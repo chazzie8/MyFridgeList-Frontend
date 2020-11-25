@@ -4,7 +4,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { Article } from 'src/app/shared/models/article.model';
 
 import { ListArticleApiActionTypes, LoadArticles, LoadArticlesSuccess } from '../actions/list-articles-api.actions';
-import { MockArticleApiService } from '../services/mock-article-api.service';
+import { ArticleApiService } from '../services/article-api.service';
 
 @Injectable()
 export class ArticleApiEffects {
@@ -26,6 +26,6 @@ export class ArticleApiEffects {
 
   constructor(
     private actions$: Actions,
-    private articleApiService: MockArticleApiService,
+    private articleApiService: ArticleApiService,
   ) { }
 }

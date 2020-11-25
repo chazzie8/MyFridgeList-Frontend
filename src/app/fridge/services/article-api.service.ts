@@ -7,7 +7,7 @@ import { Article } from 'src/app/shared/models/article.model';
 @Injectable({
   providedIn: 'root',
 })
-export class MockArticleApiService {
+export class ArticleApiService {
 
   constructor(private httpClient: HttpClient) { }
 

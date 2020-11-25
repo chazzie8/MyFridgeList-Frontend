@@ -4,19 +4,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-
+import { MaterialModule } from '../shared/material.module';
 import { ArticleListItemComponent } from './components/article-list-item/article-list-item.component';
+
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { ArticleApiEffects } from './effects/article-api.effects';
 import { articlesReducer } from './reducers/articles.reducer';
-import { MockArticleApiService } from './services/mock-article-api.service';
+import { ArticleApiService } from './services/article-api.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     BrowserModule,
+    MaterialModule,
     ReactiveFormsModule,
+  ],
+  exports: [
+    ArticleListComponent,
+    ArticleListItemComponent,
   ],
   declarations: [
     ArticleListComponent,
@@ -28,7 +34,7 @@ export class FridgeModule {
     return {
       ngModule: RootFridgeListModule,
       providers: [
-        MockArticleApiService,
+        ArticleApiService,
       ],
     };
   }

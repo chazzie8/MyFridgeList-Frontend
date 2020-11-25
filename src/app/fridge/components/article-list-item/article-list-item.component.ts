@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Article } from 'src/app/shared/models/article.model';
 
 @Component({
   selector: 'app-article-list-item',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticleListItemComponent implements OnInit {
 
+  @Input() article: Article;
+
   constructor() { }
 
+  // tslint:disable-next-line:typedef
   ngOnInit() {
+    console.log(this.article);
   }
 
 }
