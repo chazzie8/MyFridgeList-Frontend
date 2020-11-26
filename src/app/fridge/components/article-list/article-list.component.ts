@@ -20,13 +20,11 @@ export class ArticleListComponent implements OnInit {
     private store: Store<ArticlesState>,
   ) { }
 
-   // tslint:disable-next-line:typedef
-  ngOnInit() {
+  ngOnInit(): void {
     this.getArticles();
   }
 
-  // tslint:disable-next-line:typedef
-  private getArticles() {
+  private getArticles(): void {
     this.store.dispatch(new LoadArticles());
   }
 

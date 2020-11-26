@@ -15,11 +15,7 @@ export class ArticleApiEffects {
     // tslint:disable-next-line:variable-name
     switchMap((_action: LoadArticles) => {
       return this.articleApiService.getArticles().pipe(
-        map((response: Article[]) => {
-          console.log(response);
-          return new LoadArticlesSuccess(response);
-        }
-        ),
+        map((response: Article[]) => new LoadArticlesSuccess(response)),
       );
     }),
   );

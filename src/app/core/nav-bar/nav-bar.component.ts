@@ -9,7 +9,7 @@ export class NavBarComponent {
 
   @Output() menuButtonClick = new EventEmitter<boolean>();
 
-  handleNavButtonClick() {
+  public handleNavButtonClick(): void {
     this.menuButtonClick.emit(true);
   }
 

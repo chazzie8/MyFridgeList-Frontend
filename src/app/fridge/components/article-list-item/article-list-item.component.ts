@@ -6,15 +6,8 @@ import { Article } from 'src/app/shared/models/article.model';
   templateUrl: './article-list-item.component.html',
   styleUrls: ['./article-list-item.component.scss']
 })
-export class ArticleListItemComponent implements OnInit {
+export class ArticleListItemComponent {
 
   @Input() article: Article;
-
-  constructor() { }
-
-  // tslint:disable-next-line:typedef
-  ngOnInit() {
-    console.log(this.article);
-  }
 
 }
