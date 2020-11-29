@@ -28,6 +28,7 @@ export class ArticleListItemComponent {
   openDialogClick(article: Article): void {
     this.dialog.open(DialogArticleComponent, {
       data: article,
+      disableClose: true,
     });
   }
 

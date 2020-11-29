@@ -32,7 +32,9 @@ export class ArticleListComponent implements OnInit {
   }
 
   handleAddClick(): void {
-    this.dialog.open(DialogArticleComponent);
+    this.dialog.open(DialogArticleComponent, {
+      disableClose: true
+    });
   }
 
 }
