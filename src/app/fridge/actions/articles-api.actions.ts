@@ -1,4 +1,5 @@
 import { Article } from 'src/app/shared/models/article.model';
+import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
 
 export enum ArticleApiActionTypes {
 
@@ -15,7 +16,7 @@ export enum ArticleApiActionTypes {
 export class CreateArticle {
   readonly type = ArticleApiActionTypes.CreateArticle;
 
-  constructor(public article: Article) { }
+  constructor(public addArticleRequest: CreateArticleRequest) { }
 }
 
 export class CreateArticleSuccess {
@@ -49,6 +50,8 @@ export class DeleteArticleSuccess {
 }
 
 export type ArticleApiActions =
+  | CreateArticle
+  | CreateArticleSuccess
   | UpdateArticle
   | UpdateArticleSuccess
   | DeleteArticle

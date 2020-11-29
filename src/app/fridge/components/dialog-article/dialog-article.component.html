@@ -1,4 +1,9 @@
-<h2 mat-dialog-title>Artikel bearbeiten</h2>
+<ng-container *ngIf="data != null; else noDataTitle">
+  <h2 mat-dialog-title>Artikel bearbeiten</h2>
+</ng-container>
+<ng-template #noDataTitle>
+  <h2 mat-dialog-title>Artikel Hinzufügen</h2>
+</ng-template>
 
 <mat-dialog-content [formGroup]="form">
   
@@ -33,7 +38,16 @@
  
 </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Abbrechen</button>
-  <button mat-raised-button color="primary" type="submit" (click)="handleUpdateClick(data)">Speichern</button>
-</mat-dialog-actions>
+<ng-container *ngIf="data != null; else noDataButtons">
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Abbrechen</button>
+    <button mat-raised-button color="primary" type="submit" (click)="handleUpdateClick(data)">Speichern</button>
+  </mat-dialog-actions>
+</ng-container>
+
+<ng-template #noDataButtons>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Abbrechen</button>
+    <button mat-raised-button color="primary" type="submit" (click)="handleAddClick()">Hinzufügen</button>
+  </mat-dialog-actions>
+</ng-template>

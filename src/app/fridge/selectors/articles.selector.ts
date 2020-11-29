@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector } from '@ngrx/store';
 
 import { articlesAdapter, ArticlesState } from '../reducers/articles.reducer';
 
@@ -9,8 +9,3 @@ export const {
   selectEntities: getArticlesMap,
   selectAll: getArticles,
 } = articlesAdapter.getSelectors(getArticlesState);
-
-export const getSelectedArticleById = (articleId: string) => createSelector(
-  getArticles,
-  (articles) => articles[articleId]
-);

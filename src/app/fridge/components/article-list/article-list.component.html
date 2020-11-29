@@ -1,7 +1,14 @@
-<mat-accordion *ngIf="articles$ | async as articles">
-  <app-article-list-item 
-    *ngFor="let article of articles"
-    [article]="article"
-  >
-  </app-article-list-item>
-</mat-accordion>
+<div class="list-container">
+  <mat-accordion *ngIf="articles$ | async as articles">
+    <app-article-list-item 
+      *ngFor="let article of articles"
+      [article]="article"
+    >
+    </app-article-list-item>
+  </mat-accordion>
+  <div class="add-button">
+    <button mat-fab color="primary" (click)="handleAddClick()">
+      <mat-icon class="icon">add</mat-icon>
+    </button>
+  </div>
+</div>

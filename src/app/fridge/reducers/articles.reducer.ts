@@ -20,6 +20,7 @@ export function articlesReducer(
         ...state,
       });
 
+    case ArticleApiActionTypes.CreateArticleSuccess:
     case ArticleApiActionTypes.UpdateArticleSuccess:
       return articlesAdapter.upsertOne(action.article, {
         ...state,

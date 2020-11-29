@@ -5,6 +5,8 @@ import { Article } from 'src/app/shared/models/article.model';
 
 import {
   ArticleApiActionTypes,
+  CreateArticle,
+  CreateArticleSuccess,
   DeleteArticle,
   DeleteArticleSuccess,
   UpdateArticle,
@@ -28,9 +30,18 @@ export class ArticleApiEffects {
   );
 
   @Effect({ dispatch: true })
+  public addArticle$ = this.actions$.pipe(
+    ofType(ArticleApiActionTypes.CreateArticle),
+    switchMap((action: CreateArticle) => {
+      return this.articleApiService.addArticle(action.addArticleRequest).pipe(
+        map((response: Article) => new CreateArticleSuccess(response)),
+      );
+    }),
+  );
+
+  @Effect({ dispatch: true })
   public updateArticle$ = this.actions$.pipe(
     ofType(ArticleApiActionTypes.UpdateArticle),
-    // tslint:disable-next-line:variable-name
     switchMap((action: UpdateArticle) => {
       return this.articleApiService.updateArticle(action.article.id, action.article).pipe(
         map((response: Article) => new UpdateArticleSuccess(response)),
@@ -41,7 +52,6 @@ export class ArticleApiEffects {
   @Effect({ dispatch: true })
   public deleteArticle$ = this.actions$.pipe(
     ofType(ArticleApiActionTypes.DeleteArticle),
-    // tslint:disable-next-line:variable-name
     switchMap((action: DeleteArticle) => {
       return this.articleApiService.deleteArticle(action.articleId).pipe(
         map(() => new DeleteArticleSuccess(action.articleId)),

@@ -3,10 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Article } from 'src/app/shared/models/article.model';
+import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
 import { EditArticleRequest } from 'src/app/shared/models/requests/edit-article-request.model';
 
 import { UpdateArticle } from '../../actions/articles-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
+import { CreateArticle } from './../../actions/articles-api.actions';
 
 @Component({
   selector: 'app-dialog-article',
@@ -38,7 +40,9 @@ export class DialogArticleComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.initForm();
+    if (this.data != null) {
+      this.initForm();
+    }
   }
 
   initForm(): void {
@@ -49,7 +53,6 @@ export class DialogArticleComponent implements OnInit {
     });
   }
 
-
   handleUpdateClick(data: Article): void {
     if (!this.form.valid) {
       return;
@@ -59,10 +62,23 @@ export class DialogArticleComponent implements OnInit {
       label: this.form.controls.label.value,
       amount: this.form.controls.amount.value,
       expirydate: this.form.controls.expiryDate.value,
-      timestamp: data.timestamp,
     };
     const article = {...data, ...updateRequest};
     this.store.dispatch(new UpdateArticle(article));
+    this.dialogRef.close();
+  }
+
+  handleAddClick(): void {
+    if (!this.form.valid) {
+      return;
+    }
+    const addRequest: CreateArticleRequest = {
+      label: this.form.controls.label.value,
+      amount: this.form.controls.amount.value,
+      expirydate: this.form.controls.expiryDate.value,
+    };
+    const article = {...addRequest};
+    this.store.dispatch(new CreateArticle(article));
     this.dialogRef.close();
   }
 
