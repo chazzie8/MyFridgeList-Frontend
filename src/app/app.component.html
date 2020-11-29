@@ -1,7 +1,15 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="over">
         <mat-list-item>
-            <button>Test</button>
+            <mat-toolbar color="primary">
+                <span class="menu-spacer"></span>
+                <button
+                    mat-icon-button
+                    (click)="sidenav.toggle()"
+                >
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-toolbar>
         </mat-list-item>
     </mat-sidenav>
   

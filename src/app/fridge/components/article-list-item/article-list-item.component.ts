@@ -16,6 +16,8 @@ export class ArticleListItemComponent {
 
   @Input() article: Article;
 
+  panelOpenState = false;
+
   constructor(
     public dialog: MatDialog,
     private store: Store<ArticlesState>,
