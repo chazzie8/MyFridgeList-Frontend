@@ -5,7 +5,7 @@ import { Article } from 'src/app/shared/models/article.model';
 
 import { DeleteArticle } from '../../actions/articles-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
-import { ModalArticleComponent } from './../modal-article/modal-article.component';
+import { DialogArticleComponent } from '../dialog-article/dialog-article.component';
 
 @Component({
   selector: 'app-article-list-item',
@@ -25,8 +25,8 @@ export class ArticleListItemComponent {
     this.store.dispatch(new DeleteArticle(articleId));
   }
 
-  openModalClick(article: Article): void {
-    this.dialog.open(ModalArticleComponent, {
+  openDialogClick(article: Article): void {
+    this.dialog.open(DialogArticleComponent, {
       data: article,
     });
   }

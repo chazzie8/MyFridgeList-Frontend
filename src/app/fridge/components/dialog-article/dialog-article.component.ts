@@ -5,20 +5,20 @@ import { Store } from '@ngrx/store';
 import { Article } from 'src/app/shared/models/article.model';
 import { EditArticleRequest } from 'src/app/shared/models/requests/edit-article-request.model';
 
+import { UpdateArticle } from '../../actions/articles-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
-import { UpdateArticle } from './../../actions/articles-api.actions';
 
 @Component({
-  selector: 'app-modal-article',
-  templateUrl: './modal-article.component.html',
-  styleUrls: ['./modal-article.component.scss']
+  selector: 'app-dialog-article',
+  templateUrl: './dialog-article.component.html',
+  styleUrls: ['./dialog-article.component.scss']
 })
-export class ModalArticleComponent implements OnInit {
+export class DialogArticleComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Article,
     private store: Store<ArticlesState>,
-    private dialogRef: MatDialogRef<ModalArticleComponent>
+    private dialogRef: MatDialogRef<DialogArticleComponent>
   ) { }
 
   letterRegex = /^[a-zA-Z]+$/;
