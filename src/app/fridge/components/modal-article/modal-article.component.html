@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Artikel bearbeiten</h2>
+
+<mat-dialog-content [formGroup]="form">
+  
+    <mat-form-field>
+        <input 
+          matInput
+          placeholder="Artikelname"
+          formControlName="label"
+        >
+    </mat-form-field>
+    <mat-form-field>
+      <input 
+        matInput
+        placeholder="Menge"
+        formControlName="amount"
+      >
+  </mat-form-field>
+  <mat-form-field>
+    <input 
+      matInput
+      placeholder="MHD"
+      formControlName="expiryDate"
+      type="date"
+    >
+  </mat-form-field>
+ 
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Abbrechen</button>
+  <button mat-raised-button color="primary" type="submit" (click)="handleUpdateClick(data)">Speichern</button>
+</mat-dialog-actions>
