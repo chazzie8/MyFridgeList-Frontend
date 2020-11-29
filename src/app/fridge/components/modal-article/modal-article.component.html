@@ -8,13 +8,18 @@
           placeholder="Artikelname"
           formControlName="label"
         >
+        <mat-error *ngIf="form.controls.label.errors?.required">Artikelname ist erforderlich</mat-error>
+        <mat-error *ngIf="form.controls.label.errors?.pattern">Bitte ausschließlich Buchstaben verwenden</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input 
         matInput
         placeholder="Menge"
         formControlName="amount"
+        type="number"
       >
+      <mat-error *ngIf="form.controls.amount.errors?.required">Menge ist erforderlich</mat-error>
+      <mat-error *ngIf="form.controls.amount.errors?.pattern">Bitte positive Zahlen eingeben</mat-error>
   </mat-form-field>
   <mat-form-field>
     <input 
@@ -23,6 +28,7 @@
       formControlName="expiryDate"
       type="date"
     >
+    <mat-error *ngIf="form.controls.expiryDate.errors?.required">MHD ist erforderlich</mat-error>
   </mat-form-field>
  
 </mat-dialog-content>

@@ -1,0 +1,14 @@
+.mat-dialog-actions {
+  flex-direction: row;
+  float: right;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+@media only screen and (min-width: $breakpoint-min-desktop) {
+  .cdk-overlay-pane {
+    width: 30vw;
+  }
+}
