@@ -1,7 +1,9 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Article } from 'src/app/shared/models/article.model';
 
 import { LoadArticles } from '../../actions/list-articles-api.actions';
@@ -17,6 +19,8 @@ import { DialogArticleComponent } from '../dialog-article/dialog-article.compone
 export class ArticleListComponent implements OnInit {
 
   articles$: Observable<Article[]> = this.store.pipe(select(getArticles));
+  currentDate: Date = new Date();
+  daysAlmostExpired = 7;
 
   constructor(
     private store: Store<ArticlesState>,
@@ -35,6 +39,30 @@ export class ArticleListComponent implements OnInit {
     this.dialog.open(DialogArticleComponent, {
       disableClose: true
     });
+  }
+
+  handleShowExpired(): void {
+    this.articles$ = this.store.pipe(select(getArticles)).pipe(
+      map(articles => {
+        return articles.filter(article => this.currentDate.getTime() >= new Date(article.expirydate).getTime());
+    }));
+  }
+
+  handleShowAlmostExpired(): void {
+    this.articles$ = this.store.pipe(select(getArticles)).pipe(
+      map(articles => {
+        return articles.filter(article => {
+          // MHD - jetziges Datum = Tage übrig (kleiner als 3)
+          const expiryDate = new Date(article.expirydate);
+          const daysLeftMs = expiryDate.getTime() - this.currentDate.getTime();
+          const days = daysLeftMs / 1000 / 60 / 60 / 24;
+          return ((days <= this.daysAlmostExpired) && (daysLeftMs > 0));
+        });
+    }));
+  }
+
+  handleShowAll(): void {
+    this.articles$ = this.store.pipe(select(getArticles));
   }
 
 }

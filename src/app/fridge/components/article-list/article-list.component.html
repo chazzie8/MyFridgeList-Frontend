@@ -1,3 +1,9 @@
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+  <mat-button-toggle (click)="handleShowAll()">Alle</mat-button-toggle>
+  <mat-button-toggle (click)="handleShowAlmostExpired()">Fast abgelaufen</mat-button-toggle>
+  <mat-button-toggle (click)="handleShowExpired()">Abgelaufen</mat-button-toggle>
+</mat-button-toggle-group>
+
 <div class="list-container">
   <mat-accordion *ngIf="articles$ | async as articles">
     <app-article-list-item 
