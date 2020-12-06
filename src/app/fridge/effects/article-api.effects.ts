@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
 import { Article } from 'src/app/shared/models/article.model';
@@ -34,7 +35,12 @@ export class ArticleApiEffects {
     ofType(ArticleApiActionTypes.CreateArticle),
     switchMap((action: CreateArticle) => {
       return this.articleApiService.addArticle(action.addArticleRequest).pipe(
-        map((response: Article) => new CreateArticleSuccess(response)),
+        map((response: Article) => {
+          this.snackBar.open('Artikel "' + response.label + '" wurde hinzugefügt', 'Schließen', {
+            duration: 3000,
+          });
+          return new CreateArticleSuccess(response);
+        }),
       );
     }),
   );
@@ -44,7 +50,12 @@ export class ArticleApiEffects {
     ofType(ArticleApiActionTypes.UpdateArticle),
     switchMap((action: UpdateArticle) => {
       return this.articleApiService.updateArticle(action.article.id, action.article).pipe(
-        map((response: Article) => new UpdateArticleSuccess(response)),
+        map((response: Article) => {
+          this.snackBar.open('Artikel "' + response.label + '" wurde geupdated', 'Schließen', {
+            duration: 3000,
+          });
+          return new UpdateArticleSuccess(response);
+        }),
       );
     }),
   );
@@ -54,7 +65,12 @@ export class ArticleApiEffects {
     ofType(ArticleApiActionTypes.DeleteArticle),
     switchMap((action: DeleteArticle) => {
       return this.articleApiService.deleteArticle(action.articleId).pipe(
-        map(() => new DeleteArticleSuccess(action.articleId)),
+        map(() => {
+          this.snackBar.open('Artikel wurde gelöscht', 'Schließen', {
+            duration: 3000,
+          });
+          return new DeleteArticleSuccess(action.articleId);
+        }),
       );
     }),
   );
@@ -62,5 +78,6 @@ export class ArticleApiEffects {
   constructor(
     private actions$: Actions,
     private articleApiService: ArticleApiService,
+    private snackBar: MatSnackBar,
   ) { }
 }
