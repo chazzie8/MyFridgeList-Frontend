@@ -1,6 +1,6 @@
 <div class="d-flex">
   <mat-button-toggle-group name="fontStyle" class="sort-buttons">
-    <mat-button-toggle (click)="handleShowAll()">Alles</mat-button-toggle>
+    <mat-button-toggle [checked]="true" (click)="handleShowAll()">Alles</mat-button-toggle>
     <mat-button-toggle (click)="handleShowGoodArticles()">Sind gut</mat-button-toggle>
     <mat-button-toggle (click)="handleShowAlmostExpired()">Fast abgelaufen</mat-button-toggle>
     <mat-button-toggle (click)="handleShowExpired()">Abgelaufen</mat-button-toggle>
