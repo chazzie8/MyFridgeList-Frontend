@@ -20,7 +20,6 @@ export class ArticleListComponent implements OnInit {
 
   articles$: Observable<Article[]> = this.store.pipe(select(getArticles));
   currentDate: Date = new Date();
-  daysAlmostExpired = 7;
 
   constructor(
     private store: Store<ArticlesState>,
@@ -56,7 +55,20 @@ export class ArticleListComponent implements OnInit {
           const expiryDate = new Date(article.expirydate);
           const daysLeftMs = expiryDate.getTime() - this.currentDate.getTime();
           const days = daysLeftMs / 1000 / 60 / 60 / 24;
-          return ((days <= this.daysAlmostExpired) && (daysLeftMs > 0));
+          return ((days < 4) && (daysLeftMs > 0));
+        });
+    }));
+  }
+
+  handleShowGoodArticles(): void {
+    this.articles$ = this.store.pipe(select(getArticles)).pipe(
+      map(articles => {
+        return articles.filter(article => {
+          // MHD - jetziges Datum = Tage übrig (kleiner als 3)
+          const expiryDate = new Date(article.expirydate);
+          const daysLeftMs = expiryDate.getTime() - this.currentDate.getTime();
+          const days = daysLeftMs / 1000 / 60 / 60 / 24;
+          return ((days > 4) && (daysLeftMs > 0));
         });
     }));
   }

@@ -1,3 +1,20 @@
+
+// .mat-button-toggle {
+//   background-color: mat-color($primary);
+//   color: mat-color($primary, default-contrast);
+// }
+
+// .mat-button-toggle-checked {
+//   background-color: mat-color($primary);
+//   color: mat-color($primary, default-contrast);
+// }
+
+.sort-buttons {
+    display: block;
+    margin: auto auto;
+    align-items:center;
+}
+
 .add-button{
   position: fixed;
   right: 15px;
