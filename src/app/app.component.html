@@ -1,2 +1,22 @@
-<app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="over">
+        <mat-list-item>
+            <mat-toolbar color="primary">
+                <span class="menu-spacer"></span>
+                <button
+                    mat-icon-button
+                    (click)="sidenav.toggle()"
+                >
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-toolbar>
+        </mat-list-item>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+        <app-nav-bar (menuButtonClick)="sidenav.toggle()"></app-nav-bar>
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

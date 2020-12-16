@@ -1,0 +1,13 @@
+.mat-drawer-container {
+    height: 100vh;
+}
+
+.mat-drawer-inner-container {
+    width: 33vw !important;
+}
+
+@media only screen and (max-width: $breakpoint-max-mobile) {
+    .mat-drawer-inner-container {
+        width: 50vw !important;
+    }
+}

@@ -1,0 +1,17 @@
+.sort-buttons {
+    display: block;
+    margin: auto auto;
+    align-items:center;
+}
+
+.add-button{
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 999;
+}
+
+.list-container {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}

@@ -1,0 +1,23 @@
+.mat-expansion-panel-header-description {
+    align-items: center;
+}
+
+.mat-action-row {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.label-subtitle {
+    font-size: 12px;
+    color: rgba(0,0,0,.54);
+}
+
+.expansion-header-label {
+    display: flex;
+    flex-direction: column;
+}
+
+.expansion-content {
+    display: flex;
+    flex-direction: column;
+}
