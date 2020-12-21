@@ -30,7 +30,7 @@ export class ArticleListComponent implements OnInit {
     this.getArticles();
   }
 
-  private getArticles(): void {
+  private getArticles(fridgeId: string): void {
     this.store.dispatch(new LoadArticles());
   }
 

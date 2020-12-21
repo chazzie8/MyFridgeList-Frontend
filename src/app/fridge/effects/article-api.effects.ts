@@ -14,7 +14,7 @@ import {
   UpdateArticleSuccess,
 } from '../actions/articles-api.actions';
 import { ListArticleApiActionTypes, LoadArticles, LoadArticlesSuccess } from '../actions/list-articles-api.actions';
-import { ArticleApiService } from '../services/article-api.service';
+import { FridgeApiService } from '../services/fridge-api.service';
 
 @Injectable()
 export class ArticleApiEffects {
@@ -24,7 +24,7 @@ export class ArticleApiEffects {
     ofType(ListArticleApiActionTypes.LoadArticles),
     // tslint:disable-next-line:variable-name
     switchMap((_action: LoadArticles) => {
-      return this.articleApiService.getArticles().pipe(
+      return this.fridgeApiService.getArticles().pipe(
         map((response: Article[]) => new LoadArticlesSuccess(response)),
       );
     }),
@@ -34,7 +34,7 @@ export class ArticleApiEffects {
   public addArticle$ = this.actions$.pipe(
     ofType(ArticleApiActionTypes.CreateArticle),
     switchMap((action: CreateArticle) => {
-      return this.articleApiService.addArticle(action.addArticleRequest).pipe(
+      return this.fridgeApiService.addArticle(action.action.addArticleRequest).pipe(
         map((response: Article) => {
           this.snackBar.open('Artikel "' + response.label + '" wurde hinzugefügt', 'Schließen', {
             duration: 3000,
@@ -49,7 +49,7 @@ export class ArticleApiEffects {
   public updateArticle$ = this.actions$.pipe(
     ofType(ArticleApiActionTypes.UpdateArticle),
     switchMap((action: UpdateArticle) => {
-      return this.articleApiService.updateArticle(action.article.id, action.article).pipe(
+      return this.fridgeApiService.updateArticle(action.fridgeId, action.article.id, action.article).pipe(
         map((response: Article) => {
           this.snackBar.open('Artikel "' + response.label + '" wurde geupdated', 'Schließen', {
             duration: 3000,
@@ -64,7 +64,7 @@ export class ArticleApiEffects {
   public deleteArticle$ = this.actions$.pipe(
     ofType(ArticleApiActionTypes.DeleteArticle),
     switchMap((action: DeleteArticle) => {
-      return this.articleApiService.deleteArticle(action.articleId).pipe(
+      return this.fridgeApiService.deleteArticle(action.articleId).pipe(
         map(() => {
           this.snackBar.open('Artikel wurde gelöscht', 'Schließen', {
             duration: 3000,
@@ -77,7 +77,7 @@ export class ArticleApiEffects {
 
   constructor(
     private actions$: Actions,
-    private articleApiService: ArticleApiService,
+    private fridgeApiService: FridgeApiService,
     private snackBar: MatSnackBar,
   ) { }
 }
