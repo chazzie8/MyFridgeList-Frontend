@@ -1,10 +1,9 @@
-import { Fridge } from "src/app/shared/models/responses/fridge.model";
+import { Fridge } from 'src/app/shared/models/responses/fridge.model';
 
 export enum FridgeApiActionTypes {
 
   LoadFridges = '[Fridge] Load Fridges',
   LoadFridgesSuccess = '[Fridge] Load Fridges Success',
-
 }
 
 export class LoadFridges {

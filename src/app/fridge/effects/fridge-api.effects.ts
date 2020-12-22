@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Actions, Effect, ofType } from "@ngrx/effects";
+import { Injectable } from '@angular/core';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
 import { Fridge } from 'src/app/shared/models/responses/fridge.model';
 import { FridgeApiActionTypes, LoadFridges, LoadFridgesSuccess } from '../actions/fridges-api.actions';

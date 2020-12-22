@@ -23,8 +23,8 @@ export class ArticleApiEffects {
   public loadArticles$ = this.actions$.pipe(
     ofType(ListArticleApiActionTypes.LoadArticles),
     // tslint:disable-next-line:variable-name
-    switchMap((_action: LoadArticles) => {
-      return this.fridgeApiService.getArticles().pipe(
+    switchMap((action: LoadArticles) => {
+      return this.fridgeApiService.getArticles(action.fridgeId).pipe(
         map((response: Article[]) => new LoadArticlesSuccess(response)),
       );
     }),
@@ -34,7 +34,7 @@ export class ArticleApiEffects {
   public addArticle$ = this.actions$.pipe(
     ofType(ArticleApiActionTypes.CreateArticle),
     switchMap((action: CreateArticle) => {
-      return this.fridgeApiService.addArticle(action.action.addArticleRequest).pipe(
+      return this.fridgeApiService.addArticle(action.fridgeId, action.addArticleRequest).pipe(
         map((response: Article) => {
           this.snackBar.open('Artikel "' + response.label + '" wurde hinzugefügt', 'Schließen', {
             duration: 3000,
@@ -64,7 +64,7 @@ export class ArticleApiEffects {
   public deleteArticle$ = this.actions$.pipe(
     ofType(ArticleApiActionTypes.DeleteArticle),
     switchMap((action: DeleteArticle) => {
-      return this.fridgeApiService.deleteArticle(action.articleId).pipe(
+      return this.fridgeApiService.deleteArticle(action.fridgeId, action.articleId).pipe(
         map(() => {
           this.snackBar.open('Artikel wurde gelöscht', 'Schließen', {
             duration: 3000,

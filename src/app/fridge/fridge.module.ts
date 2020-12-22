@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from '../core/reducers';
+import * as reducer from './reducers/index.reducer';
 
 import { MaterialModule } from '../shared/material.module';
 import { ArticleListItemComponent } from './components/article-list-item/article-list-item.component';
@@ -46,7 +46,7 @@ export class FridgeModule {
 @NgModule({
   imports: [
     FridgeModule,
-    StoreModule.forFeature('fridge', reducers),
+    StoreModule.forFeature('fridges', reducer.reducers),
     EffectsModule.forFeature([ArticleApiEffects]),
   ],
 })

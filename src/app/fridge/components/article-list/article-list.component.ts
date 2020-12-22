@@ -9,6 +9,7 @@ import { Article } from 'src/app/shared/models/article.model';
 import { LoadArticles } from '../../actions/list-articles-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
 import { getArticles } from '../../selectors/articles.selector';
+import { getSelectedFridgeId } from '../../selectors/fridges.selector';
 import { DialogArticleComponent } from '../dialog-article/dialog-article.component';
 
 @Component({
@@ -19,6 +20,8 @@ import { DialogArticleComponent } from '../dialog-article/dialog-article.compone
 export class ArticleListComponent implements OnInit {
 
   articles$: Observable<Article[]> = this.store.pipe(select(getArticles));
+  fridgeId$: Observable<string> = this.store.pipe(select(getSelectedFridgeId));
+
   currentDate: Date = new Date();
 
   constructor(
@@ -30,13 +33,21 @@ export class ArticleListComponent implements OnInit {
     this.getArticles();
   }
 
-  private getArticles(fridgeId: string): void {
-    this.store.dispatch(new LoadArticles());
+  private getArticles(): void {
+    this.fridgeId$.subscribe((fridgeId): void => {
+      this.store.dispatch(new LoadArticles(fridgeId));
+    });
   }
 
-  handleAddClick(): void {
-    this.dialog.open(DialogArticleComponent, {
-      disableClose: true
+  handleOpenDialogClick(): void {
+    this.fridgeId$.subscribe((fridgeId): void => {
+      this.dialog.open(DialogArticleComponent, {
+        data: {
+          fridgeId,
+          article: null
+        },
+        disableClose: true
+      });
     });
   }
 

@@ -1,4 +1,4 @@
-<ng-container *ngIf="data != null; else noDataTitle">
+<ng-container *ngIf="data.article !== null; else noDataTitle">
   <h2 mat-dialog-title>Artikel bearbeiten</h2>
 </ng-container>
 <ng-template #noDataTitle>
@@ -6,7 +6,6 @@
 </ng-template>
 
 <mat-dialog-content [formGroup]="form">
-  
     <mat-form-field>
         <input 
           matInput
@@ -38,7 +37,7 @@
  
 </mat-dialog-content>
 
-<ng-container *ngIf="data != null; else noDataButtons">
+<ng-container *ngIf="data.article !== null; else noDataButtons">
   <mat-dialog-actions>
     <button mat-button mat-dialog-close>Abbrechen</button>
     <button mat-raised-button color="primary" type="submit" (click)="handleUpdateClick(data)">Speichern</button>

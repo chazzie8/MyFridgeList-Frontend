@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Article } from 'src/app/shared/models/article.model';
 
 import { DeleteArticle } from '../../actions/articles-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
+import { getSelectedFridgeId } from '../../selectors/fridges.selector';
 import { DialogArticleComponent } from '../dialog-article/dialog-article.component';
 
 @Component({
@@ -15,6 +17,7 @@ import { DialogArticleComponent } from '../dialog-article/dialog-article.compone
 export class ArticleListItemComponent {
 
   @Input() article: Article;
+  @Input() fridgeId: string;
 
   panelOpenState = false;
 
@@ -23,15 +26,19 @@ export class ArticleListItemComponent {
     private store: Store<ArticlesState>,
   ) { }
 
-  handleDeleteArticleClick(articleId: string): void {
-    this.store.dispatch(new DeleteArticle(articleId));
+  handleDeleteArticleClick(fridgeId: string, articleId: string): void {
+      this.store.dispatch(new DeleteArticle(fridgeId, articleId));
   }
 
-  openDialogClick(article: Article): void {
-    this.dialog.open(DialogArticleComponent, {
-      data: article,
-      disableClose: true,
-    });
+  openDialogClick(fridgeId: string, article: Article): void {
+      console.log(article);
+      this.dialog.open(DialogArticleComponent, {
+        data: {
+          fridgeId,
+          article,
+        },
+        disableClose: true,
+      });
   }
 
 }

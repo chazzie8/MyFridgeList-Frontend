@@ -6,11 +6,11 @@ import { ArticleListComponent } from './fridge/components/article-list/article-l
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/fridge',
+    redirectTo: '/fridges/:fridgeId',
     pathMatch: 'full',
   },
   {
-    path: 'fridge',
+    path: 'fridges/:fridgeId',
     component: ArticleListComponent,
   }
 ];
