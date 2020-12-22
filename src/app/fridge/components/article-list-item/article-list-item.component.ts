@@ -27,18 +27,16 @@ export class ArticleListItemComponent {
   ) { }
 
   handleDeleteArticleClick(fridgeId: string, articleId: string): void {
-      this.store.dispatch(new DeleteArticle(fridgeId, articleId));
+    this.store.dispatch(new DeleteArticle(fridgeId, articleId));
   }
 
   openDialogClick(fridgeId: string, article: Article): void {
-      console.log(article);
-      this.dialog.open(DialogArticleComponent, {
-        data: {
-          fridgeId,
-          article,
-        },
-        disableClose: true,
-      });
+    this.dialog.open(DialogArticleComponent, {
+      data: {
+        fridgeId,
+        article,
+      },
+      disableClose: true,
+    });
   }
-
 }

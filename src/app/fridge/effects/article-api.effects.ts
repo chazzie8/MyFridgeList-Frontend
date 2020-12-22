@@ -22,7 +22,6 @@ export class ArticleApiEffects {
   @Effect({ dispatch: true })
   public loadArticles$ = this.actions$.pipe(
     ofType(ListArticleApiActionTypes.LoadArticles),
-    // tslint:disable-next-line:variable-name
     switchMap((action: LoadArticles) => {
       return this.fridgeApiService.getArticles(action.fridgeId).pipe(
         map((response: Article[]) => new LoadArticlesSuccess(response)),
