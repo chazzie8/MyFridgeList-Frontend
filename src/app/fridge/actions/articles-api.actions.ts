@@ -16,7 +16,10 @@ export enum ArticleApiActionTypes {
 export class CreateArticle {
   readonly type = ArticleApiActionTypes.CreateArticle;
 
-  constructor(public addArticleRequest: CreateArticleRequest) { }
+  constructor(
+    public fridgeId: string,
+    public addArticleRequest: CreateArticleRequest
+  ) { }
 }
 
 export class CreateArticleSuccess {
@@ -28,7 +31,10 @@ export class CreateArticleSuccess {
 export class UpdateArticle {
   readonly type = ArticleApiActionTypes.UpdateArticle;
 
-  constructor(public article: Article) { }
+  constructor(
+    public fridgeId: string,
+    public article: Article
+  ) { }
 }
 
 export class UpdateArticleSuccess {
@@ -40,7 +46,10 @@ export class UpdateArticleSuccess {
 export class DeleteArticle {
   readonly type = ArticleApiActionTypes.DeleteArticle;
 
-  constructor(public articleId: string) { }
+  constructor(
+    public fridgeId: string,
+    public articleId: string
+  ) { }
 }
 
 export class DeleteArticleSuccess {

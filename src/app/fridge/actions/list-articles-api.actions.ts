@@ -7,6 +7,8 @@ export enum ListArticleApiActionTypes {
 
 export class LoadArticles {
   readonly type = ListArticleApiActionTypes.LoadArticles;
+
+  constructor(public fridgeId: string) {}
 }
 
 export class LoadArticlesSuccess {

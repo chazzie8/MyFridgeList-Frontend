@@ -9,14 +9,17 @@
 
 <div class="list-container">
   <mat-accordion *ngIf="articles$ | async as articles">
-    <app-article-list-item 
-      *ngFor="let article of articles"
-      [article]="article"
-    >
-    </app-article-list-item>
+      <ng-container *ngIf="fridgeId$ | async as fridgeId">
+        <app-article-list-item 
+          *ngFor="let article of articles"
+          [article]="article"
+          [fridgeId]="fridgeId"
+        >
+        </app-article-list-item>
+      </ng-container>
   </mat-accordion>
   <div class="add-button">
-    <button mat-fab color="primary" (click)="handleAddClick()">
+    <button mat-fab color="primary" (click)="handleOpenDialogClick()">
       <mat-icon class="icon">add</mat-icon>
     </button>
   </div>

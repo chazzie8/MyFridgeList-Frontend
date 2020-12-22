@@ -4,14 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import * as reducer from './reducers/index.reducer';
 
 import { MaterialModule } from '../shared/material.module';
 import { ArticleListItemComponent } from './components/article-list-item/article-list-item.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { DialogArticleComponent } from './components/dialog-article/dialog-article.component';
 import { ArticleApiEffects } from './effects/article-api.effects';
-import { articlesReducer } from './reducers/articles.reducer';
-import { ArticleApiService } from './services/article-api.service';
+import { FridgeApiService } from './services/fridge-api.service';
 
 @NgModule({
   imports: [
@@ -37,7 +37,7 @@ export class FridgeModule {
     return {
       ngModule: RootFridgeListModule,
       providers: [
-        ArticleApiService,
+        FridgeApiService,
       ],
     };
   }
@@ -46,7 +46,7 @@ export class FridgeModule {
 @NgModule({
   imports: [
     FridgeModule,
-    StoreModule.forFeature('articles', articlesReducer),
+    StoreModule.forFeature('fridges', reducer.reducers),
     EffectsModule.forFeature([ArticleApiEffects]),
   ],
 })
