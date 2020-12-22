@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { APIARY_MOCK_API_BASE_URL, APIARY_MOCK_ARTICLE_API_BASE_URL } from 'src/app/constants';
+import { APIARY_MOCK_API_BASE_URL } from 'src/app/constants';
 import { Article } from 'src/app/shared/models/article.model';
 import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
 import { CreateFridgeRequest } from 'src/app/shared/models/requests/create-fridge-request.model';
