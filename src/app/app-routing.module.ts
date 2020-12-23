@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ArticleListComponent } from './fridge/components/article-list/article-list.component';
+import { ArticleListComponent } from './fridges/components/article-list/article-list.component';
 
 const routes: Routes = [
   {
