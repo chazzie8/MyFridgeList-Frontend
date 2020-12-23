@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { ShoppinglistApiService } from '../services/shoppinglist.service';
-import {
-    ListShoppinglistsApiActionTypes,
-    LoadShoppinglists,
-    LoadShoppinglistsSuccess
-} from '../actions/list-shoppinglists-api.actions';
 import { map, switchMap } from 'rxjs/operators';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
+
+import {
+  ListShoppinglistsApiActionTypes,
+  LoadShoppinglists,
+  LoadShoppinglistsSuccess,
+} from '../actions/list-shoppinglists-api.actions';
+import { ShoppinglistApiService } from '../services/shoppinglist.service';
 
 @Injectable()
 export class ShoppinglistsApiEffects {

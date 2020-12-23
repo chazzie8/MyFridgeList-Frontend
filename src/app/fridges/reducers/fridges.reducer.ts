@@ -1,5 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Fridge } from 'src/app/shared/models/fridge.model';
+
 import { ListFridgeApiActions, ListFridgeApiActionTypes } from '../actions/list-fridges-api.actions';
 
 export const fridgesAdapter: EntityAdapter<Fridge> = createEntityAdapter<Fridge>({});

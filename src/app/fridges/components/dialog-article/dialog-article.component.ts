@@ -1,15 +1,13 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 import { Article } from 'src/app/shared/models/article.model';
 import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
 import { EditArticleRequest } from 'src/app/shared/models/requests/edit-article-request.model';
 
-import { UpdateArticle } from '../../actions/articles-api.actions';
+import { CreateArticle, UpdateArticle } from '../../actions/articles-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
-import { CreateArticle } from '../../actions/articles-api.actions';
 
 export interface DialogData {
   fridgeId: string;

@@ -1,4 +1,5 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
+
 import { getShoppinglistRootState } from '.';
 import { itemsAdapter, ItemsState } from '../reducers/items.reducer';
 

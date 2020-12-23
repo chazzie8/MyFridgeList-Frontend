@@ -1,6 +1,7 @@
 import { Params } from '@angular/router';
-import { createSelector, DefaultProjectorFn, MemoizedSelector } from '@ngrx/store';
+import { createSelector, MemoizedSelector } from '@ngrx/store';
 import { getParams } from 'src/app/core/selectors/router.selector';
+
 import { getShoppinglistRootState } from '.';
 import { shoppinglistsAdapter, ShoppinglistsState } from '../reducers/shoppinglists.reducer';
 import { SHOPPINGLIST_ID } from '../shoppinglists.constants';

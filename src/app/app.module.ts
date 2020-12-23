@@ -1,5 +1,3 @@
-import { environment } from './../environments/environment';
-import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,6 +7,7 @@ import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -16,6 +15,7 @@ import { reducers } from './core/reducers';
 import { CustomRouterStateSerializer } from './core/reducers/custom-router-serializer.reducer';
 import { FridgesModule } from './fridges/fridges.module';
 import { MaterialModule } from './shared/material.module';
+import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
 
 @NgModule({
   declarations: [

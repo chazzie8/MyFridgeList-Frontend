@@ -1,12 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { Article } from 'src/app/shared/models/article.model';
 
 import { DeleteArticle } from '../../actions/articles-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
-import { getSelectedFridgeId } from '../../selectors/fridges.selector';
 import { DialogArticleComponent } from '../dialog-article/dialog-article.component';
 
 @Component({

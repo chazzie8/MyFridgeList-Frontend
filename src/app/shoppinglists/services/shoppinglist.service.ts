@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreateShoppinglistRequest } from 'src/app/shared/models/requests/create-shoppinglist-request.model';
-import { CreateItemRequest } from 'src/app/shared/models/requests/create-item-request.model';
-import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 import { Item } from 'src/app/shared/models/item.model';
+import { CreateItemRequest } from 'src/app/shared/models/requests/create-item-request.model';
+import { CreateShoppinglistRequest } from 'src/app/shared/models/requests/create-shoppinglist-request.model';
+import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
 @Injectable({
   providedIn: 'root',

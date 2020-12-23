@@ -2,8 +2,8 @@ import { Item } from 'src/app/shared/models/item.model';
 
 export enum ListItemsApiActionTypes {
 
-    LoadItems = '[Shoppinglist] Load Items',
-    LoadItemsSuccess = '[Shoppinglist] Load Items Success',
+  LoadItems = '[Shoppinglist] Load Items',
+  LoadItemsSuccess = '[Shoppinglist] Load Items Success',
 }
 
 export class LoadItems {

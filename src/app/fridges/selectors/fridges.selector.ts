@@ -1,10 +1,10 @@
 import { Params } from '@angular/router';
-import { createSelector, DefaultProjectorFn, MemoizedSelector } from '@ngrx/store';
+import { createSelector, MemoizedSelector } from '@ngrx/store';
 import { getParams } from 'src/app/core/selectors/router.selector';
-import { FRIDGE_ID } from '../fridges.constants';
 
-import { fridgesAdapter, FridgesState } from '../reducers/fridges.reducer';
 import { getFridgeRootState } from '.';
+import { FRIDGE_ID } from '../fridges.constants';
+import { fridgesAdapter, FridgesState } from '../reducers/fridges.reducer';
 
 export const getFridgeListState: MemoizedSelector<object, FridgesState> = createSelector(
   getFridgeRootState,

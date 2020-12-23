@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Article } from 'src/app/shared/models/article.model';
+import { Fridge } from 'src/app/shared/models/fridge.model';
 import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
 import { CreateFridgeRequest } from 'src/app/shared/models/requests/create-fridge-request.model';
 import { EditArticleRequest } from 'src/app/shared/models/requests/edit-article-request.model';
-import { Fridge } from 'src/app/shared/models/fridge.model';
 
 @Injectable({
   providedIn: 'root',
