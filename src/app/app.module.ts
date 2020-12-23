@@ -1,3 +1,5 @@
+import { environment } from './../environments/environment';
+import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +14,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { reducers } from './core/reducers';
 import { CustomRouterStateSerializer } from './core/reducers/custom-router-serializer.reducer';
-import { FridgeModule } from './fridge/fridge.module';
+import { FridgesModule } from './fridges/fridges.module';
 import { MaterialModule } from './shared/material.module';
 
 @NgModule({
@@ -24,8 +26,10 @@ import { MaterialModule } from './shared/material.module';
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
-    FridgeModule,
-    FridgeModule.forRoot(),
+    FridgesModule,
+    FridgesModule.forRoot(),
+    ShoppinglistsModule,
+    ShoppinglistsModule.forRoot(),
     HttpClientModule,
     StoreModule.forRoot(reducers, {}),
     StoreDevtoolsModule.instrument({
@@ -35,10 +39,16 @@ import { MaterialModule } from './shared/material.module';
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     MaterialModule,
   ],
-  providers: [{
-    provide: RouterStateSerializer,
-    useClass: CustomRouterStateSerializer,
-  }],
+  providers: [
+    {
+      provide: RouterStateSerializer,
+      useClass: CustomRouterStateSerializer,
+    },
+    {
+      provide: 'apiBaseUrl',
+      useValue: environment.apiBaseUrl
+    },
+],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
