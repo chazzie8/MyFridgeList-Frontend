@@ -1,0 +1,10 @@
+<mat-list-option checkboxPosition="before">
+  <div class="d-flex align-items-center justify-content-between">
+    <div>
+      {{item.label}}
+    </div>
+    <div>
+      <button mat-icon-button color="warn" (click)="handleDeleteItemClick()"><mat-icon>delete</mat-icon></button>
+    </div>
+  </div>
+</mat-list-option>

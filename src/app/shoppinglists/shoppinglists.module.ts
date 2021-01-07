@@ -1,14 +1,17 @@
-import { ShoppinglistsApiEffects } from './effects/shoppinglists-api.effects';
-import { ItemsApiEffects } from './effects/items-api.effects';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+
 import { MaterialModule } from '../shared/material.module';
-import { ShoppinglistApiService } from './services/shoppinglist.service';
+import { ItemListItemComponent } from './components/item-list-item/item-list-item.component';
+import { ItemListComponent } from './components/item-list/item-list.component';
+import { ItemsApiEffects } from './effects/items-api.effects';
+import { ShoppinglistsApiEffects } from './effects/shoppinglists-api.effects';
 import * as reducer from './reducers';
+import { ShoppinglistApiService } from './services/shoppinglist.service';
 import { SHOPPINGLISTS_FEATURE_KEY } from './shoppinglists.constants';
 
 @NgModule({
@@ -19,8 +22,14 @@ import { SHOPPINGLISTS_FEATURE_KEY } from './shoppinglists.constants';
     MaterialModule,
     ReactiveFormsModule,
   ],
-  exports: [],
-  declarations: [],
+  exports: [
+    ItemListComponent,
+    ItemListItemComponent
+  ],
+  declarations: [
+    ItemListComponent,
+    ItemListItemComponent
+  ],
 })
 export class ShoppinglistsModule {
   static forRoot(): ModuleWithProviders<unknown> {

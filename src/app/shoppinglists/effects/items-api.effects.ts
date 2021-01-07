@@ -28,7 +28,7 @@ export class ItemsApiEffects {
   );
 
   @Effect({ dispatch: true })
-  public addArticle$ = this.actions$.pipe(
+  public addItem$ = this.actions$.pipe(
     ofType(ItemsApiActionTypes.CreateItem),
     switchMap((action: CreateItem) => {
       return this.shoppinglistApiService.addItem(action.shoppinglistId, action.addItemRequest).pipe(
@@ -43,7 +43,7 @@ export class ItemsApiEffects {
   );
 
   @Effect({ dispatch: true })
-  public deleteArticle$ = this.actions$.pipe(
+  public deleteItem$ = this.actions$.pipe(
     ofType(ItemsApiActionTypes.DeleteItem),
     switchMap((action: DeleteItem) => {
       return this.shoppinglistApiService.deleteItem(action.shoppinglistId, action.itemId).pipe(
