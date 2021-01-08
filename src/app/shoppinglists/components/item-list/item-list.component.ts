@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ArticlesState } from 'src/app/fridges/reducers/articles.reducer';
 import { Item } from 'src/app/shared/models/item.model';
 
 import { LoadItems } from '../../actions/list-items-api.actions';
+import { ItemsState } from '../../reducers/items.reducer';
 import { getItems } from '../../selectors/items.selector';
 import { getSelectedShoppinglistId } from '../../selectors/shoppinglists.selector';
 
@@ -19,14 +19,11 @@ export class ItemListComponent implements OnInit {
   shoppinglistId$: Observable<string> = this.store.pipe(select(getSelectedShoppinglistId));
 
   constructor(
-    private store: Store<ArticlesState>,
+    private store: Store<ItemsState>,
   ) { }
 
   ngOnInit(): void{
     this.getItems();
-    this.items$.subscribe(item => {
-      console.log(item);
-    });
   }
 
   private getItems(): void {
