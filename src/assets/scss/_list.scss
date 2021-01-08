@@ -15,3 +15,13 @@
   margin-top: 10px;
   margin-bottom: 30px;
 }
+
+mat-list-option[aria-selected="true"] {
+  text-decoration: line-through;
+}
+
+.item-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
