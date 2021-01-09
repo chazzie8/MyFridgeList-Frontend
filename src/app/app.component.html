@@ -1,22 +1,43 @@
+<mat-toolbar class="toolbar mat-elevation-z6" color="primary">
+  <span>MyFridgeList</span>
+</mat-toolbar>
+
 <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="over">
+  <mat-sidenav #sidenav mode="over">
+
+    <mat-list-item>
+      <button mat-button class="menu-button">
+        <mat-icon class="mr-2">dashboard</mat-icon>
+        Dashboard
+      </button>
+    </mat-list-item>
+
+    <!-- Menü Unterpunkte der einzelnen Kühlschränke und Einkaufslisten -->
+    <ng-container *ngIf="fridges$ | async as fridges">
+      <ng-container *ngIf="shoppinglists$ | async as shoppinglists">
         <mat-list-item>
-            <mat-toolbar color="primary">
-                <span class="menu-spacer"></span>
-                <button
-                    mat-icon-button
-                    (click)="sidenav.toggle()"
-                >
-                    <mat-icon>close</mat-icon>
-                </button>
-            </mat-toolbar>
+            <app-nav-bar-list 
+              [shoppinglists]="shoppinglists" 
+              [fridges]="fridges"
+            >
+            </app-nav-bar-list>
         </mat-list-item>
-    </mat-sidenav>
-  
-    <mat-sidenav-content>
-        <app-nav-bar (menuButtonClick)="sidenav.toggle()"></app-nav-bar>
-        <div class="container">
-            <router-outlet></router-outlet>
-        </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+      </ng-container>
+    </ng-container>
+
+    <mat-list-item>
+      <button mat-button class="menu-button">
+        <mat-icon class="mr-2">logout</mat-icon>
+        Logout
+      </button>
+    </mat-list-item>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-nav-bar (menuButtonClick)="sidenav.toggle()"></app-nav-bar>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

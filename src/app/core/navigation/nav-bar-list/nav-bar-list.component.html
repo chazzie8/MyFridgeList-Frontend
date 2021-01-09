@@ -1,0 +1,61 @@
+<mat-accordion id="menu">
+  <mat-expansion-panel class="menu-panel">
+    <mat-expansion-panel-header class="menu-panel-header">
+      <mat-panel-title>
+        <div class="menu-header-title-row">
+          <mat-icon class="icon-right-spacer">fastfood</mat-icon>
+          <span>Kühlschränke</span>
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="expansion-content" >
+      <ng-container *ngIf="fridges?.length > 0" >
+        <button 
+          *ngFor="let fridge of fridges"
+          mat-button
+          class="menu-button"
+          (click)="handleGoToSelectedFridge(fridge.id)"
+        >
+          {{fridge.name}}
+        </button>
+      </ng-container>
+      <button 
+        mat-button
+        class="menu-button"
+      >
+      <mat-icon>add_circle_outline</mat-icon>
+        Neuer Kühlschrank
+      </button>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header class="menu-panel-header">
+      <mat-panel-title>
+        <div class="menu-header-title-row">
+          <mat-icon class="icon-right-spacer">reorder</mat-icon>
+          <span>Einkaufslisten</span>
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="expansion-content" >
+      <ng-container *ngIf="shoppinglists?.length > 0">
+        <button 
+          *ngFor="let shoppinglist of shoppinglists"
+          mat-button
+          class="menu-button"
+          (click)="handleGoToSelectedShoppinglist(shoppinglist.id)"
+        >
+          {{shoppinglist.name}}
+        </button>
+      </ng-container>
+      <button 
+        mat-button
+        class="menu-button"
+      >
+        <mat-icon>add_circle_outline</mat-icon>
+        Neue Einkaufsliste
+      </button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

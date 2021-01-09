@@ -19,7 +19,8 @@ export class ItemListItemComponent {
     private store: Store<ItemsState>,
   ) { }
 
-  handleDeleteItemClick(): void {
+  handleDeleteItemClick(event: Event): void {
     this.store.dispatch(new DeleteItem(this.shoppinglistId, this.item.id));
+    event.stopPropagation();
   }
 }

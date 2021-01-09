@@ -14,3 +14,9 @@
 .mat-button-toggle-group-appearance-standard {
     border: unset;
 }
+
+@media only screen and (max-width: $breakpoint-max-mobile) {
+    .mat-button-toggle-label-content {
+        font-size: 13px;
+    }
+}
