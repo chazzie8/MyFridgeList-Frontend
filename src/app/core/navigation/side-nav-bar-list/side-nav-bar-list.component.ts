@@ -7,11 +7,11 @@ import { GoToSelectedFridge, GoToSelectedShoppinglist } from '../../router/actio
 import { BaseAppState } from '../../router/reducers/custom-router-serializer.reducer';
 
 @Component({
-  selector: 'app-nav-bar-list',
-  templateUrl: './nav-bar-list.component.html',
-  styleUrls: ['./nav-bar-list.component.scss']
+  selector: 'app-side-nav-bar-list',
+  templateUrl: './side-nav-bar-list.component.html',
+  styleUrls: ['./side-nav-bar-list.component.scss']
 })
-export class NavBarListComponent {
+export class SideNavBarListComponent {
 
   @Input() fridges: Fridge[];
   @Input() shoppinglists: Shoppinglist[];

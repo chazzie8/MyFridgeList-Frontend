@@ -4,15 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MaterialModule } from '../shared/material.module';
-import { NavBarListComponent } from './navigation/nav-bar-list/nav-bar-list.component';
 import { NavBarComponent } from './navigation/nav-bar/nav-bar.component';
+import { SideNavBarListComponent } from './navigation/side-nav-bar-list/side-nav-bar-list.component';
+import { SideNavBarComponent } from './navigation/side-nav-bar/side-nav-bar.component';
 import { RouterStateModule } from './router/router-state.module';
 
 
 @NgModule({
   declarations: [
     NavBarComponent,
-    NavBarListComponent,
+    SideNavBarComponent,
+    SideNavBarListComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { RouterStateModule } from './router/router-state.module';
   ],
   exports: [
     NavBarComponent,
-    NavBarListComponent,
+    SideNavBarComponent,
+    SideNavBarListComponent,
   ],
 })
 export class CoreModule { }

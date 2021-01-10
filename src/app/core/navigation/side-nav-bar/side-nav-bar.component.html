@@ -1,0 +1,21 @@
+<mat-list-item>
+  <button mat-button class="menu-button">
+    <mat-icon class="mr-2">dashboard</mat-icon>
+    Dashboard
+  </button>
+</mat-list-item>
+
+<mat-list-item>
+  <app-side-nav-bar-list 
+    [shoppinglists]="shoppinglists" 
+    [fridges]="fridges"
+  >
+  </app-side-nav-bar-list>
+</mat-list-item>
+
+<mat-list-item>
+  <button mat-button class="menu-button">
+    <mat-icon class="mr-2">logout</mat-icon>
+    Logout
+  </button>
+</mat-list-item>
