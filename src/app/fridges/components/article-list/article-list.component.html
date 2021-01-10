@@ -9,16 +9,15 @@
 
 <div class="list-container">
   <ng-container *ngIf="articles$ | async as articles">
-    <mat-accordion *ngIf="articles?.length > 0; else noArticles">
+    <ng-container *ngIf="articles?.length > 0; else noArticles">
       <ng-container *ngIf="fridgeId$ | async as fridgeId">
         <app-article-list-item 
-          *ngFor="let article of articles"
-          [article]="article"
+          [articles]="articles"
           [fridgeId]="fridgeId"
         >
         </app-article-list-item>
       </ng-container>
-    </mat-accordion>
+    </ng-container>
   </ng-container>
   
   <div class="add-button">

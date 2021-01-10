@@ -14,10 +14,8 @@ import { DialogArticleComponent } from '../dialog-article/dialog-article.compone
 })
 export class ArticleListItemComponent {
 
-  @Input() article: Article;
+  @Input() articles: Article[];
   @Input() fridgeId: string;
-
-  panelOpenState = false;
 
   constructor(
     public dialog: MatDialog,

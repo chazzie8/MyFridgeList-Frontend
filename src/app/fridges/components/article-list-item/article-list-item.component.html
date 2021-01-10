@@ -1,25 +1,26 @@
-<mat-expansion-panel
-  (opened)="panelOpenState = true"
-  (closed)="panelOpenState = false"
+<mat-accordion>  
+  <mat-expansion-panel
+    *ngFor="let article of articles"
   >
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      <div class="d-block">
-        <span class="d-block">{{article.label}}</span>
-        <span class="label-subtitle" *ngIf="panelOpenState == false">{{article.expirydate}}</span>
-      </div>
-    </mat-panel-title>
-    <mat-panel-description *ngIf="panelOpenState == false" class="label-subtitle">
-      {{article.amount}} Stk.
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <div class="expansion-content">
-    <span>Stückzahl: {{article.amount}}</span>
-    <span>MHD: {{article.expirydate}}</span>
-    <span>Hinzufügen am {{article.timestamp}}</span>
-  </div>
-  <mat-action-row>
-    <button mat-icon-button color="warn" (click)="handleDeleteArticleClick(fridgeId, article.id)"><mat-icon>delete</mat-icon></button>
-    <button mat-icon-button color="primary" (click)="openDialogClick(fridgeId, article)"><mat-icon>edit</mat-icon></button>
-  </mat-action-row>
-</mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="d-block">
+          <span class="d-block">{{article.label}}</span>
+          <span class="label-subtitle">{{article.expirydate}}</span>
+        </div>
+      </mat-panel-title>
+      <mat-panel-description class="label-subtitle">
+        {{article.amount}} Stk.
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="expansion-content">
+      <span>Stückzahl: {{article.amount}}</span>
+      <span>MHD: {{article.expirydate}}</span>
+      <span>Hinzufügen am {{article.timestamp}}</span>
+    </div>
+    <mat-action-row>
+      <button mat-icon-button color="warn" (click)="handleDeleteArticleClick(fridgeId, article.id)"><mat-icon>delete</mat-icon></button>
+      <button mat-icon-button color="primary" (click)="openDialogClick(fridgeId, article)"><mat-icon>edit</mat-icon></button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
