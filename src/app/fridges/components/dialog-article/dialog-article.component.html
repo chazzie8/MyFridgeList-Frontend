@@ -37,16 +37,14 @@
  
 </mat-dialog-content>
 
-<ng-container *ngIf="data.article !== null; else noDataButtons">
-  <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Abbrechen</button>
+<mat-dialog-actions>
+  <button mat-button (click)="handleCancelClick()">Abbrechen</button>
+  <ng-container *ngIf="data.article !== null; else noDataButtons">
     <button mat-raised-button color="primary" type="submit" (click)="handleUpdateClick(data)">Speichern</button>
-  </mat-dialog-actions>
-</ng-container>
+  </ng-container>
+</mat-dialog-actions>
+
 
 <ng-template #noDataButtons>
-  <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Abbrechen</button>
-    <button mat-raised-button color="primary" type="submit" (click)="handleAddClick()">Hinzufügen</button>
-  </mat-dialog-actions>
+  <button mat-raised-button color="primary" type="submit" (click)="handleAddClick()">Hinzufügen</button>
 </ng-template>

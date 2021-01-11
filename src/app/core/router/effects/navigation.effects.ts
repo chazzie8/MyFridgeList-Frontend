@@ -11,6 +11,12 @@ import { BaseAppState } from '../reducers/custom-router-serializer.reducer';
 export class NavigationEffects {
 
   @Effect({ dispatch: false })
+  GoToDashboard$ = this.actions$.pipe(
+    ofType(NavigationActionTypes.GoToDashboard),
+    tap(() => this.router.navigate(['dashboard'])),
+  );
+
+  @Effect({ dispatch: false })
   GoToSelectedFridge$ = this.actions$.pipe(
     ofType(NavigationActionTypes.GoToSelectedFridge),
     tap((action: GoToSelectedFridge) => this.router.navigate(['fridges', action.fridgeId])),

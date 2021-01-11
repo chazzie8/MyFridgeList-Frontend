@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Article } from 'src/app/shared/models/article.model';
 
 import { LoadArticles } from '../../actions/list-articles-api.actions';
@@ -33,13 +33,17 @@ export class ArticleListComponent implements OnInit {
   }
 
   private getArticles(): void {
-    this.fridgeId$.subscribe((fridgeId): void => {
+    this.fridgeId$.pipe(
+      take(1),
+    ).subscribe((fridgeId): void => {
       this.store.dispatch(new LoadArticles(fridgeId));
     });
   }
 
   handleOpenDialogClick(): void {
-    this.fridgeId$.subscribe((fridgeId): void => {
+    this.fridgeId$.pipe(
+      take(1),
+    ).subscribe((fridgeId): void => {
       this.dialog.open(DialogArticleComponent, {
         data: {
           fridgeId,

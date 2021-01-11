@@ -28,6 +28,12 @@ export class ShoppinglistApiService {
     return this.httpClient.post<Shoppinglist>(url, request);
   }
 
+  // Delete Shoppinglist
+  deleteShoppinglist(shoppinglistId: string): Observable<{}> {
+    const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}`;
+    return this.httpClient.delete<{}>(url);
+  }
+
   // Get All Items By Shoppinglist ID
   getItems(shoppinglistId: string): Observable<Item[]> {
     const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}/items`;

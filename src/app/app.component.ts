@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
+import { BaseAppState } from './core/router/reducers/custom-router-serializer.reducer';
 import { LoadFridges } from './fridges/actions/list-fridges-api.actions';
 import { FridgesState } from './fridges/reducers/fridges.reducer';
 import { getFridges } from './fridges/selectors/fridges.selector';
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
   shoppinglists$: Observable<Shoppinglist[]> = this.store.pipe(select(getShoppinglists));
 
   constructor(
-    private store: Store<FridgesState | ShoppinglistsState>,
+    private store: Store<FridgesState | ShoppinglistsState | BaseAppState>,
   ) { }
 
   ngOnInit(): void {

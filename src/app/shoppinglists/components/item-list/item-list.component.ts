@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Item } from 'src/app/shared/models/item.model';
 
 import { LoadItems } from '../../actions/list-items-api.actions';
@@ -27,7 +28,9 @@ export class ItemListComponent implements OnInit {
   }
 
   private getItems(): void {
-    this.shoppinglistId$.subscribe((shoppinglistId): void => {
+    this.shoppinglistId$.pipe(
+      take(1),
+    ).subscribe((shoppinglistId): void => {
       this.store.dispatch(new LoadItems(shoppinglistId));
     });
   }

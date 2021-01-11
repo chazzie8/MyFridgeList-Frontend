@@ -19,6 +19,11 @@ export function fridgesReducer(
         ...state,
       });
 
+    case ListFridgeApiActionTypes.DeleteFridgeSuccess:
+      return fridgesAdapter.removeOne(action.fridgeId, {
+        ...state,
+      });
+
     default:
       return state;
   }

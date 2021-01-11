@@ -86,4 +86,7 @@ export class DialogArticleComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  handleCancelClick(): void {
+    this.dialogRef.close();
+  }
 }

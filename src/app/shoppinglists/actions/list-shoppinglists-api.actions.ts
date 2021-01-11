@@ -2,21 +2,38 @@ import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
 export enum ListShoppinglistsApiActionTypes {
 
-  LoadShoppingslists = '[Shoppingslist] Load Shoppingslists',
-  LoadShoppingslistsSuccess = '[Shoppingslist] Load Shoppingslists Success',
+  LoadShoppinglists = '[Shoppingslist] Load Shoppinglists',
+  LoadShoppinglistsSuccess = '[Shoppingslist] Load Shoppinglists Success',
+
+  DeleteShoppinglist = '[Shoppinglist] Delete Shoppinglist',
+  DeleteShoppinglistSuccess = '[Shoppinglist] Delete Shoppinglist Success',
 }
 
 export class LoadShoppinglists {
-  readonly type = ListShoppinglistsApiActionTypes.LoadShoppingslists;
+  readonly type = ListShoppinglistsApiActionTypes.LoadShoppinglists;
 }
 
 export class LoadShoppinglistsSuccess {
-  readonly type = ListShoppinglistsApiActionTypes.LoadShoppingslistsSuccess;
+  readonly type = ListShoppinglistsApiActionTypes.LoadShoppinglistsSuccess;
 
-  constructor(public shoppingslists: Shoppinglist[]) { }
+  constructor(public shoppinglists: Shoppinglist[]) { }
+}
+
+export class DeleteShoppinglist {
+  readonly type = ListShoppinglistsApiActionTypes.DeleteShoppinglist;
+
+  constructor(public shoppinglistId: string) { }
+}
+
+export class DeleteShoppinglistSuccess {
+  readonly type = ListShoppinglistsApiActionTypes.DeleteShoppinglistSuccess;
+
+  constructor(public shoppinglistId: string) { }
 }
 
 export type ListShoppinglistsApiActions =
   | LoadShoppinglists
   | LoadShoppinglistsSuccess
+  | DeleteShoppinglist
+  | DeleteShoppinglistSuccess
 ;

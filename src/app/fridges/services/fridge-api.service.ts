@@ -29,6 +29,12 @@ export class FridgeApiService {
     return this.httpClient.post<Fridge>(url, request);
   }
 
+  // Delete Fridge
+  deleteFridge(fridgeId: string): Observable<{}> {
+    const url = `${this.apiBaseUrl}/fridges/${fridgeId}`;
+    return this.httpClient.delete<{}>(url);
+  }
+
   // Get All Articles By Fridge ID
   getArticles(fridgeId: string): Observable<Article[]> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}/articles`;

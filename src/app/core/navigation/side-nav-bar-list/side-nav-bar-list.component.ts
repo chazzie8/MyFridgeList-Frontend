@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
@@ -16,13 +17,18 @@ export class SideNavBarListComponent {
   @Input() fridges: Fridge[];
   @Input() shoppinglists: Shoppinglist[];
 
-  constructor(private store: Store<BaseAppState>) { }
+  constructor(
+    private store: Store<BaseAppState>,
+    public sidenav: MatSidenav
+  ) { }
 
   public handleGoToSelectedFridge(fridgeId: string): void {
     this.store.dispatch(new GoToSelectedFridge(fridgeId));
+    this.sidenav.close();
   }
 
   public handleGoToSelectedShoppinglist(shoppinglistId: string): void {
     this.store.dispatch(new GoToSelectedShoppinglist(shoppinglistId));
+    this.sidenav.close();
   }
 }
