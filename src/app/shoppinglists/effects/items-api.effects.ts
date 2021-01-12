@@ -13,6 +13,7 @@ import {
 } from '../actions/items-api.actions';
 import { ListItemsApiActionTypes, LoadItems, LoadItemsSuccess } from '../actions/list-items-api.actions';
 import { ShoppinglistApiService } from '../services/shoppinglist.service';
+import { UpdateBoughtItems, UpdateBoughtItemsSuccess } from './../actions/items-api.actions';
 
 @Injectable()
 export class ItemsApiEffects {
@@ -53,6 +54,16 @@ export class ItemsApiEffects {
           });
           return new DeleteItemSuccess(action.itemId);
         }),
+      );
+    }),
+  );
+
+  @Effect({ dispatch: true })
+  public updateItemList$ = this.actions$.pipe(
+    ofType(ItemsApiActionTypes.UpdateBoughtItems),
+    switchMap((action: UpdateBoughtItems) => {
+      return this.shoppinglistApiService.updateBoughtItems(action.shoppinglistId, action.boughtItemIds).pipe(
+        map((response: Item[]) => new UpdateBoughtItemsSuccess(response)),
       );
     }),
   );

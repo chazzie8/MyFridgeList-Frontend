@@ -3,6 +3,7 @@ import { Item } from 'src/app/shared/models/item.model';
 
 import { ItemsApiActions, ItemsApiActionTypes } from '../actions/items-api.actions';
 import { ListItemsApiActions, ListItemsApiActionTypes } from '../actions/list-items-api.actions';
+import { ShoppinglistActions, ShoppinglistActionTypes } from '../actions/shoppinglist.actions';
 
 export const itemsAdapter: EntityAdapter<Item> = createEntityAdapter<Item>({});
 
@@ -12,7 +13,7 @@ export const initialState: ItemsState = itemsAdapter.getInitialState({});
 
 export function itemsReducer(
   state = initialState,
-  action: ItemsApiActions | ListItemsApiActions,
+  action: ItemsApiActions | ListItemsApiActions | ShoppinglistActions,
 ): ItemsState {
   switch (action.type) {
     case ListItemsApiActionTypes.LoadItemsSuccess:
@@ -29,6 +30,9 @@ export function itemsReducer(
       return itemsAdapter.removeOne(action.itemId, {
         ...state,
       });
+
+    case ShoppinglistActionTypes.PurgeShoppinglistItems:
+      return initialState;
 
     default:
       return state;

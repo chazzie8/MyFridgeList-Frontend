@@ -11,7 +11,7 @@ import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { reducers } from './core/router/reducers';
+import { metaReducers, reducers } from './core/router/reducers';
 import { CustomRouterStateSerializer } from './core/router/reducers/custom-router-serializer.reducer';
 import { FridgesModule } from './fridges/fridges.module';
 import { MaterialModule } from './shared/material.module';
@@ -31,7 +31,7 @@ import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
     ShoppinglistsModule,
     ShoppinglistsModule.forRoot(),
     HttpClientModule,
-    StoreModule.forRoot(reducers, {}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       name: 'MyFridgeList App DevTools',
     }),

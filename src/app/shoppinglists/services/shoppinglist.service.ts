@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Item } from 'src/app/shared/models/item.model';
 import { CreateItemRequest } from 'src/app/shared/models/requests/create-item-request.model';
 import { CreateShoppinglistRequest } from 'src/app/shared/models/requests/create-shoppinglist-request.model';
+import { EditShoppinglistItemRequest } from 'src/app/shared/models/requests/edit-shoppinglist-item-request.model';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
 @Injectable({
@@ -26,6 +27,12 @@ export class ShoppinglistApiService {
   addShoppinglist(request: CreateShoppinglistRequest): Observable<Shoppinglist> {
     const url = `${this.apiBaseUrl}/shoppinglists`;
     return this.httpClient.post<Shoppinglist>(url, request);
+  }
+
+  // Update Bought Items
+  updateBoughtItems(shoppinglistId: string, request: EditShoppinglistItemRequest): Observable<Item[]> {
+    const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}/update`;
+    return this.httpClient.post<Item[]>(url, request);
   }
 
   // Delete Shoppinglist

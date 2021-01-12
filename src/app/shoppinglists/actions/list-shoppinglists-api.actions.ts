@@ -2,8 +2,8 @@ import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
 export enum ListShoppinglistsApiActionTypes {
 
-  LoadShoppinglists = '[Shoppingslist] Load Shoppinglists',
-  LoadShoppinglistsSuccess = '[Shoppingslist] Load Shoppinglists Success',
+  LoadShoppinglists = '[Shoppinglist] Load Shoppinglists',
+  LoadShoppinglistsSuccess = '[Shoppinglist] Load Shoppinglists Success',
 
   DeleteShoppinglist = '[Shoppinglist] Delete Shoppinglist',
   DeleteShoppinglistSuccess = '[Shoppinglist] Delete Shoppinglist Success',

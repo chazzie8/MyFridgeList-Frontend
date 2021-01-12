@@ -7,15 +7,33 @@
   </button>
 
   <span class="menu-spacer"></span>
-
-  <button mat-icon-button [matMenuTriggerFor]="optionsMenu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #optionsMenu="matMenu" class="options-menu">
-    <button 
-      mat-menu-item
-    >
-      Löschen
+  
+  <ng-container *ngIf="fridgeId$ | async as fridgeId">
+    <button mat-icon-button [matMenuTriggerFor]="optionsMenu">
+      <mat-icon>more_vert</mat-icon>
     </button>
-  </mat-menu>
+    <mat-menu #optionsMenu="matMenu" class="options-menu">
+      <button 
+        mat-menu-item
+        (click)="handleDeleteFridgeClick(fridgeId)"
+      >
+        Kühlschrank löschen
+      </button>
+    </mat-menu>
+  </ng-container>
+
+  <ng-container *ngIf="shoppinglistId$ | async as shoppinglistId">
+    <button mat-icon-button [matMenuTriggerFor]="optionsMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #optionsMenu="matMenu" class="options-menu">
+      <button 
+        mat-menu-item
+        (click)="handleDeleteShoppinglistClick(shoppinglistId)"
+      >
+        Einkaufsliste löschen
+      </button>
+    </mat-menu>
+  </ng-container>
+
 </mat-toolbar>

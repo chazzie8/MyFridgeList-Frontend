@@ -5,7 +5,10 @@
 <div class="list-container">
   <mat-card>
     <ng-container *ngIf="items$ | async as items">
-      <mat-selection-list *ngIf="items?.length > 0; else noItems">
+      <mat-selection-list 
+        #itemList 
+        *ngIf="items?.length > 0; else noItems"
+      >
         <ng-container *ngIf="shoppinglistId$ | async as shoppinglistId">
           <app-item-list-item *ngFor="let item of items" [item]="item" [shoppinglistId]="shoppinglistId">
           </app-item-list-item>

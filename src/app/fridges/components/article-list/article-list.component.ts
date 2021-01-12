@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Article } from 'src/app/shared/models/article.model';
 
+import { PurgeFridgeItems } from '../../actions/fridge.actions';
 import { LoadArticles } from '../../actions/list-articles-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
 import { getArticles } from '../../selectors/articles.selector';
@@ -16,7 +17,7 @@ import { DialogArticleComponent } from '../dialog-article/dialog-article.compone
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.scss'],
 })
-export class ArticleListComponent implements OnInit {
+export class ArticleListComponent implements OnInit, OnDestroy {
 
   articles$: Observable<Article[]> = this.store.pipe(select(getArticles));
   fridgeId$: Observable<string> = this.store.pipe(select(getSelectedFridgeId));
@@ -30,6 +31,10 @@ export class ArticleListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getArticles();
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(new PurgeFridgeItems());
   }
 
   private getArticles(): void {
