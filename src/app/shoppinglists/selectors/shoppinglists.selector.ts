@@ -1,6 +1,8 @@
 import { Params } from '@angular/router';
-import { createSelector, MemoizedSelector } from '@ngrx/store';
+import { Dictionary } from '@ngrx/entity';
+import { createSelector, DefaultProjectorFn, MemoizedSelector } from '@ngrx/store';
 import { getParams } from 'src/app/core/selectors/router.selector';
+import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
 import { getShoppinglistRootState } from '.';
 import { shoppinglistsAdapter, ShoppinglistsState } from '../reducers/shoppinglists.reducer';
@@ -20,4 +22,11 @@ export const {
 export const getSelectedShoppinglistId: MemoizedSelector<object, string> = createSelector(
   getParams,
   (params: Params) => params[SHOPPINGLIST_ID]
+);
+
+export const getSelectedShoppinglist: MemoizedSelector<object, Shoppinglist, DefaultProjectorFn<Shoppinglist>> = createSelector(
+  getShoppinglistsMap,
+  getSelectedShoppinglistId,
+  // tslint:disable-next-line:max-line-length
+  (shoppinglists: Dictionary<Shoppinglist>, currentShoppinglistId: string): Shoppinglist | undefined => shoppinglists && shoppinglists[currentShoppinglistId],
 );

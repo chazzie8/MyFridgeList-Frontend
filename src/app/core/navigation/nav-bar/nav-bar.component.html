@@ -6,6 +6,10 @@
     <mat-icon>menu</mat-icon>
   </button>
 
+  <ng-container *ngIf="getFirstUrlSegment$ | async as getFirstUrlSegment">
+    <app-nav-bar-title [firstUrlSegment]="getFirstUrlSegment"></app-nav-bar-title>
+  </ng-container>
+
   <span class="menu-spacer"></span>
   
   <ng-container *ngIf="fridgeId$ | async as fridgeId">

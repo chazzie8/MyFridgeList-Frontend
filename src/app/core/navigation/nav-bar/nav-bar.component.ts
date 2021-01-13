@@ -9,6 +9,7 @@ import { getSelectedShoppinglistId } from 'src/app/shoppinglists/selectors/shopp
 
 import { BaseAppState } from '../../router/reducers/custom-router-serializer.reducer';
 import { DeleteShoppinglist } from './../../../shoppinglists/actions/list-shoppinglists-api.actions';
+import { getFirstUrlSegment } from './../../selectors/router.selector';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,6 +20,7 @@ export class NavBarComponent {
 
   @Output() menuButtonClick = new EventEmitter<boolean>();
 
+  getFirstUrlSegment$: Observable<string> = this.store.pipe(select(getFirstUrlSegment));
   fridgeId$: Observable<string> = this.store.pipe(select(getSelectedFridgeId));
   shoppinglistId$: Observable<string> = this.store.pipe(select(getSelectedShoppinglistId));
 
@@ -37,5 +39,4 @@ export class NavBarComponent {
   public handleDeleteShoppinglistClick(shoppinglistId: string): void {
     this.store.dispatch(new DeleteShoppinglist(shoppinglistId));
   }
-
 }

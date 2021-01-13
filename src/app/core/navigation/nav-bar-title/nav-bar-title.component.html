@@ -1,0 +1,15 @@
+<ng-container *ngIf="firstUrlSegment === 'dashboard'">
+  <span class="title-label">Dashboard</span>
+</ng-container>
+
+<ng-container *ngIf="firstUrlSegment === 'fridges'">
+  <ng-container *ngIf="selectedFridge$ | async as selectedFridge">
+    <span class="title-label">{{selectedFridge.name}} - Kühlschrank</span>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="firstUrlSegment === 'shoppinglists'">
+  <ng-container *ngIf="selectedShoppinglist$ | async as selectedShoppinglist">
+    <span class="title-label">{{selectedShoppinglist.name}} - Einkaufsliste</span>
+  </ng-container>
+</ng-container>
