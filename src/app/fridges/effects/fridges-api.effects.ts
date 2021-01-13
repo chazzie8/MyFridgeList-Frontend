@@ -4,7 +4,13 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 
-import { ListFridgeApiActionTypes, LoadFridges, LoadFridgesSuccess } from '../actions/list-fridges-api.actions';
+import {
+  ListFridgeApiActionTypes,
+  LoadFridges,
+  LoadFridgesSuccess,
+  UpdateFridge,
+  UpdateFridgeSuccess,
+} from '../actions/list-fridges-api.actions';
 import { FridgeApiService } from '../services/fridge-api.service';
 import { GoToDashboard } from './../../core/router/actions/navigation.actions';
 import { DeleteFridge, DeleteFridgeSuccess } from './../actions/list-fridges-api.actions';
@@ -22,6 +28,26 @@ export class FridgeApiEffects {
       );
     }),
   );
+
+  @Effect({ dispatch: true })
+  public updateFridge$ = this.actions$.pipe(
+    ofType(ListFridgeApiActionTypes.UpdateFridge),
+    switchMap((action: UpdateFridge) => {
+      return this.fridgeApiService.updateFridge(action.fridgeId, action.updateFridgeTitle).pipe(
+        map((response: Fridge) => new UpdateFridgeSuccess(response)),
+      );
+    }),
+  );
+
+  // @Effect({ dispatch: true })
+  // public updateFridgeSuccess$ = this.actions$.pipe(
+  //   ofType(ListFridgeApiActionTypes.UpdateFridgeSuccess),
+  //   map(() => {
+  //     this.snackBar.open('Kühlschrank wurde geupdated', 'Schließen', {
+  //       duration: 3000,
+  //     });
+  //   }),
+  // );
 
   @Effect({ dispatch: true })
   public deleteFridge$ = this.actions$.pipe(

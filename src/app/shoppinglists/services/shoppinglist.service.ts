@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Item } from 'src/app/shared/models/item.model';
 import { CreateItemRequest } from 'src/app/shared/models/requests/create-item-request.model';
 import { CreateShoppinglistRequest } from 'src/app/shared/models/requests/create-shoppinglist-request.model';
+import { EditNavTitleRequest } from 'src/app/shared/models/requests/edit-nav-title-request.model';
 import { EditShoppinglistItemRequest } from 'src/app/shared/models/requests/edit-shoppinglist-item-request.model';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
@@ -29,10 +30,10 @@ export class ShoppinglistApiService {
     return this.httpClient.post<Shoppinglist>(url, request);
   }
 
-  // Update Bought Items
-  public updateBoughtItems(shoppinglistId: string, request: EditShoppinglistItemRequest): Observable<Item[]> {
-    const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}/update`;
-    return this.httpClient.post<Item[]>(url, request);
+  // Update Shoppinglist
+  public updateShoppinglist(shoppinglistId: string, request: EditNavTitleRequest): Observable<Shoppinglist> {
+    const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}`;
+    return this.httpClient.put<Shoppinglist>(url, request);
   }
 
   // Delete Shoppinglist
@@ -57,6 +58,12 @@ export class ShoppinglistApiService {
   public deleteItem(shoppinglistId: string, itemId: string): Observable<{}> {
     const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}/items/${itemId}`;
     return this.httpClient.delete<{}>(url);
+  }
+
+  // Update Bought Items
+  public updateBoughtItems(shoppinglistId: string, request: EditShoppinglistItemRequest): Observable<Item[]> {
+    const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}/update`;
+    return this.httpClient.post<Item[]>(url, request);
   }
 
 }

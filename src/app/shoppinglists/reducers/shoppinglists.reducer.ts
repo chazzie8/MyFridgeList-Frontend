@@ -20,6 +20,11 @@ export function shoppinglistsReducer(
         ...state,
       });
 
+    case ListShoppinglistsApiActionTypes.UpdateShoppinglistSuccess:
+      return shoppinglistsAdapter.upsertOne(action.shoppinglist, {
+        ...state,
+      });
+
     case ListShoppinglistsApiActionTypes.DeleteShoppinglistSuccess:
       return shoppinglistsAdapter.removeOne(action.shoppinglistId, {
         ...state,

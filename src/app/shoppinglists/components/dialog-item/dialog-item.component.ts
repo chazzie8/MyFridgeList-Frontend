@@ -26,7 +26,6 @@ export class DialogItemComponent {
   ) { }
 
   letterRegex = /^[a-zA-Z_ ]+$/;
-  numericRegex = /^[0-9]+$/;
   form: FormGroup = new FormGroup({
     label: new FormControl('', [
       Validators.required,

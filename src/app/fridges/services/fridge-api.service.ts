@@ -6,6 +6,7 @@ import { Fridge } from 'src/app/shared/models/fridge.model';
 import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
 import { CreateFridgeRequest } from 'src/app/shared/models/requests/create-fridge-request.model';
 import { EditArticleRequest } from 'src/app/shared/models/requests/edit-article-request.model';
+import { EditNavTitleRequest } from 'src/app/shared/models/requests/edit-nav-title-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,12 @@ export class FridgeApiService {
   public addFridge(request: CreateFridgeRequest): Observable<Fridge> {
     const url = `${this.apiBaseUrl}/fridges`;
     return this.httpClient.post<Fridge>(url, request);
+  }
+
+  // Update Fridge
+  public updateFridge(fridgeId: string, request: EditNavTitleRequest): Observable<Fridge> {
+    const url = `${this.apiBaseUrl}/fridges/${fridgeId}`;
+    return this.httpClient.put<Fridge>(url, request);
   }
 
   // Delete Fridge
