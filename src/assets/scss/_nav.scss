@@ -1,18 +1,19 @@
 .mat-drawer-container {
-    height: 100vh;
+  height: 100vh;
 }
 
 .mat-drawer-inner-container {
-    width: 33vw !important;
+  width: 33vw !important;
 }
 
 @media only screen and (max-width: $breakpoint-max-mobile) {
-    .mat-drawer-inner-container {
-        width: 50vw !important;
-    }
+  .mat-drawer-inner-container {
+    width: 50vw !important;
+  }
 }
 
 .title-label {
-    margin-left: 10px;
-    font-size: 14px;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 400;
 }

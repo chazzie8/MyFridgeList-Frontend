@@ -1,4 +1,4 @@
 export interface Shoppinglist{
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 }

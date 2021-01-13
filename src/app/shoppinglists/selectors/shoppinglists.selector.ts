@@ -27,6 +27,7 @@ export const getSelectedShoppinglistId: MemoizedSelector<object, string> = creat
 export const getSelectedShoppinglist: MemoizedSelector<object, Shoppinglist, DefaultProjectorFn<Shoppinglist>> = createSelector(
   getShoppinglistsMap,
   getSelectedShoppinglistId,
-  // tslint:disable-next-line:max-line-length
-  (shoppinglists: Dictionary<Shoppinglist>, currentShoppinglistId: string): Shoppinglist | undefined => shoppinglists && shoppinglists[currentShoppinglistId],
+  (shoppinglists: Dictionary<Shoppinglist>, currentShoppinglistId: string): Shoppinglist | undefined => {
+    return shoppinglists && shoppinglists[currentShoppinglistId];
+  },
 );

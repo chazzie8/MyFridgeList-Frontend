@@ -18,43 +18,43 @@ export class FridgeApiService {
   ) { }
 
   // Get All Fridges
-  getFridges(): Observable<Fridge[]> {
+  public getFridges(): Observable<Fridge[]> {
     const url = `${this.apiBaseUrl}/fridges`;
     return this.httpClient.get<Fridge[]>(url);
   }
 
   // Add New Fridge
-  addFridge(request: CreateFridgeRequest): Observable<Fridge> {
+  public addFridge(request: CreateFridgeRequest): Observable<Fridge> {
     const url = `${this.apiBaseUrl}/fridges`;
     return this.httpClient.post<Fridge>(url, request);
   }
 
   // Delete Fridge
-  deleteFridge(fridgeId: string): Observable<{}> {
+  public deleteFridge(fridgeId: string): Observable<{}> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}`;
     return this.httpClient.delete<{}>(url);
   }
 
   // Get All Articles By Fridge ID
-  getArticles(fridgeId: string): Observable<Article[]> {
+  public getArticles(fridgeId: string): Observable<Article[]> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}/articles`;
     return this.httpClient.get<Article[]>(url);
   }
 
   // Add Article By Fridge ID
-  addArticle(fridgeId: string, request: CreateArticleRequest): Observable<Article> {
+  public addArticle(fridgeId: string, request: CreateArticleRequest): Observable<Article> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}/articles`;
     return this.httpClient.post<Article>(url, request);
   }
 
   // Update Article By Fridge ID
-  updateArticle(fridgeId: string, articleId: string, request: EditArticleRequest): Observable<Article> {
+  public updateArticle(fridgeId: string, articleId: string, request: EditArticleRequest): Observable<Article> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}/articles/${articleId}`;
     return this.httpClient.put<Article>(url, request);
   }
 
   // Delete Article By Fridge ID
-  deleteArticle(fridgeId: string, articleId: string): Observable<{}> {
+  public deleteArticle(fridgeId: string, articleId: string): Observable<{}> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}/articles/${articleId}`;
     return this.httpClient.delete<{}>(url);
   }

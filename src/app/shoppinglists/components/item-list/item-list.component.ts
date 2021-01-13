@@ -29,11 +29,11 @@ export class ItemListComponent implements OnInit, OnDestroy {
     private store: Store<ItemsState>,
   ) { }
 
-  ngOnInit(): void{
+  public ngOnInit(): void{
     this.getItems();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.itemList) {
       const boughtItemIds = this.itemList.selectedOptions.selected.map(
         (ids) => ids.value,
@@ -51,7 +51,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
     this.store.dispatch(new PurgeShoppinglistItems());
   }
 
-  private getItems(): void {
+  public getItems(): void {
     this.shoppinglistId$.pipe(
       take(1),
     ).subscribe((shoppinglistId): void => {

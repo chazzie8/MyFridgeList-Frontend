@@ -19,7 +19,7 @@ export class ItemListItemComponent {
     private store: Store<ItemsState>,
   ) { }
 
-  handleDeleteItemClick(event: Event): void {
+  public handleDeleteItemClick(event: Event): void {
     this.store.dispatch(new DeleteItem(this.shoppinglistId, this.item.id));
     event.stopPropagation();
   }

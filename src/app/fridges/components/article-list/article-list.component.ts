@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Article } from 'src/app/shared/models/article.model';
 
 import { PurgeFridgeItems } from '../../actions/fridge.actions';
@@ -11,6 +11,7 @@ import { ArticlesState } from '../../reducers/articles.reducer';
 import { getArticles } from '../../selectors/articles.selector';
 import { getSelectedFridgeId } from '../../selectors/fridges.selector';
 import { DialogArticleComponent } from '../dialog-article/dialog-article.component';
+import { getAlmostExpiredArticles, getExpiredArticles, getShowGoodArticles } from './../../selectors/articles.selector';
 
 @Component({
   selector: 'app-article-list',
@@ -29,15 +30,15 @@ export class ArticleListComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getArticles();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.store.dispatch(new PurgeFridgeItems());
   }
 
-  private getArticles(): void {
+  public getArticles(): void {
     this.fridgeId$.pipe(
       take(1),
     ).subscribe((fridgeId): void => {
@@ -45,7 +46,7 @@ export class ArticleListComponent implements OnInit, OnDestroy {
     });
   }
 
-  handleOpenDialogClick(): void {
+  public handleOpenDialogClick(): void {
     this.fridgeId$.pipe(
       take(1),
     ).subscribe((fridgeId): void => {
@@ -59,41 +60,19 @@ export class ArticleListComponent implements OnInit, OnDestroy {
     });
   }
 
-  handleShowExpired(): void {
-    this.articles$ = this.store.pipe(select(getArticles)).pipe(
-      map(articles => {
-        return articles.filter(article => this.currentDate.getTime() >= new Date(article.expirydate).getTime());
-    }));
+  public handleShowExpired(): void {
+    this.articles$ = this.store.pipe(select(getExpiredArticles));
   }
 
-  handleShowAlmostExpired(): void {
-    this.articles$ = this.store.pipe(select(getArticles)).pipe(
-      map(articles => {
-        return articles.filter(article => {
-          // MHD - jetziges Datum = Tage übrig (kleiner als 3)
-          const expiryDate = new Date(article.expirydate);
-          const daysLeftMs = expiryDate.getTime() - this.currentDate.getTime();
-          const days = daysLeftMs / 1000 / 60 / 60 / 24;
-          return ((days < 4) && (daysLeftMs > 0));
-        });
-    }));
+  public handleShowAlmostExpired(): void {
+    this.articles$ = this.store.pipe(select(getAlmostExpiredArticles));
   }
 
-  handleShowGoodArticles(): void {
-    this.articles$ = this.store.pipe(select(getArticles)).pipe(
-      map(articles => {
-        return articles.filter(article => {
-          // MHD - jetziges Datum = Tage übrig (kleiner als 3)
-          const expiryDate = new Date(article.expirydate);
-          const daysLeftMs = expiryDate.getTime() - this.currentDate.getTime();
-          const days = daysLeftMs / 1000 / 60 / 60 / 24;
-          return ((days > 4) && (daysLeftMs > 0));
-        });
-    }));
+  public handleShowGoodArticles(): void {
+    this.articles$ = this.store.pipe(select(getShowGoodArticles));
   }
 
-  handleShowAll(): void {
+  public handleShowAll(): void {
     this.articles$ = this.store.pipe(select(getArticles));
   }
-
 }

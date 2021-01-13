@@ -22,11 +22,11 @@ export class ArticleListItemComponent {
     private store: Store<ArticlesState>,
   ) { }
 
-  handleDeleteArticleClick(fridgeId: string, articleId: string): void {
+  public handleDeleteArticleClick(fridgeId: string, articleId: string): void {
     this.store.dispatch(new DeleteArticle(fridgeId, articleId));
   }
 
-  openDialogClick(fridgeId: string, article: Article): void {
+  public openDialogClick(fridgeId: string, article: Article): void {
     this.dialog.open(DialogArticleComponent, {
       data: {
         fridgeId,

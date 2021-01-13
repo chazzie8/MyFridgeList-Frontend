@@ -18,43 +18,43 @@ export class ShoppinglistApiService {
   ) { }
 
   // Get All Shoppinglists
-  getShoppinglists(): Observable<Shoppinglist[]> {
+  public getShoppinglists(): Observable<Shoppinglist[]> {
     const url = `${this.apiBaseUrl}/shoppinglists`;
     return this.httpClient.get<Shoppinglist[]>(url);
   }
 
   // Add New Shoppinglist
-  addShoppinglist(request: CreateShoppinglistRequest): Observable<Shoppinglist> {
+  public addShoppinglist(request: CreateShoppinglistRequest): Observable<Shoppinglist> {
     const url = `${this.apiBaseUrl}/shoppinglists`;
     return this.httpClient.post<Shoppinglist>(url, request);
   }
 
   // Update Bought Items
-  updateBoughtItems(shoppinglistId: string, request: EditShoppinglistItemRequest): Observable<Item[]> {
+  public updateBoughtItems(shoppinglistId: string, request: EditShoppinglistItemRequest): Observable<Item[]> {
     const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}/update`;
     return this.httpClient.post<Item[]>(url, request);
   }
 
   // Delete Shoppinglist
-  deleteShoppinglist(shoppinglistId: string): Observable<{}> {
+  public deleteShoppinglist(shoppinglistId: string): Observable<{}> {
     const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}`;
     return this.httpClient.delete<{}>(url);
   }
 
   // Get All Items By Shoppinglist ID
-  getItems(shoppinglistId: string): Observable<Item[]> {
+  public getItems(shoppinglistId: string): Observable<Item[]> {
     const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}/items`;
     return this.httpClient.get<Item[]>(url);
   }
 
   // Add Item By Shoppinglist ID
-  addItem(shoppinglistId: string, request: CreateItemRequest): Observable<Item> {
+  public addItem(shoppinglistId: string, request: CreateItemRequest): Observable<Item> {
     const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}/items`;
     return this.httpClient.post<Item>(url, request);
   }
 
   // Delete Item By Shoppinglist ID
-  deleteItem(shoppinglistId: string, itemId: string): Observable<{}> {
+  public deleteItem(shoppinglistId: string, itemId: string): Observable<{}> {
     const url = `${this.apiBaseUrl}/shoppinglists/${shoppinglistId}/items/${itemId}`;
     return this.httpClient.delete<{}>(url);
   }

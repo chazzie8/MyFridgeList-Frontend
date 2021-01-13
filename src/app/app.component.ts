@@ -27,16 +27,16 @@ export class AppComponent implements OnInit {
     private store: Store<FridgesState | ShoppinglistsState | BaseAppState>,
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getFridges();
     this.getShoppinglists();
   }
 
-  private getFridges(): void {
+  public getFridges(): void {
     this.store.dispatch(new LoadFridges());
   }
 
-  private getShoppinglists(): void {
+  public getShoppinglists(): void {
     this.store.dispatch(new LoadShoppinglists());
   }
 }

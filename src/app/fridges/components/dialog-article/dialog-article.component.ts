@@ -43,11 +43,11 @@ export class DialogArticleComponent implements OnInit {
     ]),
   });
 
-  ngOnInit(): void {
-      this.initForm();
+  public ngOnInit(): void {
+    this.initForm();
   }
 
-  initForm(): void {
+  public initForm(): void {
     if (this.data.article !== null) {
       this.form.setValue({
         label: this.data.article.label,
@@ -57,7 +57,7 @@ export class DialogArticleComponent implements OnInit {
     }
   }
 
-  handleUpdateClick(data: any): void {
+  public handleUpdateClick(data: any): void {
     if (!this.form.valid) {
       return;
     }
@@ -72,7 +72,7 @@ export class DialogArticleComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  handleAddClick(): void {
+  public handleAddClick(): void {
     if (!this.form.valid) {
       return;
     }
@@ -86,7 +86,7 @@ export class DialogArticleComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  handleCancelClick(): void {
+  public handleCancelClick(): void {
     this.dialogRef.close();
   }
 }
