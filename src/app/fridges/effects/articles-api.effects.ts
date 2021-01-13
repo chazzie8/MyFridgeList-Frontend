@@ -50,7 +50,7 @@ export class ArticleApiEffects {
     switchMap((action: UpdateArticle) => {
       return this.fridgeApiService.updateArticle(action.fridgeId, action.article.id, action.article).pipe(
         map((response: Article) => {
-          this.snackBar.open('Artikel "' + response.label + '" wurde geupdated', 'Schließen', {
+          this.snackBar.open('Artikel wurde geupdated', 'Schließen', {
             duration: 3000,
           });
           return new UpdateArticleSuccess(response);
