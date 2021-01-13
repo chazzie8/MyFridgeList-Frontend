@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Artikel Hinzufügen</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <input 
+      matInput
+      placeholder="Artikelname"
+      formControlName="label"
+    >
+    <mat-error *ngIf="form.controls.label.errors?.required">Artikelname ist erforderlich</mat-error>
+    <mat-error *ngIf="form.controls.label.errors?.pattern">Bitte ausschließlich Buchstaben verwenden</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="handleCancelClick()">Fertig</button>
+  <button mat-raised-button color="primary" type="submit" (click)="handleAddClick()">Weitere hinzufügen</button>
+</mat-dialog-actions>

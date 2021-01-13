@@ -6,6 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { MaterialModule } from '../shared/material.module';
+import { DialogItemComponent } from './components/dialog-item/dialog-item.component';
 import { ItemListItemComponent } from './components/item-list-item/item-list-item.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemsApiEffects } from './effects/items-api.effects';
@@ -24,11 +25,13 @@ import { SHOPPINGLISTS_FEATURE_KEY } from './shoppinglists.constants';
   ],
   exports: [
     ItemListComponent,
-    ItemListItemComponent
+    ItemListItemComponent,
+    DialogItemComponent,
   ],
   declarations: [
     ItemListComponent,
-    ItemListItemComponent
+    ItemListItemComponent,
+    DialogItemComponent,
   ],
 })
 export class ShoppinglistsModule {

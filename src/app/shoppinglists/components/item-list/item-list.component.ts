@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSelectionList } from '@angular/material/list';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -10,6 +11,7 @@ import { LoadItems } from '../../actions/list-items-api.actions';
 import { ItemsState } from '../../reducers/items.reducer';
 import { getItems } from '../../selectors/items.selector';
 import { getSelectedShoppinglistId } from '../../selectors/shoppinglists.selector';
+import { DialogItemComponent } from '../dialog-item/dialog-item.component';
 import { UpdateBoughtItems } from './../../actions/items-api.actions';
 import { PurgeShoppinglistItems } from './../../actions/shoppinglist.actions';
 
@@ -27,6 +29,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<ItemsState>,
+    public dialog: MatDialog,
   ) { }
 
   public ngOnInit(): void{
@@ -58,4 +61,11 @@ export class ItemListComponent implements OnInit, OnDestroy {
       this.store.dispatch(new LoadItems(shoppinglistId));
     });
   }
+
+  public handleOpenDialogClick(): void {
+    this.dialog.open(DialogItemComponent, {
+      disableClose: true,
+    });
+  }
+
 }
