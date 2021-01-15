@@ -35,20 +35,15 @@ export class ShoppinglistsApiEffects {
     ofType(ListShoppinglistsApiActionTypes.UpdateShoppinglist),
     switchMap((action: UpdateShoppinglist) => {
       return this.shoppinglistApiService.updateShoppinglist(action.shoppinglistId, action.updateShoppinglistTitle).pipe(
-        map((response: Shoppinglist) => new UpdateShoppinglistSuccess(response)),
+        map((response: Shoppinglist) => {
+          this.snackBar.open('Einkaufsliste wurde geupdated', 'Schließen', {
+            duration: 3000,
+          });
+          return new UpdateShoppinglistSuccess(response);
+        }),
       );
     }),
   );
-
-  // @Effect({ dispatch: true })
-  // public updateFridgeSuccess$ = this.actions$.pipe(
-  //   ofType(ListShoppinglistsApiActionTypes.UpdateShoppinglistSuccess),
-  //   map(() => {
-  //     this.snackBar.open('Einkaufsliste wurde geupdated', 'Schließen', {
-  //       duration: 3000,
-  //     });
-  //   }),
-  // );
 
   @Effect({ dispatch: true })
   public deleteShoppinglist$ = this.actions$.pipe(

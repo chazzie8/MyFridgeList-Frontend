@@ -48,7 +48,6 @@ export class RenameNavBarTitleModalComponent implements OnInit {
 
   public initForm(): void {
     if (this.data.data !== null) {
-      console.log(this.data.data);
       this.form.setValue({
         label: this.data.data.name,
       });

@@ -34,20 +34,15 @@ export class FridgeApiEffects {
     ofType(ListFridgeApiActionTypes.UpdateFridge),
     switchMap((action: UpdateFridge) => {
       return this.fridgeApiService.updateFridge(action.fridgeId, action.updateFridgeTitle).pipe(
-        map((response: Fridge) => new UpdateFridgeSuccess(response)),
+        map((response: Fridge) => {
+          this.snackBar.open('Kühlschrank wurde geupdated', 'Schließen', {
+            duration: 3000,
+          });
+          return new UpdateFridgeSuccess(response);
+        }),
       );
     }),
   );
-
-  // @Effect({ dispatch: true })
-  // public updateFridgeSuccess$ = this.actions$.pipe(
-  //   ofType(ListFridgeApiActionTypes.UpdateFridgeSuccess),
-  //   map(() => {
-  //     this.snackBar.open('Kühlschrank wurde geupdated', 'Schließen', {
-  //       duration: 3000,
-  //     });
-  //   }),
-  // );
 
   @Effect({ dispatch: true })
   public deleteFridge$ = this.actions$.pipe(

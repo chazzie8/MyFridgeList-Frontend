@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -20,7 +20,7 @@ import { getFirstUrlSegment } from './../../selectors/router.selector';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
-export class NavBarComponent implements OnInit{
+export class NavBarComponent {
 
   @Output() menuButtonClick = new EventEmitter<boolean>();
 
@@ -34,11 +34,6 @@ export class NavBarComponent implements OnInit{
     private store: Store<FridgesState | ShoppinglistsState | BaseAppState>,
     public dialog: MatDialog,
   ) { }
-
-  public ngOnInit(): void {
-    this.selectedFridge$ = this.store.pipe(select(getSelectedFridge));
-    this.selectedShoppinglist$ = this.store.pipe(select(getSelectedShoppinglist));
-  }
 
   public handleNavButtonClick(): void {
     this.menuButtonClick.emit(true);
