@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Article } from 'src/app/shared/models/article.model';
+import { FridgeDashboardItem } from 'src/app/shared/models/fridge-dashboard-item.model';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
 import { CreateFridgeRequest } from 'src/app/shared/models/requests/create-fridge-request.model';
@@ -40,6 +41,12 @@ export class FridgeApiService {
   public deleteFridge(fridgeId: string): Observable<{}> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}`;
     return this.httpClient.delete<{}>(url);
+  }
+
+  // Get All Dashboard Items By Fridge ID
+  public getFridgeDashboardItems(): Observable<FridgeDashboardItem[]> {
+    const url = `${this.apiBaseUrl}/fridges/dashboard-items`;
+    return this.httpClient.get<FridgeDashboardItem[]>(url);
   }
 
   // Get All Articles By Fridge ID

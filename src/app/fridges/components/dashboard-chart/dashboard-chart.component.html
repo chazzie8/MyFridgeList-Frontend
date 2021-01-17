@@ -1,0 +1,33 @@
+<div style="display: block">
+  <div class="d-flex">
+    <div class="dashboard-card-header">
+      <span class="header">Kühlschrank</span>
+      <span class="subheader">{{fridge.name}}</span>
+    </div>
+    <span class="menu-spacer"></span>
+    <ng-container *ngIf="fridge">
+      <button 
+        mat-icon-button
+        (click)="handleGoToSelectedFridge(fridge.id)"
+      >
+        <mat-icon>info</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="doughnutChartData; else noData">
+    <canvas baseChart
+      [data]="doughnutChartData"
+      [labels]="doughnutChartLabels"
+      [chartType]="doughnutChartType"
+      [colors]="doughnutColors"
+      [options]="doughnutOptions"
+    >
+    </canvas>
+  </ng-container>
+</div>
+
+<ng-template #noData>
+  <div class="mt-3">
+    <span>Keine Artikel im Kühlschrank</span>
+  </div>
+</ng-template>

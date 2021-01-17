@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MaterialModule } from '../shared/material.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { FooterComponent } from './footer/footer.component';
 import { NavBarTitleComponent } from './navigation/nav-bar-title/nav-bar-title.component';
 import { NavBarComponent } from './navigation/nav-bar/nav-bar.component';
 import {
@@ -21,8 +21,8 @@ import { RouterStateModule } from './router/router-state.module';
     NavBarTitleComponent,
     SideNavBarComponent,
     SideNavBarListComponent,
-    DashboardComponent,
     RenameNavBarTitleModalComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -37,8 +37,8 @@ import { RouterStateModule } from './router/router-state.module';
     NavBarTitleComponent,
     SideNavBarComponent,
     SideNavBarListComponent,
-    DashboardComponent,
     RenameNavBarTitleModalComponent,
+    FooterComponent,
   ],
 })
 export class CoreModule { }

@@ -1,0 +1,33 @@
+.card-row {
+  display: flex;
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  justify-content: space-around;
+}
+
+.dashboard-card {
+  display: inline-block; 
+  width: 50%; 
+  margin-bottom: 10px;
+}
+
+.dashboard-card-header {
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    font-weight: $font-weight-bold;
+  }
+
+  .subheader {
+    font-weight: $font-weight-100;
+  }
+}
+
+@media only screen and (max-width: $breakpoint-max-mobile) {
+  .dashboard-card {
+    display: inline-block; 
+    width: 100%; 
+    margin-bottom: 10px;
+  }  
+}

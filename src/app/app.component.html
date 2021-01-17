@@ -1,5 +1,11 @@
 <mat-toolbar class="toolbar mat-elevation-z6" color="primary">
   <span>MyFridgeList</span>
+  <span class="menu-spacer"></span>
+  <button 
+    mat-icon-button
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
 </mat-toolbar>
 
 <mat-sidenav-container>
@@ -26,9 +32,11 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-      <app-nav-bar (menuButtonClick)="sidenav.toggle()"></app-nav-bar>
+    <app-nav-bar (menuButtonClick)="sidenav.toggle()"></app-nav-bar>
     <div class="container">
-      <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
     </div>
+    <app-footer></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
+

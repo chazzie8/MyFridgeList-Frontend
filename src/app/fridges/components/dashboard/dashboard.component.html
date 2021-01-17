@@ -1,0 +1,12 @@
+<span>Willkommen!</span>
+<h1>Hallo Username</h1>
+
+<div class="card-row">
+  <ng-container *ngIf="fridges$ | async as fridges">
+    <ng-container *ngFor="let fridge of fridges">
+        <mat-card class="dashboard-card">
+          <app-dashboard-chart [fridge]="fridge"></app-dashboard-chart>
+        </mat-card>
+    </ng-container>
+  </ng-container>
+</div>

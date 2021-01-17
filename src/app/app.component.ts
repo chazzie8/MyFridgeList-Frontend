@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
+import { GoToDashboard } from './core/router/actions/navigation.actions';
 import { BaseAppState } from './core/router/reducers/custom-router-serializer.reducer';
 import { LoadFridges } from './fridges/actions/list-fridges-api.actions';
 import { FridgesState } from './fridges/reducers/fridges.reducer';
@@ -38,5 +39,9 @@ export class AppComponent implements OnInit {
 
   public getShoppinglists(): void {
     this.store.dispatch(new LoadShoppinglists());
+  }
+
+  public handleGoToDashboardClick(): void {
+    this.store.dispatch(new GoToDashboard());
   }
 }
