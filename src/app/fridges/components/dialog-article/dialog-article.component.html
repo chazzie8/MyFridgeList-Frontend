@@ -7,7 +7,7 @@
 
 <mat-dialog-content [formGroup]="form">
     <mat-form-field>
-        <input 
+        <input
           matInput
           placeholder="Artikelname"
           formControlName="label"
@@ -40,7 +40,15 @@
 <mat-dialog-actions>
   <button mat-button (click)="handleCancelClick()">Abbrechen</button>
   <ng-container *ngIf="data.article !== null; else noDataButtons">
-    <button mat-raised-button color="primary" type="submit" (click)="handleUpdateClick(data)">Speichern</button>
+    <button
+      mat-raised-button 
+      [disabled]="!form.dirty || (form.controls['label'].value === data.article.label && form.controls['amount'].value === data.article.amount && form.controls['expiryDate'].value === data.article.expirydate)"
+      color="primary"
+      type="submit"
+      (click)="handleUpdateClick(data)"
+    >
+      Speichern
+    </button>
   </ng-container>
 </mat-dialog-actions>
 
