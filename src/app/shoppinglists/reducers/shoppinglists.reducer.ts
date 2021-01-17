@@ -20,6 +20,7 @@ export function shoppinglistsReducer(
         ...state,
       });
 
+    case ListShoppinglistsApiActionTypes.CreateShoppinglistSuccess:
     case ListShoppinglistsApiActionTypes.UpdateShoppinglistSuccess:
       return shoppinglistsAdapter.upsertOne(action.shoppinglist, {
         ...state,

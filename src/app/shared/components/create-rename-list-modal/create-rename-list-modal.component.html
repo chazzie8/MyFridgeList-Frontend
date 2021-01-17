@@ -1,0 +1,82 @@
+<ng-container *ngIf="getFirstUrlSegment$ | async as firstUrlSegment">
+  <ng-container *ngIf="data.data !== null; noData">
+    <ng-container *ngIf="firstUrlSegment === 'fridges'">
+      <h2 mat-dialog-title>Kühlschlank umbennen</h2>
+    </ng-container>
+    <ng-container *ngIf="firstUrlSegment === 'shoppinglists'">
+      <h2 mat-dialog-title>Einkaufsliste umbennen</h2>
+    </ng-container>
+  </ng-container>
+  <ng-container #noData>
+    <ng-container *ngIf="data.create === 'fridge'">
+      <h2 mat-dialog-title>Kühlschlank erstellen</h2>
+    </ng-container>
+    <ng-container *ngIf="data.create === 'shoppinglist'">
+      <h2 mat-dialog-title>Einkaufsliste erstellen</h2>
+    </ng-container>
+  </ng-container>
+
+  <mat-dialog-content [formGroup]="form">
+    <mat-form-field>
+      <input 
+        matInput
+        placeholder="Name"
+        formControlName="label"
+      >
+      <mat-error *ngIf="form.controls.label.errors?.required">Ein Name ist erforderlich</mat-error>
+      <mat-error *ngIf="form.controls.label.errors?.pattern">Bitte ausschließlich Buchstaben verwenden</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="handleCancelClick()">Abbrechen</button>
+    <ng-container *ngIf="data.data !== null; noData">
+      <ng-container *ngIf="firstUrlSegment === 'fridges'">
+        <button 
+          mat-raised-button
+          [disabled]="!form.dirty || (data.data !== null && form.controls['label'].value === data.data.name)"
+          color="primary" 
+          type="submit" 
+          (click)="handleUpdateFridgeClick(data)"
+        >
+          Speichern
+        </button>
+      </ng-container>
+      <ng-container *ngIf="firstUrlSegment === 'shoppinglists'">
+        <button 
+          mat-raised-button
+          [disabled]="!form.dirty || (data.data !== null && form.controls['label'].value === data.data.name)"
+          color="primary" 
+          type="submit" 
+          (click)="handleUpdateShoppinglistClick(data)"
+        >
+          Speichern
+        </button>
+      </ng-container>
+    </ng-container>
+    <ng-container #noData>
+      <ng-container *ngIf="data.create === 'fridge'">
+          <button 
+            mat-raised-button
+            [disabled]="!form.dirty"
+            color="primary" 
+            type="submit" 
+            (click)="handleCreateFridgeClick()"
+          >
+            Erstellen
+          </button>
+      </ng-container>
+      <ng-container *ngIf="data.create === 'shoppinglist'">
+        <button 
+            mat-raised-button
+            [disabled]="!form.dirty"
+            color="primary" 
+            type="submit" 
+            (click)="handleCreateShoppinglistClick()"
+          >
+            Erstellen
+          </button>
+      </ng-container>
+    </ng-container>
+  </mat-dialog-actions>
+</ng-container>

@@ -5,6 +5,8 @@ import { map, switchMap } from 'rxjs/operators';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 
 import {
+  CreateFridge,
+  CreateFridgeSuccess,
   ListFridgeApiActionTypes,
   LoadFridges,
   LoadFridgesSuccess,
@@ -12,7 +14,7 @@ import {
   UpdateFridgeSuccess,
 } from '../actions/list-fridges-api.actions';
 import { FridgeApiService } from '../services/fridge-api.service';
-import { GoToDashboard } from './../../core/router/actions/navigation.actions';
+import { GoToDashboard, GoToSelectedFridge } from './../../core/router/actions/navigation.actions';
 import { DeleteFridge, DeleteFridgeSuccess } from './../actions/list-fridges-api.actions';
 
 @Injectable()
@@ -41,6 +43,27 @@ export class FridgeApiEffects {
           return new UpdateFridgeSuccess(response);
         }),
       );
+    }),
+  );
+
+  @Effect({ dispatch: true })
+  public createFridge$ = this.actions$.pipe(
+    ofType(ListFridgeApiActionTypes.CreateFridge),
+    switchMap((action: CreateFridge) => {
+      return this.fridgeApiService.addFridge(action.fridgeRequest).pipe(
+        map((response: Fridge) => new CreateFridgeSuccess(response)),
+      );
+    }),
+  );
+
+  @Effect({ dispatch: true })
+  public createFridgeSuccess$ = this.actions$.pipe(
+    ofType(ListFridgeApiActionTypes.CreateFridgeSuccess),
+    map((action: CreateFridgeSuccess) => {
+      this.snackBar.open('Kühlschrank wurde hinzugefügt', 'Schließen', {
+        duration: 3000,
+      });
+      return new GoToSelectedFridge(action.fridge.id);
     }),
   );
 

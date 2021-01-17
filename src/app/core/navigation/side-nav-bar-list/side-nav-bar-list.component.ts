@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
+import {
+  CreateRenameListModalComponent,
+} from 'src/app/shared/components/create-rename-list-modal/create-rename-list-modal.component';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
@@ -19,6 +23,7 @@ export class SideNavBarListComponent {
 
   constructor(
     private store: Store<BaseAppState>,
+    private dialog: MatDialog,
     public sidenav: MatSidenav
   ) { }
 
@@ -31,4 +36,27 @@ export class SideNavBarListComponent {
     this.store.dispatch(new GoToSelectedShoppinglist(shoppinglistId));
     this.sidenav.close();
   }
+
+  public handleOpenCreateNewFridgeModalClick(): void {
+    this.sidenav.close();
+    this.dialog.open(CreateRenameListModalComponent, {
+      data: {
+        id: null,
+        data: null,
+        create: 'fridge',
+      },
+    });
+  }
+
+  public handleOpenCreateNewShoppinglistModalClick(): void {
+    this.sidenav.close();
+    this.dialog.open(CreateRenameListModalComponent, {
+      data: {
+        id: null,
+        data: null,
+        create: 'shoppinglist',
+      },
+    });
+  }
+
 }

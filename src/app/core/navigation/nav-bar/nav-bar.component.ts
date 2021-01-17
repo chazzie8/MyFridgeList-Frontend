@@ -5,13 +5,15 @@ import { Observable } from 'rxjs';
 import { DeleteFridge } from 'src/app/fridges/actions/list-fridges-api.actions';
 import { FridgesState } from 'src/app/fridges/reducers/fridges.reducer';
 import { getSelectedFridge, getSelectedFridgeId } from 'src/app/fridges/selectors/fridges.selector';
+import {
+  CreateRenameListModalComponent,
+} from 'src/app/shared/components/create-rename-list-modal/create-rename-list-modal.component';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 import { ShoppinglistsState } from 'src/app/shoppinglists/reducers/shoppinglists.reducer';
 import { getSelectedShoppinglist, getSelectedShoppinglistId } from 'src/app/shoppinglists/selectors/shoppinglists.selector';
 
 import { BaseAppState } from '../../router/reducers/custom-router-serializer.reducer';
-import { RenameNavBarTitleModalComponent } from '../rename-nav-bar-title-modal/rename-nav-bar-title-modal.component';
 import { DeleteShoppinglist } from './../../../shoppinglists/actions/list-shoppinglists-api.actions';
 import { getFirstUrlSegment } from './../../selectors/router.selector';
 
@@ -48,7 +50,7 @@ export class NavBarComponent {
   }
 
   public handleOpenDialogUpdateFridge(fridgeId: string, fridge: Fridge): void {
-    this.dialog.open(RenameNavBarTitleModalComponent, {
+    this.dialog.open(CreateRenameListModalComponent, {
       data: {
         id: fridgeId,
         data: fridge,
@@ -57,7 +59,7 @@ export class NavBarComponent {
   }
 
   public handleOpenDialogUpdateShoppinglist(shoppinglistId: string, shoppinglist: Shoppinglist): void {
-    this.dialog.open(RenameNavBarTitleModalComponent, {
+    this.dialog.open(CreateRenameListModalComponent, {
       data: {
         id: shoppinglistId,
         data: shoppinglist,

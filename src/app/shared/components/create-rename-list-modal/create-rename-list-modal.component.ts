@@ -3,35 +3,38 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { UpdateFridge } from 'src/app/fridges/actions/list-fridges-api.actions';
+import { CreateFridge, UpdateFridge } from 'src/app/fridges/actions/list-fridges-api.actions';
 import { FridgesState } from 'src/app/fridges/reducers/fridges.reducer';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 import { EditNavTitleRequest } from 'src/app/shared/models/requests/edit-nav-title-request.model';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
-import { UpdateShoppinglist } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
+import { CreateShoppinglist, UpdateShoppinglist } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
 import { ShoppinglistsState } from 'src/app/shoppinglists/reducers/shoppinglists.reducer';
 
-import { BaseAppState } from '../../router/reducers/custom-router-serializer.reducer';
-import { getFirstUrlSegment } from '../../selectors/router.selector';
+import { BaseAppState } from '../../../core/router/reducers/custom-router-serializer.reducer';
+import { getFirstUrlSegment } from '../../../core/selectors/router.selector';
+import { CreateFridgeRequest } from '../../models/requests/create-fridge-request.model';
+import { CreateShoppinglistRequest } from '../../models/requests/create-shoppinglist-request.model';
 
 export interface DialogData {
   id: string;
   data: Shoppinglist | Fridge;
+  create: string;
 }
 
 @Component({
-  selector: 'app-rename-nav-bar-title-modal',
-  templateUrl: './rename-nav-bar-title-modal.component.html',
-  styleUrls: ['./rename-nav-bar-title-modal.component.scss']
+  selector: 'app-create-rename-list-modal',
+  templateUrl: './create-rename-list-modal.component.html',
+  styleUrls: ['./create-rename-list-modal.component.scss']
 })
-export class RenameNavBarTitleModalComponent implements OnInit {
+export class CreateRenameListModalComponent implements OnInit {
 
   getFirstUrlSegment$: Observable<string> = this.store.pipe(select(getFirstUrlSegment));
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private store: Store<FridgesState | ShoppinglistsState | BaseAppState>,
-    public dialogRef: MatDialogRef<RenameNavBarTitleModalComponent>,
+    public dialogRef: MatDialogRef<CreateRenameListModalComponent>,
   ) { }
 
   letterRegex = /^[a-zA-Z_ ]+$/;
@@ -48,7 +51,8 @@ export class RenameNavBarTitleModalComponent implements OnInit {
 
   public initForm(): void {
     if (this.data.data !== null) {
-      this.form.setValue({
+      console.log(this.data.data.name);
+      this.form.patchValue({
         label: this.data.data.name,
       });
     }
@@ -77,6 +81,28 @@ export class RenameNavBarTitleModalComponent implements OnInit {
     };
     const navTitle = {...data.data, ...updateRequest};
     this.store.dispatch(new UpdateShoppinglist(this.data.id, navTitle));
+    this.dialogRef.close();
+  }
+
+  public handleCreateFridgeClick(): void {
+    if (!this.form.valid) {
+      return;
+    }
+    const createRequest: CreateFridgeRequest = {
+      name: this.form.controls.label.value,
+    };
+    this.store.dispatch(new CreateFridge(createRequest));
+    this.dialogRef.close();
+  }
+
+  public handleCreateShoppinglistClick(): void {
+    if (!this.form.valid) {
+      return;
+    }
+    const createRequest: CreateShoppinglistRequest = {
+      name: this.form.controls.label.value,
+    };
+    this.store.dispatch(new CreateShoppinglist(createRequest));
     this.dialogRef.close();
   }
 

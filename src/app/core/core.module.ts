@@ -7,9 +7,6 @@ import { MaterialModule } from '../shared/material.module';
 import { FooterComponent } from './footer/footer.component';
 import { NavBarTitleComponent } from './navigation/nav-bar-title/nav-bar-title.component';
 import { NavBarComponent } from './navigation/nav-bar/nav-bar.component';
-import {
-  RenameNavBarTitleModalComponent,
-} from './navigation/rename-nav-bar-title-modal/rename-nav-bar-title-modal.component';
 import { SideNavBarListComponent } from './navigation/side-nav-bar-list/side-nav-bar-list.component';
 import { SideNavBarComponent } from './navigation/side-nav-bar/side-nav-bar.component';
 import { RouterStateModule } from './router/router-state.module';
@@ -21,7 +18,6 @@ import { RouterStateModule } from './router/router-state.module';
     NavBarTitleComponent,
     SideNavBarComponent,
     SideNavBarListComponent,
-    RenameNavBarTitleModalComponent,
     FooterComponent,
   ],
   imports: [
@@ -37,7 +33,6 @@ import { RouterStateModule } from './router/router-state.module';
     NavBarTitleComponent,
     SideNavBarComponent,
     SideNavBarListComponent,
-    RenameNavBarTitleModalComponent,
     FooterComponent,
   ],
 })

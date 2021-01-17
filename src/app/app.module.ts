@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
@@ -15,15 +16,21 @@ import { CoreModule } from './core/core.module';
 import { metaReducers, reducers } from './core/router/reducers';
 import { CustomRouterStateSerializer } from './core/router/reducers/custom-router-serializer.reducer';
 import { FridgesModule } from './fridges/fridges.module';
+import {
+  CreateRenameListModalComponent,
+} from './shared/components/create-rename-list-modal/create-rename-list-modal.component';
 import { MaterialModule } from './shared/material.module';
 import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    CreateRenameListModalComponent,
   ],
   imports: [
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     ChartsModule,
@@ -40,6 +47,9 @@ import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
     EffectsModule.forRoot(),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     MaterialModule,
+  ],
+  exports: [
+    CreateRenameListModalComponent,
   ],
   providers: [
     {

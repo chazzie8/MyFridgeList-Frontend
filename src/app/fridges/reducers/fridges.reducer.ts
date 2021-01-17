@@ -19,6 +19,7 @@ export function fridgesReducer(
         ...state,
       });
 
+    case ListFridgeApiActionTypes.CreateFridgeSuccess:
     case ListFridgeApiActionTypes.UpdateFridgeSuccess:
       return fridgesAdapter.upsertOne(action.fridge, {
         ...state,

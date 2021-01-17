@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
-import { GoToDashboard } from 'src/app/core/router/actions/navigation.actions';
+import { GoToDashboard, GoToSelectedShoppinglist } from 'src/app/core/router/actions/navigation.actions';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
 import {
+  CreateShoppinglist,
+  CreateShoppinglistSuccess,
   DeleteShoppinglist,
   DeleteShoppinglistSuccess,
   ListShoppinglistsApiActionTypes,
@@ -43,6 +45,27 @@ export class ShoppinglistsApiEffects {
         }),
       );
     }),
+  );
+
+  @Effect({ dispatch: true })
+  public createShoppinglist$ = this.actions$.pipe(
+    ofType(ListShoppinglistsApiActionTypes.CreateShoppinglist),
+    switchMap((action: CreateShoppinglist) => {
+      return this.shoppinglistApiService.addShoppinglist(action.shoppinglistRequest).pipe(
+        map((response: Shoppinglist) => new CreateShoppinglistSuccess(response)),
+      );
+    }),
+  );
+
+  @Effect({ dispatch: true })
+  public createShoppinglistSuccess$ = this.actions$.pipe(
+    ofType(ListShoppinglistsApiActionTypes.CreateShoppinglistSuccess),
+    map((action: CreateShoppinglistSuccess) => {
+      this.snackBar.open('Einkaufsliste wurde hinzugefügt', 'Schließen', {
+        duration: 3000,
+      });
+      return new GoToSelectedShoppinglist(action.shoppinglist.id);
+    })
   );
 
   @Effect({ dispatch: true })

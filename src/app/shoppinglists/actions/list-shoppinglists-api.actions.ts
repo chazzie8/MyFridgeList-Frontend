@@ -1,3 +1,4 @@
+import { CreateShoppinglistRequest } from 'src/app/shared/models/requests/create-shoppinglist-request.model';
 import { EditNavTitleRequest } from 'src/app/shared/models/requests/edit-nav-title-request.model';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
@@ -8,6 +9,9 @@ export enum ListShoppinglistsApiActionTypes {
 
   UpdateShoppinglist = '[Shoppinglist] Update Shoppinglist',
   UpdateShoppinglistSuccess = '[Shoppinglist] Update Shoppinglist Success',
+
+  CreateShoppinglist = '[Shoppinglist] Create Shoppinglist',
+  CreateShoppinglistSuccess = '[Shoppinglist] Create Shoppinglist Success',
 
   DeleteShoppinglist = '[Shoppinglist] Delete Shoppinglist',
   DeleteShoppinglistSuccess = '[Shoppinglist] Delete Shoppinglist Success',
@@ -40,6 +44,22 @@ export class UpdateShoppinglistSuccess {
   ) { }
 }
 
+export class CreateShoppinglist {
+  readonly type = ListShoppinglistsApiActionTypes.CreateShoppinglist;
+
+  constructor(
+    public shoppinglistRequest: CreateShoppinglistRequest,
+  ) { }
+}
+
+export class CreateShoppinglistSuccess {
+  readonly type = ListShoppinglistsApiActionTypes.CreateShoppinglistSuccess;
+
+  constructor(
+    public shoppinglist: Shoppinglist,
+  ) { }
+}
+
 export class DeleteShoppinglist {
   readonly type = ListShoppinglistsApiActionTypes.DeleteShoppinglist;
 
@@ -57,6 +77,8 @@ export type ListShoppinglistsApiActions =
   | LoadShoppinglistsSuccess
   | UpdateShoppinglist
   | UpdateShoppinglistSuccess
+  | CreateShoppinglist
+  | CreateShoppinglistSuccess
   | DeleteShoppinglist
   | DeleteShoppinglistSuccess
 ;
