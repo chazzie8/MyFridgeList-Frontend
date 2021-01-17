@@ -54,5 +54,13 @@
 
 
 <ng-template #noDataButtons>
-  <button mat-raised-button color="primary" type="submit" (click)="handleAddClick()">Hinzufügen</button>
+  <button 
+    mat-raised-button 
+    [disabled]="!form.dirty"
+    color="primary" 
+    type="submit" 
+    (click)="handleAddClick()"
+  >
+    Hinzufügen
+  </button>
 </ng-template>
