@@ -25,7 +25,7 @@ export class DialogItemComponent {
     private dialogRef: MatDialogRef<DialogItemComponent>
   ) { }
 
-  letterRegex = /^[a-zA-Z_ ]+$/;
+  letterRegex = /^[a-zA-Z_äÄöÖüÜß_ ]+$/;
   form: FormGroup = new FormGroup({
     label: new FormControl('', [
       Validators.required,

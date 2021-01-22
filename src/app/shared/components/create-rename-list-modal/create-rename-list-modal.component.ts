@@ -37,7 +37,7 @@ export class CreateRenameListModalComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateRenameListModalComponent>,
   ) { }
 
-  letterRegex = /^[a-zA-Z_ ]+$/;
+  letterRegex = /^[a-zA-Z_äÄöÖüÜß_ ]+$/;
   form: FormGroup = new FormGroup({
     label: new FormControl('', [
       Validators.required,

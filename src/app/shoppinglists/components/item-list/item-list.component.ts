@@ -9,8 +9,9 @@ import { EditShoppinglistItemRequest } from 'src/app/shared/models/requests/edit
 
 import { LoadItems } from '../../actions/list-items-api.actions';
 import { ItemsState } from '../../reducers/items.reducer';
-import { getItems } from '../../selectors/items.selector';
+import { getItems, getSelectedItemById } from '../../selectors/items.selector';
 import { getSelectedShoppinglistId } from '../../selectors/shoppinglists.selector';
+import { DialogFridgeItemComponent } from '../dialog-fridge-item/dialog-fridge-item.component';
 import { DialogItemComponent } from '../dialog-item/dialog-item.component';
 import { UpdateBoughtItems } from './../../actions/items-api.actions';
 import { PurgeShoppinglistItems } from './../../actions/shoppinglist.actions';
@@ -68,4 +69,29 @@ export class ItemListComponent implements OnInit, OnDestroy {
     });
   }
 
+  public handleOpenAddItemsToFrigdeDialogClick(): void {
+    const itemObjList: Item[] = [];
+    const boughtItemIds = this.itemList.selectedOptions.selected.map(
+      (ids) => {
+        return ids.value;
+      },
+    );
+
+    boughtItemIds.forEach((boughtItem: string) => {
+      const item = this.store.pipe(select(getSelectedItemById, boughtItem));
+      item.pipe(take(1), ).subscribe(i => itemObjList.push(i[0]));
+    });
+
+    this.shoppinglistId$.pipe(
+      take(1),
+    ).subscribe((id: string) => {
+      this.dialog.open(DialogFridgeItemComponent, {
+        disableClose: true,
+        data: {
+          items: itemObjList,
+          shoppinglistId: id,
+        }
+      });
+    });
+  }
 }

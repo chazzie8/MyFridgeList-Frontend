@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Achtung</h2>
+
+<mat-dialog-content>
+  <h3>Möchtest du das Hinzufügen von Artikeln wirklich beenden?</h3>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="handleCancelClick()">
+    Nein
+  </button>
+  <button mat-raised-button color="primary" (click)="handleSubmitClick()">
+    Ja
+  </button>
+</mat-dialog-actions>
