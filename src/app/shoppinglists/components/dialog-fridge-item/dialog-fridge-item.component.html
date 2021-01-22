@@ -1,0 +1,66 @@
+<div style="display: flex; flex-direction: row;">
+  <h2 mat-dialog-title>Zum Kühlschrank hinzufügen</h2>
+  <span class="menu-spacer"></span>
+  <h2>{{index+1}}/{{data.items.length}}</h2>
+</div>
+
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field appearance="fill">
+    <mat-label>Kühlschrank</mat-label>
+    <mat-select formControlName="fridgeSelect">
+      <ng-container *ngIf="fridges$ | async as fridges">
+        <mat-option *ngFor="let fridge of fridges" [value]="fridge">
+          {{fridge.name}}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+  <ng-container>
+    <mat-form-field>
+        <input
+          matInput
+          placeholder="Artikelname"
+          formControlName="label"
+        >
+        <mat-error *ngIf="form.controls.label.errors?.required">Artikelname ist erforderlich</mat-error>
+        <mat-error *ngIf="form.controls.label.errors?.pattern">Bitte ausschließlich Buchstaben verwenden</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input 
+        matInput
+        placeholder="Menge"
+        formControlName="amount"
+        type="number"
+      >
+      <mat-error *ngIf="form.controls.amount.errors?.required">Menge ist erforderlich</mat-error>
+      <mat-error *ngIf="form.controls.amount.errors?.pattern">Bitte positive Zahlen eingeben</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input 
+      matInput
+      placeholder="MHD"
+      formControlName="expiryDate"
+      type="date"
+    >
+    <mat-error *ngIf="form.controls.expiryDate.errors?.required">MHD ist erforderlich</mat-error>
+  </mat-form-field>
+  </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button 
+    mat-button
+    (click)="handleCancelClick()"
+  >
+    Abbrechen
+  </button>
+  <button 
+    mat-raised-button 
+    [disabled]="!form.dirty || !form.controls['fridgeSelect'].valid || !form.controls['amount'].valid || !form.controls['expiryDate'].valid"
+    color="primary" 
+    type="submit"
+    (click)="handleAddClick()"
+  >
+    {{this.index < this.data.items.length - 1 ? 'Weiter' : 'Beenden'}}
+  </button>
+</mat-dialog-actions>

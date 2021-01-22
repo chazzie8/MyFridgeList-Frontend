@@ -27,7 +27,7 @@ export class DialogArticleComponent implements OnInit {
     private dialogRef: MatDialogRef<DialogArticleComponent>
   ) { }
 
-  letterRegex = /^[a-zA-Z_ ]+$/;
+  letterRegex = /^[a-zA-Z_äÄöÖüÜß_ ]+$/;
   numericRegex = /^[0-9]+$/;
   form: FormGroup = new FormGroup({
     label: new FormControl('', [
