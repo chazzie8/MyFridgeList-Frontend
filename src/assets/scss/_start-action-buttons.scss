@@ -1,0 +1,45 @@
+.action-button-box {
+  height: 200px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.action-label {
+  font-size: 20px; 
+  font-weight: 500; 
+  color: #1976d2;; 
+  padding-bottom: 12px; 
+  text-transform: uppercase;
+}
+
+.action-sub-label {
+  margin-left: .5rem;
+  font-size: 20px; 
+  font-weight: 500; 
+  color: #1976d2;; 
+  padding-bottom: 12px; 
+  text-transform: uppercase;
+}
+
+@media only screen and (max-width: $breakpoint-min-tablet) {
+  .flex-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .action-sub-label {
+    margin-left: unset;
+    font-size: 20px; 
+    font-weight: 500; 
+    color: #1976d2;; 
+    padding-bottom: 12px; 
+    text-transform: uppercase;
+  }
+}

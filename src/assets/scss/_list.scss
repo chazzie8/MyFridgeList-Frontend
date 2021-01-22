@@ -25,3 +25,10 @@ mat-list-option[aria-selected="true"] {
   align-items: center;
   justify-content: space-between;
 }
+
+.mat-pseudo-checkbox-checked, 
+.mat-pseudo-checkbox-indeterminate, 
+.mat-accent .mat-pseudo-checkbox-checked, 
+.mat-accent .mat-pseudo-checkbox-indeterminate {
+  background: $green;
+}

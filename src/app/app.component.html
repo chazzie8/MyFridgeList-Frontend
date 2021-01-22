@@ -1,42 +1,63 @@
-<mat-toolbar class="toolbar mat-elevation-z6" color="primary">
-  <span>MyFridgeList</span>
-  <span class="menu-spacer"></span>
-  <button 
-    mat-icon-button
-  >
-    <mat-icon>logout</mat-icon>
-  </button>
-</mat-toolbar>
-
-<mat-sidenav-container>
-  <mat-sidenav #sidenav mode="over">
-    <div class="logo-container">
-      <img class="img-size" src="../assets/img/logo.svg" alt="Logo">
-    </div>
-
-    <mat-divider></mat-divider>
-
-    <ng-container *ngIf="fridges$ | async as fridges">
-      <ng-container *ngIf="shoppinglists$ | async as shoppinglists">
-        <app-side-nav-bar 
-          [fridges]="fridges"
-          [shoppinglists]="shoppinglists"
+<ng-container *ngIf="firstUrlSegment$ | async as firstUrlSegment">
+  <mat-toolbar class="toolbar mat-elevation-z6" color="primary">
+    <span>MyFridgeList</span>
+    <span class="menu-spacer"></span>
+      <!-- TODO: Austauschen wenn Logged In oder Logged Out nicht mit firstUrlSegment -->
+      <ng-container *ngIf="firstUrlSegment !== 'start'">
+        <button 
+          mat-icon-button
         >
-        </app-side-nav-bar>
+          <mat-icon>logout</mat-icon>
+        </button>
       </ng-container>
-    </ng-container>
+      <!-- TODO: Austauschen wenn Logged In oder Logged Out nicht mit firstUrlSegment -->
+      <ng-container *ngIf="firstUrlSegment === 'start'">
+        <button 
+          mat-icon-button
+        >
+          <img class="text-white" src="../assets/img/github.svg" alt="github">
+        </button>
+        <button 
+          mat-button
+        >
+          Einloggen
+        </button>
+      </ng-container>
+  </mat-toolbar>
 
-    <div class="version-label">
-      <span>MyFridgeList v. 1.0.0.0</span>
-    </div>
-  </mat-sidenav>
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="over">
+      <div class="logo-container">
+        <img class="img-size" src="../assets/img/logo.svg" alt="Logo">
+      </div>
 
-  <mat-sidenav-content>
-    <app-nav-bar (menuButtonClick)="sidenav.toggle()"></app-nav-bar>
-    <div class="container">
-        <router-outlet></router-outlet>
-    </div>
-    <app-footer></app-footer>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+      <mat-divider></mat-divider>
 
+      <ng-container *ngIf="fridges$ | async as fridges">
+        <ng-container *ngIf="shoppinglists$ | async as shoppinglists">
+            <app-side-nav-bar 
+              [fridges]="fridges"
+              [shoppinglists]="shoppinglists"
+            >
+            </app-side-nav-bar>
+        </ng-container>
+      </ng-container>
+
+      <div class="version-label">
+        <span>MyFridgeList v. 1.0.0.0</span>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <!-- TODO: Austauschen wenn Logged In oder Logged Out nicht mit firstUrlSegment -->
+      <ng-container *ngIf="firstUrlSegment !== 'start'">
+        <app-nav-bar (menuButtonClick)="sidenav.toggle()"></app-nav-bar>
+      </ng-container>
+      <router-outlet></router-outlet>
+      <!-- TODO: Austauschen wenn Logged In oder Logged Out nicht mit firstUrlSegment -->
+      <ng-container *ngIf="firstUrlSegment !== 'start'">
+        <app-footer></app-footer>
+      </ng-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>

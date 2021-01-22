@@ -10,10 +10,12 @@ import { NavBarComponent } from './navigation/nav-bar/nav-bar.component';
 import { SideNavBarListComponent } from './navigation/side-nav-bar-list/side-nav-bar-list.component';
 import { SideNavBarComponent } from './navigation/side-nav-bar/side-nav-bar.component';
 import { RouterStateModule } from './router/router-state.module';
+import { StartComponent } from './start/start.component';
 
 
 @NgModule({
   declarations: [
+    StartComponent,
     NavBarComponent,
     NavBarTitleComponent,
     SideNavBarComponent,
@@ -29,6 +31,7 @@ import { RouterStateModule } from './router/router-state.module';
     RouterStateModule.forRoot(),
   ],
   exports: [
+    StartComponent,
     NavBarComponent,
     NavBarTitleComponent,
     SideNavBarComponent,
