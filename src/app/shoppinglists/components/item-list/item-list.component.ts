@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectionList } from '@angular/material/list';
 import { select, Store } from '@ngrx/store';
@@ -24,6 +25,7 @@ import { PurgeShoppinglistItems } from './../../actions/shoppinglist.actions';
 export class ItemListComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatSelectionList) itemList: MatSelectionList;
+  @ViewChild(MatButton) buttonAddItemToFridge: MatButton;
 
   items$: Observable<Item[]> = this.store.pipe(select(getItems));
   shoppinglistId$: Observable<string> = this.store.pipe(select(getSelectedShoppinglistId));
@@ -94,4 +96,13 @@ export class ItemListComponent implements OnInit, OnDestroy {
       });
     });
   }
+
+  public onSelectionChange(): void {
+    if (this.itemList.selectedOptions.selected.length < 1) {
+      this.buttonAddItemToFridge.disabled = true;
+    } else {
+      this.buttonAddItemToFridge.disabled = false;
+    }
+  }
+
 }

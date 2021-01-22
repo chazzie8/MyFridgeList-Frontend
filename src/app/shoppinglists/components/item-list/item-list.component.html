@@ -1,6 +1,6 @@
 <div class="container">
   <div class="button-row-right">
-    <button mat-raised-button color="primary" (click)="handleOpenAddItemsToFrigdeDialogClick()">Zum Kühlschrank hinzufügen</button>
+    <button mat-raised-button #buttonAddItemToFridge color="primary" (click)="handleOpenAddItemsToFrigdeDialogClick()">Zum Kühlschrank hinzufügen</button>
   </div>
 
   <div class="list-container">
@@ -9,6 +9,7 @@
         <mat-selection-list 
           #itemList 
           *ngIf="items?.length > 0; else noItems"
+          (selectionChange)="onSelectionChange()"
         >
           <ng-container *ngIf="shoppinglistId$ | async as shoppinglistId">
             <app-item-list-item *ngFor="let item of items" [item]="item" [shoppinglistId]="shoppinglistId">
