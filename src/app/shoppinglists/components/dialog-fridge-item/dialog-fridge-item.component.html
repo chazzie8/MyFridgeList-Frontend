@@ -54,6 +54,14 @@
   >
     Abbrechen
   </button>
+  <ng-container *ngIf="this.index < this.data.items.length - 1">
+    <button 
+      mat-button
+      (click)="handleSkipClick()"
+    >
+      Überspringen
+    </button>
+  </ng-container>
   <button 
     mat-raised-button 
     [disabled]="!form.dirty || !form.controls['fridgeSelect'].valid || !form.controls['amount'].valid || !form.controls['expiryDate'].valid"

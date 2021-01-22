@@ -94,4 +94,11 @@ export class DialogFridgeItemComponent implements OnInit {
     });
   }
 
+  public handleSkipClick(): void {
+    if (this.index < this.data.items.length - 1){
+      this.index += 1;
+      this.initForm();
+    }
+  }
+
 }
