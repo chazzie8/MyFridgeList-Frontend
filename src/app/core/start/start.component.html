@@ -8,7 +8,12 @@
         <span class="header-subtitle-text">Nie wieder vergessen</span>
       </div>
       <div class="header-action-button">
-        <button mat-flat-button>Jetzt starten</button>
+        <button 
+          mat-flat-button
+          (click)="handleGoToSignUpClick()"
+        >
+          Jetzt starten
+        </button>
       </div>
     </div>
   </div>
@@ -130,7 +135,13 @@
         <span class="action-sub-label">Probieren Sie es aus!</span>
       </div>
       <div class="d-flex justify-content-center">
-        <button mat-raised-button color="primary">Hier einloggen</button>
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="handleGoToSignUpClick()"
+        >
+          Hier starten
+        </button>
       </div>
     </div>
   </div>
@@ -138,9 +149,5 @@
 
 <!-- Footer -->
 <section class="pb-0">
-  <footer class="footer">
-    <p>MyFridgeList v. 1.0.0.0</p>
-    <p>Ein Projekt der IT Schule Stuttgart in Stuttgart / Germany</p>
-    <span>Made with ❤️ by Chas und Michael</span>
-  </footer>
+  <app-footer></app-footer>
 </section>

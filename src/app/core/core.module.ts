@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+import {
+  CreateRenameListModalComponent,
+} from '../shared/components/create-rename-list-modal/create-rename-list-modal.component';
 import { MaterialModule } from '../shared/material.module';
 import { FooterComponent } from './footer/footer.component';
 import { NavBarTitleComponent } from './navigation/nav-bar-title/nav-bar-title.component';
@@ -21,6 +24,7 @@ import { StartComponent } from './start/start.component';
     SideNavBarComponent,
     SideNavBarListComponent,
     FooterComponent,
+    CreateRenameListModalComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +41,7 @@ import { StartComponent } from './start/start.component';
     SideNavBarComponent,
     SideNavBarListComponent,
     FooterComponent,
+    CreateRenameListModalComponent,
   ],
 })
 export class CoreModule { }

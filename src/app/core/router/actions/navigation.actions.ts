@@ -1,9 +1,10 @@
 import { Action } from '@ngrx/store';
 
 export enum NavigationActionTypes {
-  GoToDashboard = '[Navigation] GoTo Dashboard',
-  GoToSelectedFridge = '[Navigation] GoTo Selected Fridge',
-  GoToSelectedShoppinglist = '[Navigation] GoTo Selected Shoppinglist'
+  GoToDashboard = '[Router] Navigate to Dashboard',
+  GoToSelectedFridge = '[Router] Navigate to Selected Fridge',
+  GoToSelectedShoppinglist = '[Router] Navigate to Selected Shoppinglist',
+  GoToLogInScreen = '[Router] Navigate to Log In Screen',
 }
 
 export class GoToDashboard implements Action {
@@ -21,3 +22,15 @@ export class GoToSelectedShoppinglist implements Action {
 
   constructor(public shoppinglistId: string) { }
 }
+
+export class GoToLogInScreen implements Action {
+  readonly type = NavigationActionTypes.GoToLogInScreen;
+}
+
+
+export type NavigationActions =
+  | GoToDashboard
+  | GoToSelectedFridge
+  | GoToSelectedShoppinglist
+  | GoToLogInScreen
+;

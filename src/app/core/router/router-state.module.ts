@@ -8,6 +8,7 @@ import {
 } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 
+import { AuthUINavigationEffects } from './effects/auth-ui-navigation.effects';
 import { NavigationEffects } from './effects/navigation.effects';
 import { CustomRouterStateSerializer } from './reducers/custom-router-serializer.reducer';
 
@@ -31,6 +32,7 @@ export class RouterStateModule {
     StoreModule.forFeature('router', routerReducer),
     EffectsModule.forFeature([
       NavigationEffects,
+      AuthUINavigationEffects,
     ]),
     StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer, stateKey: 'router' }),
   ]

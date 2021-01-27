@@ -2,27 +2,24 @@
   <mat-toolbar class="toolbar mat-elevation-z6" color="primary">
     <span>MyFridgeList</span>
     <span class="menu-spacer"></span>
-      <!-- TODO: Austauschen wenn Logged In oder Logged Out nicht mit firstUrlSegment -->
-      <ng-container *ngIf="firstUrlSegment !== 'start'">
-        <button 
-          mat-icon-button
-        >
-          <mat-icon>logout</mat-icon>
-        </button>
-      </ng-container>
-      <!-- TODO: Austauschen wenn Logged In oder Logged Out nicht mit firstUrlSegment -->
-      <ng-container *ngIf="firstUrlSegment === 'start'">
-        <button 
-          mat-icon-button
-        >
-          <img class="text-white" src="../assets/img/github.svg" alt="github">
-        </button>
-        <button 
-          mat-button
-        >
-          Einloggen
-        </button>
-      </ng-container>
+    <button 
+      mat-icon-button
+    >
+      <mat-icon>logout</mat-icon>
+    </button>
+    <button 
+      mat-icon-button
+    >
+      <img class="text-white" src="../assets/img/github.svg" alt="github">
+    </button>
+
+    <!-- TODO: soll angezeigt werden wenn ich auf der Startseite bin -->
+    <button 
+      mat-button
+      (click)="handleGoToSignUpClick()"
+    >
+      Starten
+    </button>
   </mat-toolbar>
 
   <mat-sidenav-container>
@@ -49,15 +46,9 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <!-- TODO: Austauschen wenn Logged In oder Logged Out nicht mit firstUrlSegment -->
-      <ng-container *ngIf="firstUrlSegment !== 'start'">
-        <app-nav-bar (menuButtonClick)="sidenav.toggle()"></app-nav-bar>
-      </ng-container>
+      <app-nav-bar (menuButtonClick)="sidenav.toggle()"></app-nav-bar>
       <router-outlet></router-outlet>
-      <!-- TODO: Austauschen wenn Logged In oder Logged Out nicht mit firstUrlSegment -->
-      <ng-container *ngIf="firstUrlSegment !== 'start'">
-        <app-footer></app-footer>
-      </ng-container>
+      <app-footer></app-footer>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </ng-container>

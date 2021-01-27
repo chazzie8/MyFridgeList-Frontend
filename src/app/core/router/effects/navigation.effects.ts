@@ -12,23 +12,22 @@ import { DASHBOARD_ROUTER_KEY, FRIDGES_ROUTER_KEY, SHOPPINGLISTS_ROUTER_KEY } fr
 export class NavigationEffects {
 
   @Effect({ dispatch: false })
-  public GoToDashboard$ = this.actions$.pipe(
+  public goToDashboard$ = this.actions$.pipe(
     ofType(NavigationActionTypes.GoToDashboard),
     tap(() => this.router.navigate([DASHBOARD_ROUTER_KEY])),
   );
 
   @Effect({ dispatch: false })
-  public GoToSelectedFridge$ = this.actions$.pipe(
+  public goToSelectedFridge$ = this.actions$.pipe(
     ofType(NavigationActionTypes.GoToSelectedFridge),
     tap((action: GoToSelectedFridge) => this.router.navigate([FRIDGES_ROUTER_KEY, action.fridgeId])),
   );
 
   @Effect({ dispatch: false })
-  public GoToSelectedShoppinglist$ = this.actions$.pipe(
+  public goToSelectedShoppinglist$ = this.actions$.pipe(
     ofType(NavigationActionTypes.GoToSelectedShoppinglist),
     tap((action: GoToSelectedShoppinglist) => this.router.navigate([SHOPPINGLISTS_ROUTER_KEY, action.shoppinglistId])),
   );
-
 
   constructor(
     private actions$: Actions,

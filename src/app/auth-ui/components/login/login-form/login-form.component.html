@@ -1,0 +1,55 @@
+<div data-overlay class="d-flex flex-column justify-content-md-center o-hidden">
+  <section class="py-3">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-4 col-lg-5 col-md-6 mb-5 mb-md-0">
+
+          <mat-card>
+            <h1 class="h5 text-center">Anmeldung</h1>
+            <div class="text-center text-small mb-4">
+              Sie haben noch keinen Account? <br><button mat-button color="primary" (click)="handleGoToSignUpClick()">Hier registrieren</button>
+            </div>
+
+            <form [formGroup]="form" (ngSubmit)="handleLoginClick()" #ngForm="ngForm" novalidate>
+              <mat-form-field>
+                <input 
+                  matInput 
+                  type="email" 
+                  placeholder="Email-Adresse" 
+                  formControlName="emailAddress"
+                >
+                <mat-error *ngIf="form.controls.emailAddress.errors?.required">E-Mail ist erforderlich</mat-error>
+                <mat-error *ngIf="form.controls.emailAddress.errors?.pattern"> E-Mail ist ungültig</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input 
+                  matInput
+                  type="password"
+                  placeholder="Passwort" 
+                  formControlName="password"
+                  [type]="hide ? 'password' : 'text'"
+                >
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="form.controls.password.errors?.required">Passwort ist erforderlich</mat-error>
+              </mat-form-field>
+
+              <div class="button-row-right">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  type="submit"
+                >
+                  Anmelden
+                </button>
+              </div>
+            </form>
+
+          </mat-card>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

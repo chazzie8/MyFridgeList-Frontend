@@ -6,7 +6,7 @@ import { ArticleListComponent } from './fridges/components/article-list/article-
 import { DashboardComponent } from './fridges/components/dashboard/dashboard.component';
 import { ItemListComponent } from './shoppinglists/components/item-list/item-list.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: 'start',

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
+import { GoToSignUp } from './auth-ui/actions/auth-ui-navigation.actions';
 import { GoToDashboard } from './core/router/actions/navigation.actions';
 import { BaseAppState } from './core/router/reducers/custom-router-serializer.reducer';
 import { getFirstUrlSegment } from './core/selectors/router.selector';
@@ -45,5 +46,9 @@ export class AppComponent implements OnInit {
 
   public handleGoToDashboardClick(): void {
     this.store.dispatch(new GoToDashboard());
+  }
+
+  public handleGoToSignUpClick(): void {
+    this.store.dispatch(new GoToSignUp());
   }
 }
