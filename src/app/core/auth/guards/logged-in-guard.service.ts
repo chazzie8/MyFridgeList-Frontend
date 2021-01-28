@@ -11,7 +11,7 @@ import { isLoggedIn } from '../selectors/auth.selectors';
 @Injectable()
 export class LoggedInGuard implements CanActivate {
 
-  isLoggedIn$ = this.store.pipe(select(isLoggedIn));
+  isLoggedIn$: Observable<boolean> = this.store.pipe(select(isLoggedIn));
 
   constructor(
     private router: Router,
@@ -26,7 +26,7 @@ export class LoggedInGuard implements CanActivate {
         if (loggedIn) {
           return true;
         }
-        const redirectUrlTree = this.router.createUrlTree([AUTH_UI_PATHS.root.signUp]);
+        const redirectUrlTree = this.router.createUrlTree([AUTH_UI_PATHS.root.login]);
         return redirectUrlTree;
       }),
     );

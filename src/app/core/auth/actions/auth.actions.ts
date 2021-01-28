@@ -31,7 +31,6 @@ export class Logout {
 export type AuthActions =
   | Login
   | LoginSuccess
-  | LoginSuccess
   | SessionExpired
   | Logout
 ;

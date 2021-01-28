@@ -25,9 +25,9 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.loadFridgeDashboardItems();
     this.loadFridges();
     this.loadShoppinglists();
+    this.loadFridgeDashboardItems();
   }
 
   public loadFridgeDashboardItems(): void {

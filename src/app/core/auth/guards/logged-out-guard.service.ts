@@ -11,7 +11,7 @@ import { isLoggedIn } from '../selectors/auth.selectors';
 @Injectable()
 export class LoggedOutGuard implements CanActivate {
 
-  isLoggedIn$ = this.store.pipe(select(isLoggedIn));
+  isLoggedIn$: Observable<boolean> = this.store.pipe(select(isLoggedIn));
 
   constructor(
     private router: Router,

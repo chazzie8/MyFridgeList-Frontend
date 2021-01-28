@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { AUTH_STATE_KEY } from '../definitions/auth.definitions';
 import { AuthState } from '../reducers/auth.reducer';
-import { decodeToken, getEmailFromToken } from '../utilities/auth-utilities';
+import { decodeToken } from '../utilities/auth-utilities';
 
 export const getAuthState = createFeatureSelector<AuthState>(AUTH_STATE_KEY);
 
@@ -24,11 +24,6 @@ export const getToken = createSelector(
 export const getDecodedToken = createSelector(
   getToken,
   (token) => (token ? decodeToken(token) : null),
-);
-
-export const getEmailFromAuthToken = createSelector(
-  getDecodedToken,
-  (token) => getEmailFromToken(token),
 );
 
 export const getUserName = createSelector(
