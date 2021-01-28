@@ -2,14 +2,14 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
+import { BaseAppState } from 'src/app/core/router/reducers/custom-router-serializer.reducer';
 import {
   CreateRenameListModalComponent,
 } from 'src/app/shared/components/create-rename-list-modal/create-rename-list-modal.component';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
-import { GoToSelectedFridge, GoToSelectedShoppinglist } from '../../router/actions/navigation.actions';
-import { BaseAppState } from '../../router/reducers/custom-router-serializer.reducer';
+import { GoToSelectedFridge, GoToSelectedShoppinglist } from './../../router/actions/navigation.actions';
 
 @Component({
   selector: 'app-side-nav-bar-list',

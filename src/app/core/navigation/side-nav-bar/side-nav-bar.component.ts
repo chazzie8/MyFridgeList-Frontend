@@ -1,11 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { GoToDashboard } from 'src/app/core/router/actions/navigation.actions';
+import { BaseAppState } from 'src/app/core/router/reducers/custom-router-serializer.reducer';
+import { getFridges } from 'src/app/fridges/selectors/fridges.selector';
+import { Fridge } from 'src/app/shared/models/fridge.model';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
+import { getShoppinglists } from 'src/app/shoppinglists/selectors/shoppinglists.selector';
 
-import { BaseAppState } from '../../router/reducers/custom-router-serializer.reducer';
-import { Fridge } from './../../../shared/models/fridge.model';
-import { GoToDashboard } from './../../router/actions/navigation.actions';
+import { Logout } from '../../auth/actions/auth.actions';
+import { isLoggedIn } from '../../auth/selectors/auth.selectors';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -14,8 +19,9 @@ import { GoToDashboard } from './../../router/actions/navigation.actions';
 })
 export class SideNavBarComponent {
 
-  @Input() fridges: Fridge[];
-  @Input() shoppinglists: Shoppinglist[];
+  isLoggedIn$: Observable<boolean> = this.store.pipe(select(isLoggedIn));
+  fridges$: Observable<Fridge[]> = this.store.pipe(select(getFridges));
+  shoppinglists$: Observable<Shoppinglist[]> = this.store.pipe(select(getShoppinglists));
 
   constructor(
     private store: Store<BaseAppState>,
@@ -27,4 +33,8 @@ export class SideNavBarComponent {
     this.sidenav.close();
   }
 
+  public handleLogoutClick(): void {
+    this.store.dispatch(new Logout());
+    this.sidenav.close();
+  }
 }

@@ -1,54 +1,12 @@
-<ng-container *ngIf="firstUrlSegment$ | async as firstUrlSegment">
-  <mat-toolbar class="toolbar mat-elevation-z6" color="primary">
-    <span>MyFridgeList</span>
-    <span class="menu-spacer"></span>
-    <button 
-      mat-icon-button
-    >
-      <mat-icon>logout</mat-icon>
-    </button>
-    <button 
-      mat-icon-button
-    >
-      <img class="text-white" src="../assets/img/github.svg" alt="github">
-    </button>
+<app-nav-toolbar></app-nav-toolbar>
 
-    <!-- TODO: soll angezeigt werden wenn ich auf der Startseite bin -->
-    <button 
-      mat-button
-      (click)="handleGoToSignUpClick()"
-    >
-      Starten
-    </button>
-  </mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="over">
+    <app-side-nav-bar></app-side-nav-bar>
+  </mat-sidenav>
 
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="over">
-      <div class="logo-container">
-        <img class="img-size" src="../assets/img/logo.svg" alt="Logo">
-      </div>
-
-      <mat-divider></mat-divider>
-
-      <ng-container *ngIf="fridges$ | async as fridges">
-        <ng-container *ngIf="shoppinglists$ | async as shoppinglists">
-            <app-side-nav-bar 
-              [fridges]="fridges"
-              [shoppinglists]="shoppinglists"
-            >
-            </app-side-nav-bar>
-        </ng-container>
-      </ng-container>
-
-      <div class="version-label">
-        <span>MyFridgeList v. 1.0.0.0</span>
-      </div>
-    </mat-sidenav>
-
-    <mat-sidenav-content>
+  <mat-sidenav-content>
       <app-nav-bar (menuButtonClick)="sidenav.toggle()"></app-nav-bar>
-      <router-outlet></router-outlet>
-      <app-footer></app-footer>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</ng-container>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>  

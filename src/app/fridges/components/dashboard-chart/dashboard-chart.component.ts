@@ -4,12 +4,12 @@ import { ChartType } from 'chart.js';
 import { Label, MultiDataSet } from 'ng2-charts';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
+import { GoToSelectedFridge } from 'src/app/core/router/actions/navigation.actions';
 import { BaseAppState } from 'src/app/core/router/reducers/custom-router-serializer.reducer';
 import { FridgeDashboardItem } from 'src/app/shared/models/fridge-dashboard-item.model';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 
-import { GoToSelectedFridge } from './../../../core/router/actions/navigation.actions';
-import { getFridgeDashboardItemsByFridgeId } from './../../selectors/dashboard.selector';
+import { getFridgeDashboardItemsByFridgeId } from '../../selectors/dashboard.selector';
 
 @Component({
   selector: 'app-dashboard-chart',

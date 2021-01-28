@@ -1,6 +1,6 @@
 <div class="container">
   <span>Willkommen!</span>
-  <h1>Hallo Username</h1>
+  <h1>Hallo {{userName$ | async}}</h1>
 
   <div class="card-row">
     <ng-container *ngIf="fridges$ | async as fridges">

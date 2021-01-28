@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { BaseAppState } from 'src/app/core/router/reducers/custom-router-serializer.reducer';
 import { DeleteFridge } from 'src/app/fridges/actions/list-fridges-api.actions';
 import { FridgesState } from 'src/app/fridges/reducers/fridges.reducer';
 import { getSelectedFridge, getSelectedFridgeId } from 'src/app/fridges/selectors/fridges.selector';
@@ -10,12 +11,13 @@ import {
 } from 'src/app/shared/components/create-rename-list-modal/create-rename-list-modal.component';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
+import { DeleteShoppinglist } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
 import { ShoppinglistsState } from 'src/app/shoppinglists/reducers/shoppinglists.reducer';
 import { getSelectedShoppinglist, getSelectedShoppinglistId } from 'src/app/shoppinglists/selectors/shoppinglists.selector';
 
-import { BaseAppState } from '../../router/reducers/custom-router-serializer.reducer';
-import { DeleteShoppinglist } from './../../../shoppinglists/actions/list-shoppinglists-api.actions';
-import { getFirstUrlSegment } from './../../selectors/router.selector';
+import { isLoggedIn } from '../../auth/selectors/auth.selectors';
+import { getFirstUrlSegment } from '../../selectors/router.selector';
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -26,6 +28,7 @@ export class NavBarComponent {
 
   @Output() menuButtonClick = new EventEmitter<boolean>();
 
+  isLoggedIn$: Observable<boolean> = this.store.pipe(select(isLoggedIn));
   getFirstUrlSegment$: Observable<string> = this.store.pipe(select(getFirstUrlSegment));
   fridgeId$: Observable<string> = this.store.pipe(select(getSelectedFridgeId));
   shoppinglistId$: Observable<string> = this.store.pipe(select(getSelectedShoppinglistId));

@@ -4,6 +4,7 @@ export enum NavigationActionTypes {
   GoToDashboard = '[Router] Navigate to Dashboard',
   GoToSelectedFridge = '[Router] Navigate to Selected Fridge',
   GoToSelectedShoppinglist = '[Router] Navigate to Selected Shoppinglist',
+  GoToSignUpConfirmationScreen = '[Router] Navigate to Sign Up Confirmation Screen',
   GoToLogInScreen = '[Router] Navigate to Log In Screen',
 }
 
@@ -21,6 +22,10 @@ export class GoToSelectedShoppinglist implements Action {
   readonly type = NavigationActionTypes.GoToSelectedShoppinglist;
 
   constructor(public shoppinglistId: string) { }
+}
+
+export class GoToSignUpConfirmationScreen implements Action {
+  readonly type = NavigationActionTypes.GoToSignUpConfirmationScreen;
 }
 
 export class GoToLogInScreen implements Action {

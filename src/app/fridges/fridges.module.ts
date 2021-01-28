@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { ChartsModule } from 'ng2-charts';
@@ -16,6 +17,7 @@ import { ArticleApiEffects } from './effects/articles-api.effects';
 import { DashboardApiEffects } from './effects/dashboard-api.effects';
 import { FridgeApiEffects } from './effects/fridges-api.effects';
 import { FRIDGES_FEATURE_KEY } from './fridges.constants';
+import { routes } from './fridges.routes';
 import * as reducer from './reducers';
 import { FridgeApiService } from './services/fridge-api.service';
 
@@ -57,6 +59,7 @@ export class FridgesModule {
 @NgModule({
   imports: [
     FridgesModule,
+    RouterModule.forChild(routes),
     StoreModule.forFeature(FRIDGES_FEATURE_KEY, reducer.reducers),
     EffectsModule.forFeature([
       ArticleApiEffects,

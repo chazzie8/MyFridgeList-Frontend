@@ -1,3 +1,11 @@
 .img-size {
-  width: 60%;
+  width: auto;
+  height: 140px;
+}
+
+@media only screen and (max-width: $breakpoint-max-mobile) {
+  .img-size {
+    width: auto;
+    height: 120px;
+  }
 }

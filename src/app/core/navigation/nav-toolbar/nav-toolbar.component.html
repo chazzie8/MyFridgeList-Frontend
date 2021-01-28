@@ -1,0 +1,14 @@
+<mat-toolbar class="toolbar mat-elevation-z6" color="primary">
+  <img src="../../../../assets/img/logo.svg" alt="Logo" class="toolbar-header-logo" routerLink="/start">
+  <span>MyFridgeList</span>
+  <span class="menu-spacer"></span>
+  
+  <ng-container *ngIf="!(isLoggedIn$ | async)">
+    <button mat-icon-button><img class="text-white" src="../../../../assets/img/github.svg" alt="github"></button>
+    <button mat-button (click)="handleGoToSignUpClick()">Starten</button>
+  </ng-container>
+
+  <ng-container *ngIf="isLoggedIn$ | async">
+    <button mat-icon-button (click)="handleLogoutClick()"><mat-icon>logout</mat-icon></button>
+  </ng-container>
+</mat-toolbar>

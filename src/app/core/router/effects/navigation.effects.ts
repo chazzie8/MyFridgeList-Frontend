@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 
 import { GoToSelectedFridge, GoToSelectedShoppinglist, NavigationActionTypes } from '../actions/navigation.actions';
+import { DASHBOARD_ROUTER_KEY, FRIDGES_ROUTER_KEY, SHOPPINGLISTS_ROUTER_KEY } from '../definitions/router.definitions';
 import { BaseAppState } from '../reducers/custom-router-serializer.reducer';
-import { DASHBOARD_ROUTER_KEY, FRIDGES_ROUTER_KEY, SHOPPINGLISTS_ROUTER_KEY } from './../router.constants';
 
 @Injectable()
 export class NavigationEffects {

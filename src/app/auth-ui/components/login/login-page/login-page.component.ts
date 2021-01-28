@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Login } from 'src/app/core/auth/actions/auth.actions';
+import { BaseAppState } from 'src/app/core/router/reducers/custom-router-serializer.reducer';
+import { LoginRequest } from 'src/app/shared/models/requests/login-request.model';
 
 import { LoginFormValue } from '../login-form/login-form-value.model';
+
 
 @Component({
   selector: 'app-login-page',
@@ -9,9 +14,15 @@ import { LoginFormValue } from '../login-form/login-form-value.model';
 })
 export class LoginPageComponent {
 
-  constructor() { }
+  constructor(
+    private store: Store<BaseAppState>
+  ) { }
 
   public handleLoginClick(formValue: LoginFormValue): void {
-    console.log(formValue);
+    const request: LoginRequest = {
+      email: formValue.emailAddress,
+      password: formValue.password,
+    };
+    this.store.dispatch(new Login(request));
   }
 }

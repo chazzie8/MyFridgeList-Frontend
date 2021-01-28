@@ -1,12 +1,12 @@
 .container {
   position: relative;
-  min-height: calc(100% - 187px);
+  min-height: calc(100% - 123px);
   margin-top: 15px;
 }
 
 @media only screen and (max-width: $breakpoint-max-mobile) {
   .container {
-    min-height: calc(100% - 71px);
+    min-height: calc(100% - 72px);
   }
 }
 

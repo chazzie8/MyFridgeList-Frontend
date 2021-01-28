@@ -1,25 +1,40 @@
-<mat-list-item>
-  <button 
-    mat-button 
-    class="menu-button"
-    (click)="handleGoToDashboardClick()"
-  >
-    <mat-icon class="mr-2">dashboard</mat-icon>
-    Dashboard
-  </button>
-</mat-list-item>
+<ng-container *ngIf="isLoggedIn$ | async">
+  <div class="logo-container">
+    <img class="img-size" src="../assets/img/logo.svg" alt="Logo">
+  </div>
 
-<mat-list-item>
-  <app-side-nav-bar-list 
-    [shoppinglists]="shoppinglists" 
-    [fridges]="fridges"
-  >
-  </app-side-nav-bar-list>
-</mat-list-item>
+  <mat-divider></mat-divider>
 
-<mat-list-item>
-  <button mat-button class="menu-button">
-    <mat-icon class="mr-2">logout</mat-icon>
-    Logout
-  </button>
-</mat-list-item>
+  <mat-list-item>
+    <button 
+      mat-button 
+      class="menu-button"
+      (click)="handleGoToDashboardClick()"
+    >
+      <mat-icon class="mr-2">dashboard</mat-icon>
+      Dashboard
+    </button>
+  </mat-list-item>
+  <ng-container *ngIf="fridges$ | async as fridges">
+    <ng-container *ngIf="shoppinglists$ | async as shoppinglists">
+      <mat-list-item>
+        <app-side-nav-bar-list 
+          [shoppinglists]="shoppinglists" 
+          [fridges]="fridges"
+        >
+        </app-side-nav-bar-list>
+      </mat-list-item>
+    </ng-container>
+  </ng-container>
+
+  <mat-list-item>
+    <button mat-button class="menu-button" (click)="handleLogoutClick()">
+      <mat-icon class="mr-2">logout</mat-icon>
+      Logout
+    </button>
+  </mat-list-item>
+
+  <div class="version-label">
+    <span>MyFridgeList v. 1.0.0.0</span>
+  </div>
+</ng-container>

@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { AuthUIModule } from './auth-ui/auth-ui.module';
 import { CoreModule } from './core/core.module';
-import { metaReducers, reducers } from './core/router/reducers';
+import { metaReducers, reducers } from './core/store/reducers';
 import { FridgesModule } from './fridges/fridges.module';
 import { MaterialModule } from './shared/material.module';
 import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';

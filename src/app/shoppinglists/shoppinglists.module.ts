@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -16,6 +17,7 @@ import { ShoppinglistsApiEffects } from './effects/shoppinglists-api.effects';
 import * as reducer from './reducers';
 import { ShoppinglistApiService } from './services/shoppinglist.service';
 import { SHOPPINGLISTS_FEATURE_KEY } from './shoppinglists.constants';
+import { routes } from './shoppinglists.routes';
 
 @NgModule({
   imports: [
@@ -54,6 +56,7 @@ export class ShoppinglistsModule {
 @NgModule({
   imports: [
     ShoppinglistsModule,
+    RouterModule.forChild(routes),
     StoreModule.forFeature(SHOPPINGLISTS_FEATURE_KEY, reducer.reducers),
     EffectsModule.forFeature([
       ItemsApiEffects,

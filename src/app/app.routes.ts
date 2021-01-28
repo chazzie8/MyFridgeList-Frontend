@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { LoggedOutGuard } from './core/auth/guards/logged-out-guard.service';
 import { StartComponent } from './core/start/start.component';
-import { ArticleListComponent } from './fridges/components/article-list/article-list.component';
-import { DashboardComponent } from './fridges/components/dashboard/dashboard.component';
-import { ItemListComponent } from './shoppinglists/components/item-list/item-list.component';
 
 export const routes: Routes = [
   {
@@ -15,18 +13,7 @@ export const routes: Routes = [
   {
     path: 'start',
     component: StartComponent,
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: 'fridges/:fridgeId',
-    component: ArticleListComponent,
-  },
-  {
-    path: 'shoppinglists/:shoppinglistId',
-    component: ItemListComponent,
+    canActivate: [LoggedOutGuard],
   },
   {
     path: '**',
