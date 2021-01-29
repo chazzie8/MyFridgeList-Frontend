@@ -6,6 +6,7 @@ import { exhaustMap, map, tap } from 'rxjs/operators';
 import { GoToLogIn } from 'src/app/auth-ui/actions/auth-ui-navigation.actions';
 import { LoginRequest } from 'src/app/shared/models/requests/login-request.model';
 import { LoginResponse } from 'src/app/shared/models/respones/login-response.model';
+import { ApiResponse } from 'src/app/shared/models/respones/response.model';
 
 import { AuthActionTypes, Login, LoginSuccess, Logout, SessionExpired } from '../actions/auth.actions';
 import { AuthService } from '../services/auth.service';
@@ -20,7 +21,7 @@ export class AuthEffects {
     map((action: Login) => action.payload),
     exhaustMap((auth: LoginRequest) =>
       this.authService.login(auth.email, auth.password).pipe(
-        map((response: LoginResponse) => new LoginSuccess(response)),
+        map((response: ApiResponse<LoginResponse>) => new LoginSuccess(response.data)),
       ),
     ),
   );

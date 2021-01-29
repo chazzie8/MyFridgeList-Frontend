@@ -25,7 +25,7 @@ export class SideNavBarComponent {
 
   constructor(
     private store: Store<BaseAppState>,
-    public sidenav: MatSidenav
+    public sidenav: MatSidenav,
   ) { }
 
   handleGoToDashboardClick(): void {

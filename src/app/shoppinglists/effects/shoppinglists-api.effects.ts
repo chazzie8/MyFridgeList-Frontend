@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { GoToDashboard, GoToSelectedShoppinglist } from 'src/app/core/router/actions/navigation.actions';
+import { ApiResponse } from 'src/app/shared/models/respones/response.model';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
 import {
@@ -11,12 +12,12 @@ import {
   DeleteShoppinglist,
   DeleteShoppinglistSuccess,
   ListShoppinglistsApiActionTypes,
+  LoadShoppinglists,
   LoadShoppinglistsSuccess,
   UpdateShoppinglist,
   UpdateShoppinglistSuccess,
 } from '../actions/list-shoppinglists-api.actions';
 import { ShoppinglistApiService } from '../services/shoppinglist.service';
-import { LoadShoppinglists } from './../actions/list-shoppinglists-api.actions';
 
 @Injectable()
 export class ShoppinglistsApiEffects {
@@ -27,7 +28,7 @@ export class ShoppinglistsApiEffects {
     // tslint:disable-next-line:variable-name
     switchMap((_action: LoadShoppinglists) => {
       return this.shoppinglistApiService.getShoppinglists().pipe(
-        map((response: Shoppinglist[]) => new LoadShoppinglistsSuccess(response)),
+        map((response: ApiResponse<Shoppinglist[]>) => new LoadShoppinglistsSuccess(response.data)),
       );
     }),
   );
@@ -37,13 +38,18 @@ export class ShoppinglistsApiEffects {
     ofType(ListShoppinglistsApiActionTypes.UpdateShoppinglist),
     switchMap((action: UpdateShoppinglist) => {
       return this.shoppinglistApiService.updateShoppinglist(action.shoppinglistId, action.updateShoppinglistTitle).pipe(
-        map((response: Shoppinglist) => {
-          this.snackBar.open('Einkaufsliste wurde geupdated', 'Schließen', {
-            duration: 3000,
-          });
-          return new UpdateShoppinglistSuccess(response);
-        }),
+        map((response: ApiResponse<Shoppinglist>) => new UpdateShoppinglistSuccess(response.data)),
       );
+    }),
+  );
+
+  @Effect({ dispatch: false })
+  public updateShoppinglistSuccess$ = this.actions$.pipe(
+    ofType(ListShoppinglistsApiActionTypes.UpdateShoppinglistSuccess),
+    tap((action: UpdateShoppinglistSuccess) => {
+      this.snackBar.open('Einkaufsliste "' + action.shoppinglist.name + '" wurde geupdated', 'Schließen', {
+        duration: 3000,
+      });
     }),
   );
 
@@ -52,7 +58,7 @@ export class ShoppinglistsApiEffects {
     ofType(ListShoppinglistsApiActionTypes.CreateShoppinglist),
     switchMap((action: CreateShoppinglist) => {
       return this.shoppinglistApiService.addShoppinglist(action.shoppinglistRequest).pipe(
-        map((response: Shoppinglist) => new CreateShoppinglistSuccess(response)),
+        map((response: ApiResponse<Shoppinglist>) => new CreateShoppinglistSuccess(response.data)),
       );
     }),
   );

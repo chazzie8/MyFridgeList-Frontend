@@ -12,6 +12,7 @@ import { AuthTokenInjectorInterceptor } from './interceptors/auth-token-injector
 import { AuthTokenInvalidInterceptor } from './interceptors/auth-token-invalid.interceptor';
 import { reducer } from './reducers/auth.reducer';
 import { AuthService } from './services/auth.service';
+import { MockAuthService } from './services/mock-auth.service';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { AuthService } from './services/auth.service';
     LoggedOutGuard,
     {
       provide: AuthService,
-      useClass: AuthService,
+      // useClass: AuthService,
+      useClass: MockAuthService,
     },
     {
       provide: HTTP_INTERCEPTORS,

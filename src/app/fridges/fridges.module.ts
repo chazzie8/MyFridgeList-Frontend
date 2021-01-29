@@ -20,6 +20,7 @@ import { FRIDGES_FEATURE_KEY } from './fridges.constants';
 import { routes } from './fridges.routes';
 import * as reducer from './reducers';
 import { FridgeApiService } from './services/fridge-api.service';
+import { MockFridgeApiService } from './services/mock-fridge-api.service';
 
 @NgModule({
   imports: [
@@ -50,7 +51,11 @@ export class FridgesModule {
     return {
       ngModule: RootFridgeListModule,
       providers: [
-        FridgeApiService,
+        {
+          provide: FridgeApiService,
+          // useClass: FridgeApiService,
+          useClass: MockFridgeApiService,
+        }
       ],
     };
   }

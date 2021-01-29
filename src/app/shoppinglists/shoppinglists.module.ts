@@ -15,6 +15,7 @@ import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemsApiEffects } from './effects/items-api.effects';
 import { ShoppinglistsApiEffects } from './effects/shoppinglists-api.effects';
 import * as reducer from './reducers';
+import { MockShoppinglistApiService } from './services/mock-shoppinglist.service';
 import { ShoppinglistApiService } from './services/shoppinglist.service';
 import { SHOPPINGLISTS_FEATURE_KEY } from './shoppinglists.constants';
 import { routes } from './shoppinglists.routes';
@@ -47,7 +48,11 @@ export class ShoppinglistsModule {
     return {
       ngModule: RootShoppinglistsModule,
       providers: [
-        ShoppinglistApiService,
+        {
+          provide: ShoppinglistApiService,
+          // useClass: ShoppinglistApiService,
+          useClass: MockShoppinglistApiService,
+        },
       ],
     };
   }

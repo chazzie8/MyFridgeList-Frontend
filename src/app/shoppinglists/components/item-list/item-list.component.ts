@@ -14,6 +14,7 @@ import { getItems, getSelectedItemById } from '../../selectors/items.selector';
 import { getSelectedShoppinglistId } from '../../selectors/shoppinglists.selector';
 import { DialogFridgeItemComponent } from '../dialog-fridge-item/dialog-fridge-item.component';
 import { DialogItemComponent } from '../dialog-item/dialog-item.component';
+import { LoadFridges } from './../../../fridges/actions/list-fridges-api.actions';
 import { UpdateBoughtItems } from './../../actions/items-api.actions';
 import { PurgeShoppinglistItems } from './../../actions/shoppinglist.actions';
 
@@ -37,6 +38,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void{
     this.getItems();
+    this.getFridges();
   }
 
   public ngOnDestroy(): void {
@@ -63,6 +65,10 @@ export class ItemListComponent implements OnInit, OnDestroy {
     ).subscribe((shoppinglistId): void => {
       this.store.dispatch(new LoadItems(shoppinglistId));
     });
+  }
+
+  public getFridges(): void {
+    this.store.dispatch(new LoadFridges());
   }
 
   public handleOpenDialogClick(): void {
