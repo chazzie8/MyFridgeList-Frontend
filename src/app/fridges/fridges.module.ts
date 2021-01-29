@@ -7,16 +7,16 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { ChartsModule } from 'ng2-charts';
 
-import { MaterialModule } from '../shared/material.module';
+import { SharedModule } from './../shared/shared.module';
 import { ArticleListItemComponent } from './components/article-list-item/article-list-item.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { DashboardChartComponent } from './components/dashboard-chart/dashboard-chart.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DialogArticleComponent } from './components/dialog-article/dialog-article.component';
+import { FRIDGES_FEATURE_KEY } from './definitions/fridges.definitions';
 import { ArticleApiEffects } from './effects/articles-api.effects';
 import { DashboardApiEffects } from './effects/dashboard-api.effects';
 import { FridgeApiEffects } from './effects/fridges-api.effects';
-import { FRIDGES_FEATURE_KEY } from './fridges.constants';
 import { routes } from './fridges.routes';
 import * as reducer from './reducers';
 import { FridgeApiService } from './services/fridge-api.service';
@@ -26,7 +26,7 @@ import { FridgeApiService } from './services/fridge-api.service';
     CommonModule,
     FormsModule,
     BrowserModule,
-    MaterialModule,
+    SharedModule,
     ReactiveFormsModule,
     ChartsModule,
   ],

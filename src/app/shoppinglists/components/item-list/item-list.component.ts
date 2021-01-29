@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Item } from 'src/app/shared/models/item.model';
 import { EditShoppinglistItemRequest } from 'src/app/shared/models/requests/edit-shoppinglist-item-request.model';
+import { LoadShoppinglists } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
 
 import { LoadItems } from '../../actions/list-items-api.actions';
 import { ItemsState } from '../../reducers/items.reducer';
@@ -36,6 +37,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void{
+    this.store.dispatch(new LoadShoppinglists());
     this.getItems();
   }
 

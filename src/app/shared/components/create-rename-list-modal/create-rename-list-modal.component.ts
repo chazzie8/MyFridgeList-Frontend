@@ -51,8 +51,7 @@ export class CreateRenameListModalComponent implements OnInit {
 
   public initForm(): void {
     if (this.data.data !== null) {
-      console.log(this.data.data.name);
-      this.form.patchValue({
+      this.form.setValue({
         label: this.data.data.name,
       });
     }

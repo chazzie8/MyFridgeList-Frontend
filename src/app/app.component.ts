@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { isLoggedIn } from './core/auth/selectors/auth.selectors';
+import { getIsLoading } from './core/loading/selectors/loading.selectors';
 import { BaseAppState } from './core/router/reducers/custom-router-serializer.reducer';
 
 @Component({
@@ -14,6 +15,7 @@ export class AppComponent {
   title = 'MyFridgeList-Frontend';
 
   isLoggedIn$: Observable<boolean> = this.store.pipe(select(isLoggedIn));
+  loading$: Observable<boolean> = this.store.pipe(select(getIsLoading));
 
   constructor(
     private store: Store<BaseAppState>

@@ -6,17 +6,17 @@ import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { MaterialModule } from '../shared/material.module';
+import { SharedModule } from './../shared/shared.module';
 import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.component';
 import { DialogFridgeItemComponent } from './components/dialog-fridge-item/dialog-fridge-item.component';
 import { DialogItemComponent } from './components/dialog-item/dialog-item.component';
 import { ItemListItemComponent } from './components/item-list-item/item-list-item.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
+import { SHOPPINGLISTS_FEATURE_KEY } from './definitions/shoppinglists.definitions';
 import { ItemsApiEffects } from './effects/items-api.effects';
 import { ShoppinglistsApiEffects } from './effects/shoppinglists-api.effects';
 import * as reducer from './reducers';
 import { ShoppinglistApiService } from './services/shoppinglist.service';
-import { SHOPPINGLISTS_FEATURE_KEY } from './shoppinglists.constants';
 import { routes } from './shoppinglists.routes';
 
 @NgModule({
@@ -24,7 +24,7 @@ import { routes } from './shoppinglists.routes';
     CommonModule,
     FormsModule,
     BrowserModule,
-    MaterialModule,
+    SharedModule,
     ReactiveFormsModule,
   ],
   exports: [

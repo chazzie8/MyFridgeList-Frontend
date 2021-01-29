@@ -7,6 +7,7 @@ import { Article } from 'src/app/shared/models/article.model';
 
 import { PurgeFridgeItems } from '../../actions/fridge.actions';
 import { LoadArticles } from '../../actions/list-articles-api.actions';
+import { LoadFridges } from '../../actions/list-fridges-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
 import { getArticles } from '../../selectors/articles.selector';
 import { getSelectedFridgeId } from '../../selectors/fridges.selector';
@@ -31,6 +32,7 @@ export class ArticleListComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
+    this.store.dispatch(new LoadFridges());
     this.getArticles();
   }
 

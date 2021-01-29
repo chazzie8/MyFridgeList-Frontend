@@ -11,6 +11,7 @@
           matInput
           placeholder="Artikelname"
           formControlName="label"
+          type="text"
         >
         <mat-error *ngIf="form.controls.label.errors?.required">Artikelname ist erforderlich</mat-error>
         <mat-error *ngIf="form.controls.label.errors?.pattern">Bitte ausschließlich Buchstaben verwenden</mat-error>
@@ -56,7 +57,7 @@
 <ng-template #noDataButtons>
   <button 
     mat-raised-button 
-    [disabled]="!form.dirty"
+    [disabled]="!(form.controls.label.dirty && form.controls.amount.dirty && form.controls.expiryDate.dirty)"
     color="primary" 
     type="submit" 
     (click)="handleAddClick()"

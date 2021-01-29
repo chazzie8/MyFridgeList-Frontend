@@ -4,10 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
-import {
-  CreateRenameListModalComponent,
-} from '../shared/components/create-rename-list-modal/create-rename-list-modal.component';
-import { MaterialModule } from '../shared/material.module';
+import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { routes } from './core.routes';
 import { FooterComponent } from './footer/footer.component';
@@ -29,13 +26,12 @@ import { StartComponent } from './start/start.component';
     SideNavBarComponent,
     SideNavBarListComponent,
     FooterComponent,
-    CreateRenameListModalComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     BrowserModule,
-    MaterialModule,
+    SharedModule,
     ReactiveFormsModule,
     AuthModule,
     RouterModule.forChild(routes),
@@ -49,7 +45,6 @@ import { StartComponent } from './start/start.component';
     SideNavBarComponent,
     SideNavBarListComponent,
     FooterComponent,
-    CreateRenameListModalComponent,
   ],
 })
 export class CoreModule { }

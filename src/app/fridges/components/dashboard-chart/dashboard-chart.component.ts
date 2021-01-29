@@ -16,7 +16,7 @@ import { getFridgeDashboardItemsByFridgeId } from '../../selectors/dashboard.sel
   templateUrl: './dashboard-chart.component.html',
   styleUrls: ['./dashboard-chart.component.scss']
 })
-export class DashboardChartComponent implements OnInit{
+export class DashboardChartComponent implements OnInit {
 
   private fridge$ = new BehaviorSubject<Fridge | undefined>(undefined);
 

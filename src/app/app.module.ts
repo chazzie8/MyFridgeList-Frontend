@@ -13,9 +13,10 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { AuthUIModule } from './auth-ui/auth-ui.module';
 import { CoreModule } from './core/core.module';
+import { LoadingModule } from './core/loading/loading.module';
 import { metaReducers, reducers } from './core/store/reducers';
 import { FridgesModule } from './fridges/fridges.module';
-import { MaterialModule } from './shared/material.module';
+import { SharedModule } from './shared/shared.module';
 import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
 
 @NgModule({
@@ -38,13 +39,23 @@ import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
     StoreDevtoolsModule.instrument({
       name: 'MyFridgeList App DevTools',
     }),
-    EffectsModule.forRoot(),
+    CoreModule,
+    LoadingModule,
     AuthUIModule,
-    MaterialModule,
+    ChartsModule,
+    SharedModule,
+    FridgesModule.forRoot(),
+    ShoppinglistsModule.forRoot(),
+    EffectsModule.forRoot(),
   ],
   providers: [
-    { provide: 'apiBaseUrl', useValue: environment.apiBaseUrl },
-],
-  bootstrap: [AppComponent],
+    {
+      provide: 'apiBaseUrl',
+      useValue: environment.apiBaseUrl
+    },
+  ],
+  bootstrap: [
+    AppComponent
+  ],
 })
 export class AppModule { }

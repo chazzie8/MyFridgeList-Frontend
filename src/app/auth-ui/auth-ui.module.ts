@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { MaterialModule } from './../shared/material.module';
+import { SharedModule } from './../shared/shared.module';
 import { routes } from './auth-ui.routes';
 import { LoginFormComponent } from './components/login/login-form/login-form.component';
 import { LoginPageComponent } from './components/login/login-page/login-page.component';
@@ -24,7 +24,7 @@ import { SignUpPageComponent } from './components/sign-up/sign-up-page/sign-up-p
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
+    SharedModule,
   ],
 })
 export class AuthUIModule { }

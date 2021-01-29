@@ -4,7 +4,7 @@ import { createSelector, DefaultProjectorFn, MemoizedSelector } from '@ngrx/stor
 import { getParams } from 'src/app/core/selectors/router.selector';
 
 import { getFridgeRootState } from '.';
-import { FRIDGE_ID } from '../fridges.constants';
+import { FRIDGE_ID } from '../definitions/fridges.definitions';
 import { fridgesAdapter, FridgesState } from '../reducers/fridges.reducer';
 import { Fridge } from './../../shared/models/fridge.model';
 
@@ -27,5 +27,5 @@ export const getSelectedFridgeId: MemoizedSelector<object, string> = createSelec
 export const getSelectedFridge: MemoizedSelector<object, Fridge, DefaultProjectorFn<Fridge>> = createSelector(
   getFridgesMap,
   getSelectedFridgeId,
-  (fridges: Dictionary<Fridge>, currentFridgeId: string): Fridge | undefined => fridges && fridges[currentFridgeId],
+  (fridges: Dictionary<Fridge>, currentFridgeId: string): Fridge => fridges && fridges[currentFridgeId],
 );

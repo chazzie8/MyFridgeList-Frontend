@@ -5,8 +5,8 @@ import { getParams } from 'src/app/core/selectors/router.selector';
 import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 
 import { getShoppinglistRootState } from '.';
+import { SHOPPINGLIST_ID } from '../definitions/shoppinglists.definitions';
 import { shoppinglistsAdapter, ShoppinglistsState } from '../reducers/shoppinglists.reducer';
-import { SHOPPINGLIST_ID } from '../shoppinglists.constants';
 
 export const getShoppinglistListState: MemoizedSelector<object, ShoppinglistsState> = createSelector(
   getShoppinglistRootState,

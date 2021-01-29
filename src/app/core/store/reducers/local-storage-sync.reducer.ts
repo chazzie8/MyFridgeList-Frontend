@@ -1,7 +1,7 @@
 import { ActionReducer } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { BaseAppState } from 'src/app/core/router/reducers/custom-router-serializer.reducer';
-import { SHOPPINGLISTS_FEATURE_KEY } from 'src/app/shoppinglists/shoppinglists.constants';
+import { SHOPPINGLISTS_FEATURE_KEY } from 'src/app/shoppinglists/definitions/shoppinglists.definitions';
 
 import { AUTH_STATE_KEY } from '../../auth/definitions/auth.definitions';
 

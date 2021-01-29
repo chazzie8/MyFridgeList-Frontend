@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getUserName } from 'src/app/core/auth/selectors/auth.selectors';
@@ -9,13 +9,14 @@ import { LoadShoppinglists } from 'src/app/shoppinglists/actions/list-shoppingli
 
 import { LoadFridgeDashboardItems } from '../../actions/dashboard-api.actions';
 import { LoadFridges } from '../../actions/list-fridges-api.actions';
+import { PurgeDashboardFridgeItems } from './../../actions/fridge.actions';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   fridges$: Observable<Fridge[]> = this.store.pipe(select(getFridges));
   userName$: Observable<string> = this.store.pipe(select(getUserName));
@@ -28,6 +29,10 @@ export class DashboardComponent implements OnInit {
     this.loadFridges();
     this.loadShoppinglists();
     this.loadFridgeDashboardItems();
+  }
+
+  public ngOnDestroy(): void {
+    this.store.dispatch(new PurgeDashboardFridgeItems());
   }
 
   public loadFridgeDashboardItems(): void {

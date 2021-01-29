@@ -6,7 +6,11 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
+    <ng-container *ngIf="loading$ | async">
+      <app-loading-overlay></app-loading-overlay>  
+    </ng-container>
     <app-nav-bar (menuButtonClick)="sidenav.toggle()"></app-nav-bar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
+
 </mat-sidenav-container>  
