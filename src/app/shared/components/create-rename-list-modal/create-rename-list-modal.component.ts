@@ -13,6 +13,7 @@ import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 import { CreateShoppinglist, UpdateShoppinglist } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
 import { ShoppinglistsState } from 'src/app/shoppinglists/reducers/shoppinglists.reducer';
 
+import { letterPatternValidator } from '../../form-validators/chars-pattern-validator';
 import { CreateFridgeRequest } from '../../models/requests/create-fridge-request.model';
 import { CreateShoppinglistRequest } from '../../models/requests/create-shoppinglist-request.model';
 
@@ -37,11 +38,10 @@ export class CreateRenameListModalComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateRenameListModalComponent>,
   ) { }
 
-  letterRegex = /^[a-zA-Z_äÄöÖüÜß_ ]+$/;
   form: FormGroup = new FormGroup({
     label: new FormControl('', [
       Validators.required,
-      Validators.pattern(this.letterRegex)
+      letterPatternValidator
     ]),
   });
 

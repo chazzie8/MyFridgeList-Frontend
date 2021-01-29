@@ -1,13 +1,25 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { Component, Inject, Injectable, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DateAdapter, NativeDateAdapter } from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { letterPatternValidator, numericPatternValidator } from 'src/app/shared/form-validators/chars-pattern-validator';
 import { Article } from 'src/app/shared/models/article.model';
 import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
 import { EditArticleRequest } from 'src/app/shared/models/requests/edit-article-request.model';
 
 import { CreateArticle, UpdateArticle } from '../../actions/articles-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
+
+@Injectable()
+export class AppDateAdapter extends NativeDateAdapter {
+  format(date: Date): string {
+    const day: string = date.getDate().toString();
+    const month: string = (date.getMonth() + 1).toString();
+    const year = date.getFullYear();
+    return `${day.length > 1 ? day : '0' + day}.${month.length > 1 ? month : '0' + month}.${year}`;
+  }
+}
 
 export interface DialogData {
   fridgeId: string;
@@ -17,7 +29,13 @@ export interface DialogData {
 @Component({
   selector: 'app-dialog-article',
   templateUrl: './dialog-article.component.html',
-  styleUrls: ['./dialog-article.component.scss']
+  styleUrls: ['./dialog-article.component.scss'],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: AppDateAdapter,
+    },
+  ]
 })
 export class DialogArticleComponent implements OnInit {
 
@@ -27,21 +45,21 @@ export class DialogArticleComponent implements OnInit {
     private dialogRef: MatDialogRef<DialogArticleComponent>
   ) { }
 
-  letterRegex = /^[a-zA-Z_äÄöÖüÜß_ ]+$/;
-  numericRegex = /^[0-9]+$/;
   form: FormGroup = new FormGroup({
     label: new FormControl('', [
       Validators.required,
-      Validators.pattern(this.letterRegex)
+      letterPatternValidator
     ]),
     amount: new FormControl('', [
       Validators.required,
-      Validators.pattern(this.numericRegex)
+      numericPatternValidator
     ]),
     expiryDate: new FormControl('', [
       Validators.required
     ]),
   });
+
+  minDate = new Date();
 
   public ngOnInit(): void {
     this.initForm();
@@ -54,6 +72,12 @@ export class DialogArticleComponent implements OnInit {
         amount: this.data.article.amount,
         expiryDate: this.data.article.expirydate,
       });
+    } else {
+      this.form.setValue({
+        label: null,
+        amount: null,
+        expiryDate: new Date(),
+      });
     }
   }
 
@@ -65,7 +89,7 @@ export class DialogArticleComponent implements OnInit {
       id: this.data.article.id,
       label: this.form.controls.label.value,
       amount: this.form.controls.amount.value,
-      expirydate: this.form.controls.expiryDate.value,
+      expirydate: new Date(this.form.controls.expiryDate.value).toLocaleDateString(),
     };
     const article = {...data.article, ...updateRequest};
     this.store.dispatch(new UpdateArticle(this.data.fridgeId, article));
@@ -79,7 +103,7 @@ export class DialogArticleComponent implements OnInit {
     const addRequest: CreateArticleRequest = {
       label: this.form.controls.label.value,
       amount: this.form.controls.amount.value,
-      expirydate: this.form.controls.expiryDate.value,
+      expirydate: new Date(this.form.controls.expiryDate.value).toLocaleDateString(),
     };
     const article = {...addRequest};
     this.store.dispatch(new CreateArticle(this.data.fridgeId, article));

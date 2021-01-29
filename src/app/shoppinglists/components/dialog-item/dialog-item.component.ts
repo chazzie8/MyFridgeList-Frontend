@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { letterPatternValidator } from 'src/app/shared/form-validators/chars-pattern-validator';
 import { CreateItemRequest } from 'src/app/shared/models/requests/create-item-request.model';
 
 import { CreateItem } from '../../actions/items-api.actions';
@@ -25,11 +26,10 @@ export class DialogItemComponent {
     private dialogRef: MatDialogRef<DialogItemComponent>
   ) { }
 
-  letterRegex = /^[a-zA-Z_äÄöÖüÜß_ ]+$/;
   form: FormGroup = new FormGroup({
     label: new FormControl('', [
       Validators.required,
-      Validators.pattern(this.letterRegex)
+      letterPatternValidator
     ]),
   });
 

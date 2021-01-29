@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { CreateArticle } from 'src/app/fridges/actions/articles-api.actions';
 import { ArticlesState } from 'src/app/fridges/reducers/articles.reducer';
 import { getFridges } from 'src/app/fridges/selectors/fridges.selector';
+import { letterPatternValidator } from 'src/app/shared/form-validators/chars-pattern-validator';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 import { Item } from 'src/app/shared/models/item.model';
 import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
@@ -35,19 +36,17 @@ export class DialogFridgeItemComponent implements OnInit {
     private dialogRef: MatDialogRef<DialogFridgeItemComponent>
   ) { }
 
-  letterRegex = /^[a-zA-Z_äÄöÖüÜß_ ]+$/;
-  numericRegex = /^[0-9]+$/;
   form: FormGroup = new FormGroup({
     fridgeSelect: new FormControl('', [
       Validators.required
     ]),
     label: new FormControl('', [
       Validators.required,
-      Validators.pattern(this.letterRegex)
+      letterPatternValidator
     ]),
     amount: new FormControl('', [
       Validators.required,
-      Validators.pattern(this.numericRegex)
+      letterPatternValidator
     ]),
     expiryDate: new FormControl('', [
       Validators.required

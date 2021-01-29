@@ -26,15 +26,18 @@
       <mat-error *ngIf="form.controls.amount.errors?.pattern">Bitte positive Zahlen eingeben</mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input 
-      matInput
-      placeholder="MHD"
+    <input
       formControlName="expiryDate"
-      type="date"
+      matInput 
+      [matDatepicker]="picker"
+      [min]="minDate"
+      placeholder="MHD"
+      disabled
     >
-    <mat-error *ngIf="form.controls.expiryDate.errors?.required">MHD ist erforderlich</mat-error>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker disabled="false"></mat-datepicker>
   </mat-form-field>
- 
+
 </mat-dialog-content>
 
 <mat-dialog-actions>
@@ -51,7 +54,6 @@
     </button>
   </ng-container>
 </mat-dialog-actions>
-
 
 <ng-template #noDataButtons>
   <button 

@@ -28,3 +28,9 @@
   justify-content: center;
   bottom: 15px;
 }
+
+.mat-input-element:disabled,
+.mat-form-field-type-mat-native-select.mat-form-field-disabled
+{
+  color: currentColor;
+}
