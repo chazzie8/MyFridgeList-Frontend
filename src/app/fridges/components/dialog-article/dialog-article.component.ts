@@ -31,7 +31,10 @@ export interface DialogData {
   templateUrl: './dialog-article.component.html',
   styleUrls: ['./dialog-article.component.scss'],
   providers: [
-    {provide: DateAdapter, useClass: AppDateAdapter},
+    {
+      provide: DateAdapter,
+      useClass: AppDateAdapter,
+    },
   ]
 })
 export class DialogArticleComponent implements OnInit {
