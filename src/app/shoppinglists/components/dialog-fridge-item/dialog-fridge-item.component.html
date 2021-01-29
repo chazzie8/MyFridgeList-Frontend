@@ -37,39 +37,49 @@
       <mat-error *ngIf="form.controls.amount.errors?.pattern">Bitte positive Zahlen eingeben</mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input 
-      matInput
-      placeholder="MHD"
+    <input
       formControlName="expiryDate"
-      type="date"
+      matInput 
+      [matDatepicker]="picker"
+      (click)="picker.open()"
+      [min]="minDate"
+      placeholder="MHD"
+      onfocus="blur()"
+      class="input-font-size-16"
     >
-    <mat-error *ngIf="form.controls.expiryDate.errors?.required">MHD ist erforderlich</mat-error>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   </ng-container>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button 
+  <div class="modal-button-row">
+    <ng-container *ngIf="this.index < this.data.items.length - 1">
+      <button 
+        mat-button
+        (click)="handleSkipClick()"
+      >
+        Überspringen
+      </button>
+    </ng-container>
+    <button 
+      mat-raised-button 
+      [disabled]="!form.dirty || !form.controls['fridgeSelect'].valid || !form.controls['amount'].valid || !form.controls['expiryDate'].valid"
+      color="primary" 
+      type="submit"
+      (click)="handleAddClick()"
+    >
+      {{this.index < this.data.items.length - 1 ? 'Weiter' : 'Fertig'}}
+    </button>
+  </div>
+  <div class="cancel-modal-button">
+    <button 
     mat-button
     (click)="handleCancelClick()"
   >
     Abbrechen
   </button>
-  <ng-container *ngIf="this.index < this.data.items.length - 1">
-    <button 
-      mat-button
-      (click)="handleSkipClick()"
-    >
-      Überspringen
-    </button>
-  </ng-container>
-  <button 
-    mat-raised-button 
-    [disabled]="!form.dirty || !form.controls['fridgeSelect'].valid || !form.controls['amount'].valid || !form.controls['expiryDate'].valid"
-    color="primary" 
-    type="submit"
-    (click)="handleAddClick()"
-  >
-    {{this.index < this.data.items.length - 1 ? 'Weiter' : 'Beenden'}}
-  </button>
+  </div>
+  
 </mat-dialog-actions>

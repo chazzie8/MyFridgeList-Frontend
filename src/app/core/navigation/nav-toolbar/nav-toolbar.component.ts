@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { GoToSignUp } from 'src/app/auth-ui/actions/auth-ui-navigation.actions';
@@ -14,6 +14,9 @@ import { isLoggedIn } from './../../auth/selectors/auth.selectors';
 })
 export class NavToolbarComponent {
 
+  // tslint:disable-next-line:no-output-rename
+  @Output('sideNav') sidenavEmitter = new EventEmitter();
+
   isLoggedIn$: Observable<boolean> = this.store.pipe(select(isLoggedIn));
 
   constructor(
@@ -26,5 +29,6 @@ export class NavToolbarComponent {
 
   public handleLogoutClick(): void {
     this.store.dispatch(new Logout());
+    this.sidenavEmitter.emit();
   }
 }

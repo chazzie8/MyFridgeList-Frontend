@@ -5,9 +5,9 @@ import { MatSelectionList } from '@angular/material/list';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { LoadFridges } from 'src/app/fridges/actions/list-fridges-api.actions';
 import { Item } from 'src/app/shared/models/item.model';
 import { EditShoppinglistItemRequest } from 'src/app/shared/models/requests/edit-shoppinglist-item-request.model';
-import { LoadShoppinglists } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
 
 import { LoadItems } from '../../actions/list-items-api.actions';
 import { ItemsState } from '../../reducers/items.reducer';
@@ -37,7 +37,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void{
-    this.store.dispatch(new LoadShoppinglists());
+    this.store.dispatch(new LoadFridges());
+
     this.getItems();
   }
 

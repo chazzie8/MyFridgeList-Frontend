@@ -27,15 +27,20 @@
       <mat-error *ngIf="form.controls.amount.errors?.pattern">Bitte positive Zahlen eingeben</mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input 
-      matInput
-      placeholder="MHD"
+    <input
       formControlName="expiryDate"
-      type="date"
+      matInput 
+      [matDatepicker]="picker"
+      (click)="picker.open()"
+      [min]="minDate"
+      placeholder="MHD"
+      onfocus="blur()"
+      class="input-font-size-16"
     >
-    <mat-error *ngIf="form.controls.expiryDate.errors?.required">MHD ist erforderlich</mat-error>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
- 
+
 </mat-dialog-content>
 
 <mat-dialog-actions>
@@ -43,7 +48,7 @@
   <ng-container *ngIf="data.article !== null; else noDataButtons">
     <button
       mat-raised-button 
-      [disabled]="!form.dirty || (form.controls['label'].value === data.article.label && form.controls['amount'].value === data.article.amount && form.controls['expiryDate'].value === data.article.expirydate)"
+      [disabled]="form.controls['label'].value === data.article.label && form.controls['amount'].value === data.article.amount && form.controls['expiryDate'].value === data.article.expirydate"
       color="primary"
       type="submit"
       (click)="handleUpdateClick(data)"
@@ -53,11 +58,10 @@
   </ng-container>
 </mat-dialog-actions>
 
-
 <ng-template #noDataButtons>
   <button 
     mat-raised-button 
-    [disabled]="!(form.controls.label.dirty && form.controls.amount.dirty && form.controls.expiryDate.dirty)"
+    [disabled]="!(form.controls.label.dirty && form.controls.amount.dirty)"
     color="primary" 
     type="submit" 
     (click)="handleAddClick()"

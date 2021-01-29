@@ -7,20 +7,14 @@ import { BaseAppState } from 'src/app/core/router/reducers/custom-router-seriali
 import { getFirstUrlSegment } from 'src/app/core/selectors/router.selector';
 import { CreateFridge, UpdateFridge } from 'src/app/fridges/actions/list-fridges-api.actions';
 import { FridgesState } from 'src/app/fridges/reducers/fridges.reducer';
-import { Fridge } from 'src/app/shared/models/fridge.model';
 import { EditNavTitleRequest } from 'src/app/shared/models/requests/edit-nav-title-request.model';
-import { Shoppinglist } from 'src/app/shared/models/shoppinglist.model';
 import { CreateShoppinglist, UpdateShoppinglist } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
 import { ShoppinglistsState } from 'src/app/shoppinglists/reducers/shoppinglists.reducer';
 
+import { letterPatternValidator } from '../../form-validators/chars-pattern-validator';
+import { DialogRenameData } from '../../models/dialog-rename-data.model';
 import { CreateFridgeRequest } from '../../models/requests/create-fridge-request.model';
 import { CreateShoppinglistRequest } from '../../models/requests/create-shoppinglist-request.model';
-
-export interface DialogData {
-  id: string;
-  data: Shoppinglist | Fridge;
-  create: string;
-}
 
 @Component({
   selector: 'app-create-rename-list-modal',
@@ -32,16 +26,15 @@ export class CreateRenameListModalComponent implements OnInit {
   getFirstUrlSegment$: Observable<string> = this.store.pipe(select(getFirstUrlSegment));
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogRenameData,
     private store: Store<FridgesState | ShoppinglistsState | BaseAppState>,
     public dialogRef: MatDialogRef<CreateRenameListModalComponent>,
   ) { }
 
-  letterRegex = /^[a-zA-Z_äÄöÖüÜß_ ]+$/;
   form: FormGroup = new FormGroup({
     label: new FormControl('', [
       Validators.required,
-      Validators.pattern(this.letterRegex)
+      letterPatternValidator
     ]),
   });
 
