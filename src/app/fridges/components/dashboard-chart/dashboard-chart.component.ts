@@ -10,6 +10,7 @@ import { FridgeDashboardItem } from 'src/app/shared/models/fridge-dashboard-item
 import { Fridge } from 'src/app/shared/models/fridge.model';
 
 import { getFridgeDashboardItemsByFridgeId } from '../../selectors/dashboard.selector';
+import { getFridgeByFridgeId } from '../../selectors/fridges.selector';
 
 @Component({
   selector: 'app-dashboard-chart',
@@ -18,21 +19,29 @@ import { getFridgeDashboardItemsByFridgeId } from '../../selectors/dashboard.sel
 })
 export class DashboardChartComponent implements OnInit {
 
-  private fridge$ = new BehaviorSubject<Fridge | undefined>(undefined);
+  private fridgeId$ = new BehaviorSubject<string | undefined>(undefined);
 
   @Input()
-  set fridge(fridge: Fridge) {
-    this.fridge$.next(fridge);
+  set fridgeId(fridgeId: string) {
+    this.fridgeId$.next(fridgeId);
   }
-  get fridge(): Fridge {
-    return this.fridge$.value;
+  get fridgeId(): string {
+    return this.fridgeId$.value;
   }
 
-  dashboardItems$: Observable<FridgeDashboardItem[]> = this.fridge$.pipe(
-    filter((fridge: Fridge) => Boolean(fridge)),
+  fridge$: Observable<Fridge> = this.fridgeId$.pipe(
+    filter((fridgeId: string) => fridgeId !== ''),
     take(1),
-    switchMap((fridge: Fridge) => {
-      return this.store.pipe(select(getFridgeDashboardItemsByFridgeId, fridge.id));
+    switchMap((fridgeId: string) => {
+      return this.store.pipe(select(getFridgeByFridgeId, fridgeId));
+    })
+  );
+
+  dashboardItems$: Observable<FridgeDashboardItem[]> = this.fridgeId$.pipe(
+    filter((fridgeId: string) => fridgeId !== ''),
+    take(1),
+    switchMap((fridgeId: string) => {
+      return this.store.pipe(select(getFridgeDashboardItemsByFridgeId, fridgeId));
     })
   );
 

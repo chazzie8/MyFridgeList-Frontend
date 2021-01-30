@@ -12,7 +12,7 @@ import { BaseAppState } from './core/router/reducers/custom-router-serializer.re
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'MyFridgeList-Frontend';
+  title = 'MyFridgeList';
 
   isLoggedIn$: Observable<boolean> = this.store.pipe(select(isLoggedIn));
   loading$: Observable<boolean> = this.store.pipe(select(getIsLoading));

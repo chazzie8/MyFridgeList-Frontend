@@ -3,10 +3,10 @@
   <h1>Hallo {{userName$ | async}}</h1>
 
   <div class="card-row">
-    <ng-container *ngIf="fridges$ | async as fridges">
-      <ng-container *ngFor="let fridge of fridges">
+    <ng-container *ngIf="fridgeIds$ | async as fridgeIds">
+      <ng-container *ngFor="let fridgeId of fridgeIds">
           <mat-card class="dashboard-card">
-            <app-dashboard-chart [fridge]="fridge"></app-dashboard-chart>
+            <app-dashboard-chart [fridgeId]="fridgeId"></app-dashboard-chart>
           </mat-card>
       </ng-container>
     </ng-container>

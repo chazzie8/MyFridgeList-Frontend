@@ -20,7 +20,7 @@ export class NavToolbarComponent {
   isLoggedIn$: Observable<boolean> = this.store.pipe(select(isLoggedIn));
 
   constructor(
-    private store: Store<BaseAppState>
+    private store: Store<BaseAppState>,
   ) { }
 
   public handleGoToSignUpClick(): void {

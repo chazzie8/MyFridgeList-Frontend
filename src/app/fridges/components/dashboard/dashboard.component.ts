@@ -3,8 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getUserName } from 'src/app/core/auth/selectors/auth.selectors';
 import { FridgesState } from 'src/app/fridges/reducers/fridges.reducer';
-import { getFridges } from 'src/app/fridges/selectors/fridges.selector';
-import { Fridge } from 'src/app/shared/models/fridge.model';
+import { getFridgeIds } from 'src/app/fridges/selectors/fridges.selector';
 import { LoadShoppinglists } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
 
 import { LoadFridgeDashboardItems } from '../../actions/dashboard-api.actions';
@@ -18,7 +17,7 @@ import { PurgeDashboardFridgeItems } from './../../actions/fridge.actions';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  fridges$: Observable<Fridge[]> = this.store.pipe(select(getFridges));
+  fridgeIds$: Observable<string[] | number[]> = this.store.pipe(select(getFridgeIds));
   userName$: Observable<string> = this.store.pipe(select(getUserName));
 
   constructor(
@@ -33,6 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.store.dispatch(new PurgeDashboardFridgeItems());
+    this.loadFridgeDashboardItems();
   }
 
   public loadFridgeDashboardItems(): void {

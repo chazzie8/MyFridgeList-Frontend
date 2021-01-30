@@ -31,10 +31,6 @@ import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
       enableTracing: false,
       scrollPositionRestoration: 'top',
     }),
-    ChartsModule,
-    CoreModule,
-    FridgesModule.forRoot(),
-    ShoppinglistsModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       name: 'MyFridgeList App DevTools',
