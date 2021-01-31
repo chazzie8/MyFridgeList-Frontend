@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { Fridge } from 'src/app/shared/models/fridge.model';
+import { ApiResponse } from 'src/app/shared/models/respones/response.model';
 
 import {
   CreateFridge,
   CreateFridgeSuccess,
   ListFridgeApiActionTypes,
-  LoadFridges,
   LoadFridgesSuccess,
   UpdateFridge,
   UpdateFridgeSuccess,
@@ -23,10 +23,9 @@ export class FridgeApiEffects {
   @Effect({ dispatch: true })
   public loadFridges$ = this.actions$.pipe(
     ofType(ListFridgeApiActionTypes.LoadFridges),
-    // tslint:disable-next-line:variable-name
-    switchMap((_action: LoadFridges) => {
+    switchMap(() => {
       return this.fridgeApiService.getFridges().pipe(
-        map((response: Fridge[]) => new LoadFridgesSuccess(response)),
+        map((response: ApiResponse<Fridge[]>) => new LoadFridgesSuccess(response.data)),
       );
     }),
   );
@@ -36,13 +35,18 @@ export class FridgeApiEffects {
     ofType(ListFridgeApiActionTypes.UpdateFridge),
     switchMap((action: UpdateFridge) => {
       return this.fridgeApiService.updateFridge(action.fridgeId, action.updateFridgeTitle).pipe(
-        map((response: Fridge) => {
-          this.snackBar.open('Kühlschrank wurde geupdated', 'Schließen', {
-            duration: 3000,
-          });
-          return new UpdateFridgeSuccess(response);
-        }),
+        map((response: ApiResponse<Fridge>) => new UpdateFridgeSuccess(response.data)),
       );
+    }),
+  );
+
+  @Effect({ dispatch: false })
+  public updateFridgeSuccess$ = this.actions$.pipe(
+    ofType(ListFridgeApiActionTypes.UpdateFridgeSuccess),
+    tap(() => {
+      this.snackBar.open('Kühlschrank wurde geupdated', 'Schließen', {
+        duration: 3000,
+      });
     }),
   );
 
@@ -51,7 +55,7 @@ export class FridgeApiEffects {
     ofType(ListFridgeApiActionTypes.CreateFridge),
     switchMap((action: CreateFridge) => {
       return this.fridgeApiService.addFridge(action.fridgeRequest).pipe(
-        map((response: Fridge) => new CreateFridgeSuccess(response)),
+        map((response: ApiResponse<Fridge>) => new CreateFridgeSuccess(response.data)),
       );
     }),
   );

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
 import { FridgeDashboardItem } from 'src/app/shared/models/fridge-dashboard-item.model';
+import { ApiResponse } from 'src/app/shared/models/respones/response.model';
 
 import { DashboardItemsApiActionTypes, LoadFridgeDashboardItemsSuccess } from '../actions/dashboard-api.actions';
 import { FridgeApiService } from './../services/fridge-api.service';
@@ -14,7 +15,7 @@ export class DashboardApiEffects {
     ofType(DashboardItemsApiActionTypes.LoadFridgeDashboardItems),
     switchMap(() => {
       return this.fridgeApiService.getFridgeDashboardItems().pipe(
-        map((response: FridgeDashboardItem[]) => new LoadFridgeDashboardItemsSuccess(response)),
+        map((response: ApiResponse<FridgeDashboardItem[]>) => new LoadFridgeDashboardItemsSuccess(response.data)),
       );
     }),
   );

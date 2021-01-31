@@ -3,5 +3,6 @@ export interface LoginResponse {
   userId: string;
   username: string;
   validFrom: string;
-  expiryAt: string;
+  expiredAt: string;
+  succeeded: boolean;
 }

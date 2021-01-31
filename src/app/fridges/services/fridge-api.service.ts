@@ -8,10 +8,9 @@ import { CreateArticleRequest } from 'src/app/shared/models/requests/create-arti
 import { CreateFridgeRequest } from 'src/app/shared/models/requests/create-fridge-request.model';
 import { EditArticleRequest } from 'src/app/shared/models/requests/edit-article-request.model';
 import { EditNavTitleRequest } from 'src/app/shared/models/requests/edit-nav-title-request.model';
+import { ApiResponse } from 'src/app/shared/models/respones/response.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class FridgeApiService {
 
   constructor(
@@ -20,57 +19,57 @@ export class FridgeApiService {
   ) { }
 
   // Get All Fridges
-  public getFridges(): Observable<Fridge[]> {
+  public getFridges(): Observable<ApiResponse<Fridge[]>> {
     const url = `${this.apiBaseUrl}/fridges`;
-    return this.httpClient.get<Fridge[]>(url);
+    return this.httpClient.get<ApiResponse<Fridge[]>>(url);
   }
 
   // Add New Fridge
-  public addFridge(request: CreateFridgeRequest): Observable<Fridge> {
+  public addFridge(request: CreateFridgeRequest): Observable<ApiResponse<Fridge>> {
     const url = `${this.apiBaseUrl}/fridges`;
-    return this.httpClient.post<Fridge>(url, request);
+    return this.httpClient.post<ApiResponse<Fridge>>(url, request);
   }
 
   // Update Fridge
-  public updateFridge(fridgeId: string, request: EditNavTitleRequest): Observable<Fridge> {
+  public updateFridge(fridgeId: string, request: EditNavTitleRequest): Observable<ApiResponse<Fridge>> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}`;
-    return this.httpClient.put<Fridge>(url, request);
+    return this.httpClient.put<ApiResponse<Fridge>>(url, request);
   }
 
   // Delete Fridge
-  public deleteFridge(fridgeId: string): Observable<{}> {
+  public deleteFridge(fridgeId: string): Observable<ApiResponse<{}>> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}`;
-    return this.httpClient.delete<{}>(url);
+    return this.httpClient.delete<ApiResponse<{}>>(url);
   }
 
   // Get All Dashboard Items By Fridge ID
-  public getFridgeDashboardItems(): Observable<FridgeDashboardItem[]> {
+  public getFridgeDashboardItems(): Observable<ApiResponse<FridgeDashboardItem[]>> {
     const url = `${this.apiBaseUrl}/fridges/dashboard-items`;
-    return this.httpClient.get<FridgeDashboardItem[]>(url);
+    return this.httpClient.get<ApiResponse<FridgeDashboardItem[]>>(url);
   }
 
   // Get All Articles By Fridge ID
-  public getArticles(fridgeId: string): Observable<Article[]> {
+  public getArticles(fridgeId: string): Observable<ApiResponse<Article[]>> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}/articles`;
-    return this.httpClient.get<Article[]>(url);
+    return this.httpClient.get<ApiResponse<Article[]>>(url);
   }
 
   // Add Article By Fridge ID
-  public addArticle(fridgeId: string, request: CreateArticleRequest): Observable<Article> {
+  public addArticle(fridgeId: string, request: CreateArticleRequest): Observable<ApiResponse<Article>> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}/articles`;
-    return this.httpClient.post<Article>(url, request);
+    return this.httpClient.post<ApiResponse<Article>>(url, request);
   }
 
   // Update Article By Fridge ID
-  public updateArticle(fridgeId: string, articleId: string, request: EditArticleRequest): Observable<Article> {
+  public updateArticle(fridgeId: string, articleId: string, request: EditArticleRequest): Observable<ApiResponse<Article>> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}/articles/${articleId}`;
-    return this.httpClient.put<Article>(url, request);
+    return this.httpClient.put<ApiResponse<Article>>(url, request);
   }
 
   // Delete Article By Fridge ID
-  public deleteArticle(fridgeId: string, articleId: string): Observable<{}> {
+  public deleteArticle(fridgeId: string, articleId: string): Observable<ApiResponse<{}>> {
     const url = `${this.apiBaseUrl}/fridges/${fridgeId}/articles/${articleId}`;
-    return this.httpClient.delete<{}>(url);
+    return this.httpClient.delete<ApiResponse<{}>>(url);
   }
 
 }

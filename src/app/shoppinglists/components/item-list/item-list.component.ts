@@ -40,6 +40,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
     this.store.dispatch(new LoadFridges());
 
     this.getItems();
+    this.getFridges();
   }
 
   public ngOnDestroy(): void {
@@ -66,6 +67,10 @@ export class ItemListComponent implements OnInit, OnDestroy {
     ).subscribe((shoppinglistId): void => {
       this.store.dispatch(new LoadItems(shoppinglistId));
     });
+  }
+
+  public getFridges(): void {
+    this.store.dispatch(new LoadFridges());
   }
 
   public handleOpenDialogClick(): void {
