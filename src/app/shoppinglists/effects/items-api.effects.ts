@@ -39,11 +39,11 @@ export class ItemsApiEffects {
     }),
   );
 
-  @Effect({ dispatch: true })
+  @Effect({ dispatch: false })
   public addItemSuccess$ = this.actions$.pipe(
   ofType(ItemsApiActionTypes.CreateItemSuccess),
-    tap((response: ApiResponse<Item>) => {
-      this.snackBar.open('Artikel "' + response.data.label + '" wurde hinzugefügt', 'Schließen', {
+    tap(() => {
+      this.snackBar.open('Artikel wurde hinzugefügt', 'Schließen', {
         duration: 3000,
       });
     }),
@@ -59,7 +59,7 @@ export class ItemsApiEffects {
     }),
   );
 
-  @Effect({ dispatch: true })
+  @Effect({ dispatch: false })
   public deleteItemSuccess$ = this.actions$.pipe(
   ofType(ItemsApiActionTypes.DeleteItemSuccess),
     tap(() => {

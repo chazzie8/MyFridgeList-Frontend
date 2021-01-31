@@ -12,7 +12,6 @@ import {
   DeleteShoppinglist,
   DeleteShoppinglistSuccess,
   ListShoppinglistsApiActionTypes,
-  LoadShoppinglists,
   LoadShoppinglistsSuccess,
   UpdateShoppinglist,
   UpdateShoppinglistSuccess,
@@ -25,8 +24,7 @@ export class ShoppinglistsApiEffects {
   @Effect({ dispatch: true })
   public loadShoppinglists$ = this.actions$.pipe(
     ofType(ListShoppinglistsApiActionTypes.LoadShoppinglists),
-    // tslint:disable-next-line:variable-name
-    switchMap((_action: LoadShoppinglists) => {
+    switchMap(() => {
       return this.shoppinglistApiService.getShoppinglists().pipe(
         map((response: ApiResponse<Shoppinglist[]>) => new LoadShoppinglistsSuccess(response.data)),
       );
@@ -46,8 +44,8 @@ export class ShoppinglistsApiEffects {
   @Effect({ dispatch: false })
   public updateShoppinglistSuccess$ = this.actions$.pipe(
     ofType(ListShoppinglistsApiActionTypes.UpdateShoppinglistSuccess),
-    tap((action: UpdateShoppinglistSuccess) => {
-      this.snackBar.open('Einkaufsliste "' + action.shoppinglist.name + '" wurde geupdated', 'Schließen', {
+    tap(() => {
+      this.snackBar.open('Einkaufsliste wurde geupdated', 'Schließen', {
         duration: 3000,
       });
     }),

@@ -9,7 +9,6 @@ import {
   CreateFridge,
   CreateFridgeSuccess,
   ListFridgeApiActionTypes,
-  LoadFridges,
   LoadFridgesSuccess,
   UpdateFridge,
   UpdateFridgeSuccess,
@@ -24,8 +23,7 @@ export class FridgeApiEffects {
   @Effect({ dispatch: true })
   public loadFridges$ = this.actions$.pipe(
     ofType(ListFridgeApiActionTypes.LoadFridges),
-    // tslint:disable-next-line:variable-name
-    switchMap((_action: LoadFridges) => {
+    switchMap(() => {
       return this.fridgeApiService.getFridges().pipe(
         map((response: ApiResponse<Fridge[]>) => new LoadFridgesSuccess(response.data)),
       );
@@ -42,11 +40,11 @@ export class FridgeApiEffects {
     }),
   );
 
-  @Effect({ dispatch: true })
+  @Effect({ dispatch: false })
   public updateFridgeSuccess$ = this.actions$.pipe(
     ofType(ListFridgeApiActionTypes.UpdateFridgeSuccess),
-    tap((action: UpdateFridgeSuccess) => {
-      this.snackBar.open('Kühlschrank' + action.fridge.name + 'wurde geupdated', 'Schließen', {
+    tap(() => {
+      this.snackBar.open('Kühlschrank wurde geupdated', 'Schließen', {
         duration: 3000,
       });
     }),
@@ -66,7 +64,7 @@ export class FridgeApiEffects {
   public createFridgeSuccess$ = this.actions$.pipe(
     ofType(ListFridgeApiActionTypes.CreateFridgeSuccess),
     map((action: CreateFridgeSuccess) => {
-      this.snackBar.open('Kühlschrank "' + action.fridge.name + '" wurde hinzugefügt', 'Schließen', {
+      this.snackBar.open('Kühlschrank wurde hinzugefügt', 'Schließen', {
         duration: 3000,
       });
       return new GoToSelectedFridge(action.fridge.id);

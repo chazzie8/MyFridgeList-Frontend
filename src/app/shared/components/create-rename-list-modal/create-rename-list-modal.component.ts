@@ -63,7 +63,6 @@ export class CreateRenameListModalComponent implements OnInit {
       return;
     }
     const updateRequest: EditNavTitleRequest = {
-      id: this.data.data.id,
       name: this.form.controls.label.value,
     };
     const navTitle = {...data.data, ...updateRequest};
@@ -76,7 +75,6 @@ export class CreateRenameListModalComponent implements OnInit {
       return;
     }
     const updateRequest: EditNavTitleRequest = {
-      id: this.data.data.id,
       name: this.form.controls.label.value,
     };
     const navTitle = {...data.data, ...updateRequest};

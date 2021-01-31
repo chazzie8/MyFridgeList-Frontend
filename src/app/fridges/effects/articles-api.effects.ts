@@ -43,8 +43,8 @@ export class ArticleApiEffects {
   @Effect({ dispatch: false })
   public addArticleSuccess$ = this.actions$.pipe(
     ofType(ArticlesApiActionTypes.CreateArticleSuccess),
-    tap((action: CreateArticleSuccess) => {
-      this.snackBar.open('Artikel "' + action.article.label + '" wurde hinzugefügt', 'Schließen', {
+    tap(() => {
+      this.snackBar.open('Artikel wurde hinzugefügt', 'Schließen', {
         duration: 3000,
       });
     }),
@@ -63,8 +63,8 @@ export class ArticleApiEffects {
   @Effect({ dispatch: false })
   public updateArticleSuccess$ = this.actions$.pipe(
     ofType(ArticlesApiActionTypes.UpdateArticleSuccess),
-    tap((action: UpdateArticleSuccess) => {
-      this.snackBar.open('Artikel "' + action.article.label + '" wurde geupdated', 'Schließen', {
+    tap(() => {
+      this.snackBar.open('Artikel wurde geupdated', 'Schließen', {
         duration: 3000,
       });
     }),
@@ -75,12 +75,7 @@ export class ArticleApiEffects {
     ofType(ArticlesApiActionTypes.DeleteArticle),
     switchMap((action: DeleteArticle) => {
       return this.fridgeApiService.deleteArticle(action.fridgeId, action.articleId).pipe(
-        map(() => {
-          this.snackBar.open('Artikel wurde gelöscht', 'Schließen', {
-            duration: 3000,
-          });
-          return new DeleteArticleSuccess(action.articleId);
-        }),
+        map(() => new DeleteArticleSuccess(action.articleId)),
       );
     }),
   );
