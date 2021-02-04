@@ -28,7 +28,7 @@ export class SideNavBarComponent {
     public sidenav: MatSidenav,
   ) { }
 
-  handleGoToDashboardClick(): void {
+  public handleGoToDashboardClick(): void {
     this.store.dispatch(new GoToDashboard());
     this.sidenav.close();
   }

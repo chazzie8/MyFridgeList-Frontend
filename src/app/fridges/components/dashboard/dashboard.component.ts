@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getUserName } from 'src/app/core/auth/selectors/auth.selectors';
-import { FridgesState } from 'src/app/fridges/reducers/fridges.reducer';
+import { BaseAppState } from 'src/app/core/router/reducers/custom-router-serializer.reducer';
 import { getFridgeIds } from 'src/app/fridges/selectors/fridges.selector';
 import { LoadShoppinglists } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
 
@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   userName$: Observable<string> = this.store.pipe(select(getUserName));
 
   constructor(
-    private store: Store<FridgesState>,
+    private store: Store<BaseAppState>,
   ) { }
 
   public ngOnInit(): void {
@@ -31,8 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.store.dispatch(new PurgeDashboardFridgeItems());
-    this.loadFridgeDashboardItems();
+    this.purgeDashboardFridgeItems();
   }
 
   public loadFridgeDashboardItems(): void {
@@ -45,6 +44,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public loadShoppinglists(): void {
     this.store.dispatch(new LoadShoppinglists());
+  }
+
+  public purgeDashboardFridgeItems(): void {
+    this.store.dispatch(new PurgeDashboardFridgeItems());
   }
 
 }
