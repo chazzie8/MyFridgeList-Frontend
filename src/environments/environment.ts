@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://private-1348b9-myfridgelist.apiary-mock.com',
+  // apiBaseUrl: 'https://private-1348b9-myfridgelist.apiary-mock.com',
+  apiBaseUrl: 'http://localhost:49644/api',
 };
 
 /*

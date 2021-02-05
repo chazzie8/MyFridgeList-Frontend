@@ -20,7 +20,6 @@ import { FridgeApiEffects } from './effects/fridges-api.effects';
 import { routes } from './fridges.routes';
 import * as reducer from './reducers';
 import { FridgeApiService } from './services/fridge-api.service';
-import { MockFridgeApiService } from './services/mock-fridge-api.service';
 
 @NgModule({
   imports: [
@@ -53,8 +52,8 @@ export class FridgesModule {
       providers: [
         {
           provide: FridgeApiService,
-          // useClass: FridgeApiService,
-          useClass: MockFridgeApiService,
+          useClass: FridgeApiService,
+          // useClass: MockFridgeApiService,
         }
       ],
     };

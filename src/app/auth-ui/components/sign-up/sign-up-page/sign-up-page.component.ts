@@ -19,7 +19,6 @@ export class SignUpPageComponent {
 
   public handleSignUpClick(formValue: SignUpFormValue): void {
 
-    console.log(formValue);
     const request: SignUpRequest = {
       email: formValue.emailAddress,
       username: formValue.userName,

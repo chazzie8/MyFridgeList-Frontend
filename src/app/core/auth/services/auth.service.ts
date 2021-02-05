@@ -15,7 +15,7 @@ export class AuthService {
   ) {}
 
   public login(email: string, password: string): Observable<ApiResponse<LoginResponse>> {
-    const url = `${this.apiBaseUrl}/accounts/signin`;
+    const url = `${this.apiBaseUrl}/account/signin`;
     const body: LoginRequest = {
       email,
       password,
@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   public signUp(signUpRequest: SignUpRequest): Observable<ApiResponse<{}>> {
-    const url = `${this.apiBaseUrl}/accounts/signup`;
+    const url = `${this.apiBaseUrl}/account/signup`;
     return this.httpClient.post<ApiResponse<{}>>(url, signUpRequest);
   }
 }

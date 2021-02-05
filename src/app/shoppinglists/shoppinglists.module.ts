@@ -16,7 +16,6 @@ import { SHOPPINGLISTS_FEATURE_KEY } from './definitions/shoppinglists.definitio
 import { ItemsApiEffects } from './effects/items-api.effects';
 import { ShoppinglistsApiEffects } from './effects/shoppinglists-api.effects';
 import * as reducer from './reducers';
-import { MockShoppinglistApiService } from './services/mock-shoppinglist.service';
 import { ShoppinglistApiService } from './services/shoppinglist.service';
 import { routes } from './shoppinglists.routes';
 
@@ -50,8 +49,8 @@ export class ShoppinglistsModule {
       providers: [
         {
           provide: ShoppinglistApiService,
-          // useClass: ShoppinglistApiService,
-          useClass: MockShoppinglistApiService,
+          useClass: ShoppinglistApiService,
+          // useClass: MockShoppinglistApiService,
         },
       ],
     };
