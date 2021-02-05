@@ -20,7 +20,7 @@
                   formControlName="emailAddress"
                 >
                 <mat-error *ngIf="form.controls.emailAddress.errors?.required">E-Mail ist erforderlich</mat-error>
-                <mat-error *ngIf="form.controls.emailAddress.errors?.pattern"> E-Mail ist ungültig</mat-error>
+                <mat-error *ngIf="form.controls.emailAddress.errors?.pattern">E-Mail ist ungültig</mat-error>
               </mat-form-field>
               <mat-form-field>
                 <input 
@@ -30,6 +30,7 @@
                   formControlName="userName"
                 >
                 <mat-error *ngIf="form.controls.userName.errors?.required">Username ist erforderlich</mat-error>
+                <mat-error *ngIf="form.controls.userName.errors?.pattern">Bitte nur Buchstaben und Zahlen ohne Leerzeichen</mat-error>
               </mat-form-field>
               <mat-form-field>
                 <input 
@@ -66,6 +67,7 @@
                   mat-raised-button
                   color="primary"
                   type="submit"
+                  [disabled]="!(form.controls.emailAddress.dirty && form.controls.userName.dirty && form.controls.password.dirty && form.controls.passwordConfirmation.dirty)"
                 >
                   Registrieren
                 </button>

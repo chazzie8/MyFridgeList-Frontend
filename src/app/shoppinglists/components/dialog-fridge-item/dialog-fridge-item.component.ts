@@ -71,9 +71,6 @@ export class DialogFridgeItemComponent implements OnInit {
   }
 
   public initForm(): void {
-    // this.form.get('label').setValue(this.data.items[this.index].label);
-    // this.form.get('amount').reset();
-    // this.form.get('expiryDate').reset();
     if (this.data.items != null) {
       this.form.patchValue({
         label: this.data.items[this.index].label,
@@ -85,7 +82,6 @@ export class DialogFridgeItemComponent implements OnInit {
 
   public handleAddClick(): void {
     const fridge: Fridge = this.form.get('fridgeSelect').value;
-
     const addRequest: CreateArticleRequest = {
       label: this.form.controls.label.value,
       amount: this.form.controls.amount.value,

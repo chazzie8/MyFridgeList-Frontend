@@ -84,7 +84,7 @@ export class DialogArticleComponent implements OnInit {
       id: this.data.article.id,
       label: this.form.controls.label.value,
       amount: this.form.controls.amount.value,
-      expirydate: new Date(this.form.controls.expiryDate.value).toLocaleDateString(),
+      expirydate: this.form.controls.expiryDate.value,
     };
     const article = {...data.article, ...updateRequest};
     this.store.dispatch(new UpdateArticle(this.data.fridgeId, article));
@@ -98,7 +98,7 @@ export class DialogArticleComponent implements OnInit {
     const addRequest: CreateArticleRequest = {
       label: this.form.controls.label.value,
       amount: this.form.controls.amount.value,
-      expirydate: new Date(this.form.controls.expiryDate.value).toLocaleDateString(),
+      expirydate: this.form.controls.expiryDate.value,
     };
     const article = {...addRequest};
     this.store.dispatch(new CreateArticle(this.data.fridgeId, article));

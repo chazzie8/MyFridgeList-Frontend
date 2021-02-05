@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { distinctUntilChanged, filter, take, tap } from 'rxjs/operators';
 import { Article } from 'src/app/shared/models/article.model';
 
 import { PurgeFridgeItems } from '../../actions/fridge.actions';
@@ -32,34 +32,49 @@ export class ArticleListComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.store.dispatch(new LoadFridges());
-    this.getArticles();
+    this.loadFridges();
+    this.observeFridge();
   }
 
   public ngOnDestroy(): void {
     this.store.dispatch(new PurgeFridgeItems());
   }
 
+  public loadFridges(): void {
+    this.store.dispatch(new LoadFridges());
+  }
+
+  public observeFridge(): void {
+    this.fridgeId$.pipe(
+      distinctUntilChanged(),
+      tap(() => this.getArticles()),
+    ).subscribe();
+  }
+
   public getArticles(): void {
     this.fridgeId$.pipe(
+      filter((fridgeId) => Boolean(fridgeId)),
       take(1),
-    ).subscribe((fridgeId): void => {
-      this.store.dispatch(new LoadArticles(fridgeId));
-    });
+      tap((fridgeId): void => {
+        this.store.dispatch(new LoadArticles(fridgeId));
+      }),
+    ).subscribe();
   }
 
   public handleOpenDialogClick(): void {
     this.fridgeId$.pipe(
+      filter((fridgeId) => Boolean(fridgeId)),
       take(1),
-    ).subscribe((fridgeId): void => {
-      this.dialog.open(DialogArticleComponent, {
-        data: {
-          fridgeId,
-          article: null
-        },
-        disableClose: true
-      });
-    });
+      tap((fridgeId): void => {
+        this.dialog.open(DialogArticleComponent, {
+          data: {
+            fridgeId,
+            article: null
+          },
+          disableClose: true
+        });
+      }),
+    ).subscribe();
   }
 
   public handleShowExpired(): void {

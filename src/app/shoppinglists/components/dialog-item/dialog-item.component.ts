@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 import { letterPatternValidator } from 'src/app/shared/form-validators/chars-pattern-validator';
 import { CreateItemRequest } from 'src/app/shared/models/requests/create-item-request.model';
 
@@ -43,15 +43,17 @@ export class DialogItemComponent {
     };
     const item = {...addRequest};
     this.getSelectedShoppinglistId$.pipe(
+      filter((selectedShoppinglistId) => Boolean(selectedShoppinglistId)),
       take(1),
-    ).subscribe((selectedShoppinglistId) => {
-      this.store.dispatch(new CreateItem(selectedShoppinglistId, item));
-    });
+      tap((selectedShoppinglistId) => {
+        this.store.dispatch(new CreateItem(selectedShoppinglistId, item));
+      }),
+    ).subscribe();
+
     this.form.reset();
   }
 
   public handleCancelClick(): void {
     this.dialogRef.close();
   }
-
 }

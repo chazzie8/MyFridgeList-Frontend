@@ -4,10 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSelectionList } from '@angular/material/list';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { distinctUntilChanged, filter, take, tap } from 'rxjs/operators';
 import { LoadFridges } from 'src/app/fridges/actions/list-fridges-api.actions';
 import { Item } from 'src/app/shared/models/item.model';
 import { EditShoppinglistItemRequest } from 'src/app/shared/models/requests/edit-shoppinglist-item-request.model';
+import { LoadShoppinglists } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
 
 import { LoadItems } from '../../actions/list-items-api.actions';
 import { ItemsState } from '../../reducers/items.reducer';
@@ -37,10 +38,9 @@ export class ItemListComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void{
-    this.store.dispatch(new LoadFridges());
-
-    this.getItems();
     this.getFridges();
+    this.getShoppinglists();
+    this.observeShoppinglist();
   }
 
   public ngOnDestroy(): void {
@@ -50,23 +50,38 @@ export class ItemListComponent implements OnInit, OnDestroy {
       );
 
       this.shoppinglistId$.pipe(
+        filter((shoppinglistId) => Boolean(shoppinglistId)),
         take(1),
-      ).subscribe((shoppinglistId): void => {
-        const request: EditShoppinglistItemRequest = {
-          itemIds: boughtItemIds,
-        };
-        this.store.dispatch(new UpdateBoughtItems(shoppinglistId, request));
-      });
+        tap((shoppinglistId): void => {
+          const request: EditShoppinglistItemRequest = {
+            itemIds: boughtItemIds,
+          };
+          this.store.dispatch(new UpdateBoughtItems(shoppinglistId, request));
+        }),
+      ).subscribe();
     }
     this.store.dispatch(new PurgeShoppinglistItems());
   }
 
+  public observeShoppinglist(): void {
+    this.shoppinglistId$.pipe(
+      distinctUntilChanged(),
+      tap(() => this.getItems()),
+    ).subscribe();
+  }
+
+  public getShoppinglists(): void {
+    this.store.dispatch(new LoadShoppinglists());
+  }
+
   public getItems(): void {
     this.shoppinglistId$.pipe(
+      filter((shoppinglistId) => Boolean(shoppinglistId)),
       take(1),
-    ).subscribe((shoppinglistId): void => {
-      this.store.dispatch(new LoadItems(shoppinglistId));
-    });
+      tap((shoppinglistId): void => {
+        this.store.dispatch(new LoadItems(shoppinglistId));
+      }),
+    ).subscribe();
   }
 
   public getFridges(): void {
@@ -93,24 +108,18 @@ export class ItemListComponent implements OnInit, OnDestroy {
     });
 
     this.shoppinglistId$.pipe(
+      filter((shoppinglistId) => Boolean(shoppinglistId)),
       take(1),
-    ).subscribe((id: string) => {
-      this.dialog.open(DialogFridgeItemComponent, {
-        disableClose: true,
-        data: {
-          items: itemObjList,
-          shoppinglistId: id,
-        }
-      });
-    });
-  }
-
-  public onSelectionChange(): void {
-    if (this.itemList.selectedOptions.selected.length < 1) {
-      this.buttonAddItemToFridge.disabled = true;
-    } else {
-      this.buttonAddItemToFridge.disabled = false;
-    }
+      tap((id: string) => {
+        this.dialog.open(DialogFridgeItemComponent, {
+          disableClose: true,
+          data: {
+            items: itemObjList,
+            shoppinglistId: id,
+          }
+        });
+      }),
+    ).subscribe();
   }
 
 }

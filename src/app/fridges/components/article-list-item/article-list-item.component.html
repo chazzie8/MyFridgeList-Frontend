@@ -6,7 +6,7 @@
       <mat-panel-title>
         <div class="d-block">
           <span class="d-block">{{article.label}}</span>
-          <span class="label-subtitle">{{article.expirydate}}</span>
+          <span class="label-subtitle">{{article.expirydate | date:'dd.MM.yyyy'}}</span>
         </div>
       </mat-panel-title>
       <mat-panel-description class="label-subtitle">
@@ -15,8 +15,8 @@
     </mat-expansion-panel-header>
     <div class="expansion-content">
       <span>Stückzahl: {{article.amount}}</span>
-      <span>MHD: {{article.expirydate}}</span>
-      <span>Hinzufügen am {{article.timestamp}}</span>
+      <span>MHD: {{article.expirydate | date:'dd.MM.yyyy'}}</span>
+      <span>Hinzufügen am {{article.timestamp | date:'dd.MM.yyyy'}}</span>
     </div>
     <mat-action-row>
       <button mat-icon-button color="warn" (click)="handleDeleteArticleClick(fridgeId, article.id)"><mat-icon>delete</mat-icon></button>
