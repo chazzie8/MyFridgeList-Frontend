@@ -47,11 +47,11 @@ import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
   providers: [
     {
       provide: 'apiBaseUrl',
-      useValue: environment.apiBaseUrl
+      useValue: environment.apiBaseUrl,
     },
   ],
   bootstrap: [
-    AppComponent
+    AppComponent,
   ],
 })
 export class AppModule { }
