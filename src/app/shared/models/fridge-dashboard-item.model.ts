@@ -4,4 +4,5 @@ export interface FridgeDashboardItem {
   articleName: string;
   expiryDate: string;
   amount: number;
+  expirystatus: string;
 }

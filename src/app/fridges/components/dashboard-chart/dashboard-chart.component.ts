@@ -81,24 +81,9 @@ export class DashboardChartComponent implements OnInit {
       take(1),
       tap(
         (items: FridgeDashboardItem[]) => {
-          const goodItems = items.filter((item: FridgeDashboardItem) => {
-            const currentDate: Date = new Date();
-            const expiryDate = new Date(item.expiryDate);
-            const daysLeftMs = expiryDate.getTime() - currentDate.getTime();
-            const days = daysLeftMs / 1000 / 60 / 60 / 24;
-            return ((days > 4) && (daysLeftMs > 0));
-          });
-          const almostExpiredItems = items.filter((item: FridgeDashboardItem) => {
-            const currentDate: Date = new Date();
-            const expiryDate = new Date(item.expiryDate);
-            const daysLeftMs = expiryDate.getTime() - currentDate.getTime();
-            const days = daysLeftMs / 1000 / 60 / 60 / 24;
-            return ((days < 4) && (daysLeftMs > 0));
-          });
-          const expiredItems = items.filter((item: FridgeDashboardItem) => {
-            const currentDate: Date = new Date();
-            return currentDate >= new Date(item.expiryDate);
-          });
+          const goodItems = items.filter((item: FridgeDashboardItem) => item.expirystatus === 'good');
+          const almostExpiredItems = items.filter((item: FridgeDashboardItem) => item.expirystatus === 'almostExpired');
+          const expiredItems = items.filter((item: FridgeDashboardItem) => item.expirystatus === 'expired');
 
           let goodItemsAmount = 0;
           let almostExpiredItemsAmount = 0;

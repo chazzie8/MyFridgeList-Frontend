@@ -4,4 +4,5 @@ export interface Article {
   amount: number;
   expirydate: Date;
   timestamp: Date;
+  expirystatus: string;
 }
