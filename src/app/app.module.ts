@@ -1,5 +1,9 @@
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import localeDECH from '@angular/common/locales/de-CH';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -18,6 +22,8 @@ import { metaReducers, reducers } from './core/store/reducers';
 import { FridgesModule } from './fridges/fridges.module';
 import { SharedModule } from './shared/shared.module';
 import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
+
+registerLocaleData(localeDECH);
 
 @NgModule({
   declarations: [
@@ -49,6 +55,30 @@ import { ShoppinglistsModule } from './shoppinglists/shoppinglists.module';
       provide: 'apiBaseUrl',
       useValue: environment.apiBaseUrl,
     },
+    {
+      ​​​​provide: LOCALE_ID,
+      useValue: 'de-CH',
+    },
+    {
+      ​​​​​provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+      useValue: {
+        ​​​​​useUtc: true
+      },​​​​​
+    },
+    {​​​​​
+      provide: MAT_DATE_FORMATS,
+      useValue: {​​​​​
+        parse: {​​​​​
+          dateInput: 'DD.MM.YYYY',
+        }​​​​​,
+        display: {​​​​​
+          dateInput: 'DD.MM.YYYY',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM-YYYY',
+        }​​​​​,
+      },​​​
+    }​​​​​,
   ],
   bootstrap: [
     AppComponent,

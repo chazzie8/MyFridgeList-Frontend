@@ -1,6 +1,5 @@
-import { Component, Inject, Injectable, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DateAdapter, NativeDateAdapter } from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -15,26 +14,10 @@ import { CreateArticleRequest } from 'src/app/shared/models/requests/create-arti
 import { DeleteItem } from '../../actions/items-api.actions';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 
-@Injectable()
-export class AppDateAdapter extends NativeDateAdapter {
-  format(date: Date): string {
-    const day: string = date.getDate().toString();
-    const month: string = (date.getMonth() + 1).toString();
-    const year = date.getFullYear();
-    return `${day.length > 1 ? day : '0' + day}.${month.length > 1 ? month : '0' + month}.${year}`;
-  }
-}
-
 @Component({
   selector: 'app-dialog-fridge-item',
   templateUrl: './dialog-fridge-item.component.html',
   styleUrls: ['./dialog-fridge-item.component.scss'],
-  providers: [
-    {
-      provide: DateAdapter,
-      useClass: AppDateAdapter,
-    },
-  ]
 })
 export class DialogFridgeItemComponent implements OnInit {
 

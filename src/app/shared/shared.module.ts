@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
@@ -48,6 +49,7 @@ import { CreateRenameListModalComponent } from './components/create-rename-list-
     MatSelectModule,
     MatProgressSpinnerModule,
     MatNativeDateModule,
+    MatMomentDateModule,
   ],
   exports: [
     CreateRenameListModalComponent,

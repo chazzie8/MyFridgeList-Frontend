@@ -3,7 +3,16 @@
     *ngFor="let article of articles"
   >
     <mat-expansion-panel-header>
-      <mat-panel-title>
+      <mat-panel-title class="align-items-center">
+        <ng-container *ngIf="article.expirystatus == 'good'">
+          <mat-icon style="color:#00aa00;" class="mr-2">sentiment_satisfied_alt</mat-icon>
+        </ng-container>
+        <ng-container *ngIf="article.expirystatus == 'almostExpired'">
+          <mat-icon style="color:#E0A800;" class="mr-2">sentiment_dissatisfied</mat-icon>
+        </ng-container>
+        <ng-container *ngIf="article.expirystatus == 'expired'">
+          <mat-icon style="color:#f44336;" class="mr-2">sentiment_very_dissatisfied</mat-icon>
+        </ng-container>
         <div class="d-block">
           <span class="d-block">{{article.label}}</span>
           <span class="label-subtitle">{{article.expirydate | date:'dd.MM.yyyy'}}</span>
@@ -16,7 +25,7 @@
     <div class="expansion-content">
       <span>Stückzahl: {{article.amount}}</span>
       <span>MHD: {{article.expirydate | date:'dd.MM.yyyy'}}</span>
-      <span>Hinzufügen am {{article.timestamp | date:'dd.MM.yyyy'}}</span>
+      <span>Hinzugefügt am {{article.timestamp | date:'dd.MM.yyyy'}}</span>
     </div>
     <mat-action-row>
       <button mat-icon-button color="warn" (click)="handleDeleteArticleClick(fridgeId, article.id)"><mat-icon>delete</mat-icon></button>

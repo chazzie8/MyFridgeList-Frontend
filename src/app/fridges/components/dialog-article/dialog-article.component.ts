@@ -1,6 +1,5 @@
-import { Component, Inject, Injectable, OnInit, Optional } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DateAdapter, NativeDateAdapter } from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { letterPatternValidator, numericPatternValidator } from 'src/app/shared/form-validators/chars-pattern-validator';
@@ -11,26 +10,10 @@ import { EditArticleRequest } from 'src/app/shared/models/requests/edit-article-
 import { CreateArticle, UpdateArticle } from '../../actions/articles-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
 
-@Injectable()
-export class AppDateAdapter extends NativeDateAdapter {
-  format(date: Date): string {
-    const day: string = date.getDate().toString();
-    const month: string = (date.getMonth() + 1).toString();
-    const year = date.getFullYear();
-    return `${day.length > 1 ? day : '0' + day}.${month.length > 1 ? month : '0' + month}.${year}`;
-  }
-}
-
 @Component({
   selector: 'app-dialog-article',
   templateUrl: './dialog-article.component.html',
   styleUrls: ['./dialog-article.component.scss'],
-  providers: [
-    {
-      provide: DateAdapter,
-      useClass: AppDateAdapter,
-    },
-  ]
 })
 export class DialogArticleComponent implements OnInit {
 
