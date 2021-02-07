@@ -1,9 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getUserName } from 'src/app/core/auth/selectors/auth.selectors';
 import { BaseAppState } from 'src/app/core/router/reducers/custom-router-serializer.reducer';
 import { getFridgeIds } from 'src/app/fridges/selectors/fridges.selector';
+import {
+  CreateRenameListModalComponent,
+} from 'src/app/shared/components/create-rename-list-modal/create-rename-list-modal.component';
 import { LoadShoppinglists } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
 
 import { LoadFridgeDashboardItems } from '../../actions/dashboard-api.actions';
@@ -22,6 +26,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<BaseAppState>,
+    private dialog: MatDialog,
   ) { }
 
   public ngOnInit(): void {
@@ -48,6 +53,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public purgeDashboardFridgeItems(): void {
     this.store.dispatch(new PurgeDashboardFridgeItems());
+  }
+
+  public handleAddFridgeClick(): void {
+    this.dialog.open(CreateRenameListModalComponent, {
+      data: {
+        id: null,
+        data: null,
+        create: 'fridge',
+      },
+    });
   }
 
 }

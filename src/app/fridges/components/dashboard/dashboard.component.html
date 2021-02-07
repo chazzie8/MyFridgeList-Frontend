@@ -4,11 +4,27 @@
 
   <div class="card-row">
     <ng-container *ngIf="fridgeIds$ | async as fridgeIds">
-      <ng-container *ngFor="let fridgeId of fridgeIds">
-          <mat-card class="dashboard-card">
-            <app-dashboard-chart [fridgeId]="fridgeId"></app-dashboard-chart>
-          </mat-card>
+      <ng-container *ngIf="fridgeIds.length > 0; else noFridges">
+        <ng-container *ngFor="let fridgeId of fridgeIds">
+            <mat-card class="dashboard-card">
+              <app-dashboard-chart [fridgeId]="fridgeId"></app-dashboard-chart>
+            </mat-card>
+        </ng-container>
       </ng-container>
     </ng-container>
   </div>
 </div>
+
+<ng-template #noFridges>
+  <mat-card class="dashboard-card">
+    <mat-card-content>
+      <p>Es liegen uns noch keine Daten eines Kühlschrankes vor</p>
+      <div class="empty-dashboard-action-box">
+        <span class="empty-dashboard-action-text">Hier Kühlschrank anlegen</span>
+        <button mat-fab color="primary" class="mt-1" (click)="handleAddFridgeClick()">
+          <mat-icon class="icon">add</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
