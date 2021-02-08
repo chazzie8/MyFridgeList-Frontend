@@ -32,6 +32,9 @@ export class ItemListComponent implements OnInit, OnDestroy {
   items$: Observable<Item[]> = this.store.pipe(select(getItems));
   shoppinglistId$: Observable<string> = this.store.pipe(select(getSelectedShoppinglistId));
 
+  // tslint:disable-next-line:variable-name
+  private _shoppinglistId: string;
+
   constructor(
     private store: Store<ItemsState>,
     public dialog: MatDialog,
@@ -48,25 +51,22 @@ export class ItemListComponent implements OnInit, OnDestroy {
       const boughtItemIds = this.itemList.selectedOptions.selected.map(
         (ids) => ids.value,
       );
-
-      this.shoppinglistId$.pipe(
-        filter((shoppinglistId) => Boolean(shoppinglistId)),
-        take(1),
-        tap((shoppinglistId): void => {
-          const request: EditShoppinglistItemRequest = {
-            itemIds: boughtItemIds,
-          };
-          this.store.dispatch(new UpdateBoughtItems(shoppinglistId, request));
-        }),
-      ).subscribe();
+      const request: EditShoppinglistItemRequest = {
+        itemIds: boughtItemIds,
+      };
+      this.store.dispatch(new UpdateBoughtItems(this._shoppinglistId, request));
     }
     this.store.dispatch(new PurgeShoppinglistItems());
   }
 
   public observeShoppinglist(): void {
     this.shoppinglistId$.pipe(
+      filter((id: string) => Boolean(id)),
       distinctUntilChanged(),
-      tap(() => this.getItems()),
+      tap((id: string) => {
+        this._shoppinglistId = id;
+        this.getItems();
+      }),
     ).subscribe();
   }
 
