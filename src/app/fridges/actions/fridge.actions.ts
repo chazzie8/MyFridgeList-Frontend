@@ -1,18 +1,12 @@
 export enum FridgeActionTypes {
 
-  PurgeFridgeItems = '[Fridge] Purge Fridge Items',
-  PurgeDashboardFridgeItems = '[Dashboard] Purge Dashboard Fridge Items',
+  PurgeFridgeArticles = '[Fridge] Purge Fridge Articles',
 }
 
-export class PurgeFridgeItems {
-  readonly type = FridgeActionTypes.PurgeFridgeItems;
-}
-
-export class PurgeDashboardFridgeItems {
-  readonly type = FridgeActionTypes.PurgeDashboardFridgeItems;
+export class PurgeFridgeArticles {
+  readonly type = FridgeActionTypes.PurgeFridgeArticles;
 }
 
 export type FridgeActions =
-  | PurgeFridgeItems
-  | PurgeDashboardFridgeItems
+  | PurgeFridgeArticles
 ;

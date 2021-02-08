@@ -6,10 +6,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { GoToSelectedFridge } from 'src/app/core/router/actions/navigation.actions';
 import { BaseAppState } from 'src/app/core/router/reducers/custom-router-serializer.reducer';
-import { FridgeDashboardItem } from 'src/app/shared/models/fridge-dashboard-item.model';
+import { DashboardArticle } from 'src/app/shared/models/dashboard-article.model';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 
-import { getFridgeDashboardItemsByFridgeId } from '../../selectors/dashboard.selector';
+import { getFridgeDashboardArticleByFridgeId } from '../../selectors/dashboard.selector';
 import { getFridgeByFridgeId } from '../../selectors/fridges.selector';
 
 @Component({
@@ -37,11 +37,11 @@ export class DashboardChartComponent implements OnInit {
     })
   );
 
-  dashboardItems$: Observable<FridgeDashboardItem[]> = this.fridgeId$.pipe(
+  dashboardArticles$: Observable<DashboardArticle[]> = this.fridgeId$.pipe(
     filter((fridgeId: string) => fridgeId !== ''),
     take(1),
     switchMap((fridgeId: string) => {
-      return this.store.pipe(select(getFridgeDashboardItemsByFridgeId, fridgeId));
+      return this.store.pipe(select(getFridgeDashboardArticleByFridgeId, fridgeId));
     })
   );
 
@@ -74,38 +74,39 @@ export class DashboardChartComponent implements OnInit {
   }
 
   public initializeChartData(): void {
-    this.dashboardItems$.pipe(
+    this.dashboardArticles$.pipe(
       filter(
-        (items: FridgeDashboardItem[]) => Boolean(items) && items.length > 0
+        (articles: DashboardArticle[]) => Boolean(articles) && articles.length > 0
       ),
       take(1),
       tap(
-        (items: FridgeDashboardItem[]) => {
-          const goodItems = items.filter((item: FridgeDashboardItem) => item.expirystatus === 'good');
-          const almostExpiredItems = items.filter((item: FridgeDashboardItem) => item.expirystatus === 'almostExpired');
-          const expiredItems = items.filter((item: FridgeDashboardItem) => item.expirystatus === 'expired');
+        (articles: DashboardArticle[]) => {
+          const goodArticles = articles.filter((article: DashboardArticle) => article.expirystatus === 'good');
+          const almostExpiredArticles = articles.filter((article: DashboardArticle) => article.expirystatus === 'almostExpired');
+          const expiredArticles = articles.filter((article: DashboardArticle) => article.expirystatus === 'expired');
 
-          let goodItemsAmount = 0;
-          let almostExpiredItemsAmount = 0;
-          let expiredItemsAmount = 0;
+          let goodArticlesAmount = 0;
+          let almostExpiredArticlesAmount = 0;
+          let expiredArticlesAmount = 0;
 
-          if (goodItems.length > 0) {
-            goodItemsAmount = goodItems.map((item: FridgeDashboardItem) => item.amount).reduce((a, b) => a + b);
+          if (goodArticles.length > 0) {
+            goodArticlesAmount = goodArticles.map((article: DashboardArticle) => article.amount).reduce((a, b) => a + b);
           }
 
-          if (almostExpiredItems.length > 0) {
-            almostExpiredItemsAmount = almostExpiredItems.map((item: FridgeDashboardItem) => item.amount).reduce((a, b) => a + b);
+          if (almostExpiredArticles.length > 0) {
+            // tslint:disable-next-line:max-line-length
+            almostExpiredArticlesAmount = almostExpiredArticles.map((article: DashboardArticle) => article.amount).reduce((a, b) => a + b);
           }
 
-          if (expiredItems.length > 0) {
-            expiredItemsAmount = expiredItems.map((item: FridgeDashboardItem) => item.amount).reduce((a, b) => a + b);
+          if (expiredArticles.length > 0) {
+            expiredArticlesAmount = expiredArticles.map((article: DashboardArticle) => article.amount).reduce((a, b) => a + b);
           }
 
           this.doughnutChartData = [
             [
-              goodItemsAmount,
-              almostExpiredItemsAmount,
-              expiredItemsAmount
+              goodArticlesAmount,
+              almostExpiredArticlesAmount,
+              expiredArticlesAmount
             ],
           ];
         }

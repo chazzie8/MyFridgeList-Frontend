@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { ListArticlesApiActionTypes } from 'src/app/fridges/actions/list-articles-api.actions';
 
 import { ArticlesApiActionTypes } from './../../../fridges/actions/articles-api.actions';
-import { DashboardItemsApiActionTypes } from './../../../fridges/actions/dashboard-api.actions';
+import { DashboardArticlesApiActionTypes } from './../../../fridges/actions/dashboard-api.actions';
 import { ListFridgeApiActionTypes } from './../../../fridges/actions/list-fridges-api.actions';
 import { ItemsApiActionTypes } from './../../../shoppinglists/actions/items-api.actions';
 import { ListItemsApiActionTypes } from './../../../shoppinglists/actions/list-items-api.actions';
@@ -21,7 +21,7 @@ export class LoadingEffects {
       ArticlesApiActionTypes.CreateArticle,
       ArticlesApiActionTypes.DeleteArticle,
       ArticlesApiActionTypes.UpdateArticle,
-      DashboardItemsApiActionTypes.LoadFridgeDashboardItems,
+      DashboardArticlesApiActionTypes.LoadFridgeDashboardArticles,
       ItemsApiActionTypes.CreateItem,
       ItemsApiActionTypes.DeleteItem,
       ItemsApiActionTypes.UpdateBoughtItems,
@@ -45,7 +45,7 @@ export class LoadingEffects {
       ArticlesApiActionTypes.CreateArticleSuccess,
       ArticlesApiActionTypes.DeleteArticleSuccess,
       ArticlesApiActionTypes.UpdateArticleSuccess,
-      DashboardItemsApiActionTypes.LoadFridgeDashboardItemsSuccess,
+      DashboardArticlesApiActionTypes.LoadFridgeDashboardArticlesSuccess,
       ItemsApiActionTypes.CreateItemSuccess,
       ItemsApiActionTypes.DeleteItemSuccess,
       ItemsApiActionTypes.UpdateBoughtItemsSuccess,

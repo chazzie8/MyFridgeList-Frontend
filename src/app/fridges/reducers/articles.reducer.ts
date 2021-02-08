@@ -32,7 +32,7 @@ export function articlesReducer(
         ...state,
       });
 
-    case FridgeActionTypes.PurgeFridgeItems:
+    case FridgeActionTypes.PurgeFridgeArticles:
       return initialState;
 
     default:

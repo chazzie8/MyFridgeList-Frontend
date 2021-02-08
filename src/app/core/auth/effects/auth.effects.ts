@@ -8,7 +8,7 @@ import { LoginRequest } from 'src/app/shared/models/requests/login-request.model
 import { LoginResponse } from 'src/app/shared/models/respones/login-response.model';
 import { ApiResponse } from 'src/app/shared/models/respones/response.model';
 
-import { AuthActionTypes, Login, LoginSuccess, Logout, SessionExpired } from '../actions/auth.actions';
+import { AuthActionTypes, Login, LoginSuccess } from '../actions/auth.actions';
 import { AuthService } from '../services/auth.service';
 import { DASHBOARD_ROUTER_KEY } from './../../router/definitions/router.definitions';
 
@@ -29,8 +29,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   redirectAfterLogin$ = this.actions$.pipe(
     ofType(AuthActionTypes.LoginSuccess),
-    // tslint:disable-next-line:variable-name
-    tap((_action: LoginSuccess) => {
+    tap(() => {
       this.router.navigate([DASHBOARD_ROUTER_KEY]);
     }),
   );
@@ -38,15 +37,13 @@ export class AuthEffects {
   @Effect({ dispatch : true })
   redirectToLoginAfterSessionExpired$ = this.actions$.pipe(
     ofType(AuthActionTypes.SessionExpired),
-    // tslint:disable-next-line:variable-name
-    map((_action: SessionExpired) => new GoToLogIn()),
+    map(() => new GoToLogIn()),
   );
 
   @Effect({ dispatch : false })
   showMessageAfterSessionExpired$ = this.actions$.pipe(
     ofType(AuthActionTypes.SessionExpired),
-    // tslint:disable-next-line:variable-name
-    tap((_action: SessionExpired) => {
+    tap(() => {
       this.snackBar.open('Sie wurden ausgeloggt. Session abgelaufen.', 'Schließen', {
         duration: 5000,
       });
@@ -56,8 +53,7 @@ export class AuthEffects {
   @Effect({ dispatch : true })
   redirectToLoginAfterLogout$ = this.actions$.pipe(
     ofType(AuthActionTypes.Logout),
-    // tslint:disable-next-line:variable-name
-    map((_action: Logout) => new GoToLogIn()),
+    map(() => new GoToLogIn()),
   );
 
   constructor(

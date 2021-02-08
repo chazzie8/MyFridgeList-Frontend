@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { distinctUntilChanged, filter, take, tap } from 'rxjs/operators';
 import { Article } from 'src/app/shared/models/article.model';
 
-import { PurgeFridgeItems } from '../../actions/fridge.actions';
+import { PurgeFridgeArticles } from '../../actions/fridge.actions';
 import { LoadArticles } from '../../actions/list-articles-api.actions';
 import { LoadFridges } from '../../actions/list-fridges-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
@@ -37,7 +37,7 @@ export class ArticleListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.store.dispatch(new PurgeFridgeItems());
+    this.store.dispatch(new PurgeFridgeArticles());
   }
 
   public loadFridges(): void {

@@ -10,9 +10,9 @@ import {
 } from 'src/app/shared/components/create-rename-list-modal/create-rename-list-modal.component';
 import { LoadShoppinglists } from 'src/app/shoppinglists/actions/list-shoppinglists-api.actions';
 
-import { LoadFridgeDashboardItems } from '../../actions/dashboard-api.actions';
+import { LoadFridgeDashboardArticles } from '../../actions/dashboard-api.actions';
+import { PurgeDashboardFridgeArticles } from '../../actions/dashboard.actions';
 import { LoadFridges } from '../../actions/list-fridges-api.actions';
-import { PurgeDashboardFridgeItems } from './../../actions/fridge.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,15 +32,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.loadFridges();
     this.loadShoppinglists();
-    this.loadFridgeDashboardItems();
+    this.loadFridgeDashboardArticles();
   }
 
   public ngOnDestroy(): void {
-    this.purgeDashboardFridgeItems();
+    this.purgeDashboardFridgeArticles();
   }
 
-  public loadFridgeDashboardItems(): void {
-    this.store.dispatch(new LoadFridgeDashboardItems());
+  public loadFridgeDashboardArticles(): void {
+    this.store.dispatch(new LoadFridgeDashboardArticles());
   }
 
   public loadFridges(): void {
@@ -51,8 +51,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.store.dispatch(new LoadShoppinglists());
   }
 
-  public purgeDashboardFridgeItems(): void {
-    this.store.dispatch(new PurgeDashboardFridgeItems());
+  public purgeDashboardFridgeArticles(): void {
+    this.store.dispatch(new PurgeDashboardFridgeArticles());
   }
 
   public handleAddFridgeClick(): void {

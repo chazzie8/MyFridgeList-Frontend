@@ -1,23 +1,24 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import { FridgeDashboardItem } from 'src/app/shared/models/fridge-dashboard-item.model';
+import { DashboardArticle } from 'src/app/shared/models/dashboard-article.model';
 
 import { getFridgeRootState } from '.';
-import { fridgeDashboardItemAdapter, FridgeDashboardState } from '../reducers/fridge-dashboard.reducer';
+import { fridgeDashboardArticleAdapter, FridgeDashboardState } from '../reducers/fridge-dashboard.reducer';
 
-export const getFridgeDashboardItemsState: MemoizedSelector<object, FridgeDashboardState> = createSelector(
+export const getFridgeDashboardArticlesState: MemoizedSelector<object, FridgeDashboardState> = createSelector(
   getFridgeRootState,
   (state) => state.fridgeDashboard,
 );
 
 export const {
-  selectIds: getFridgeDashboardItemIds,
-  selectEntities: getFridgeDashboardItemsMap,
-  selectAll: getFridgeDashboardItems,
-} = fridgeDashboardItemAdapter.getSelectors(getFridgeDashboardItemsState);
+  selectIds: getFridgeDashboardArticleIds,
+  selectEntities: getFridgeDashboardArticlesMap,
+  selectAll: getFridgeDashboardArticles,
+} = fridgeDashboardArticleAdapter.getSelectors(getFridgeDashboardArticlesState);
 
-export const getFridgeDashboardItemsByFridgeId = createSelector(
-  getFridgeDashboardItems,
-  (dashboardItems: FridgeDashboardItem[], fridgeId: string) => dashboardItems && dashboardItems.filter((item: FridgeDashboardItem) => {
-    return item.fridgeId === fridgeId;
+export const getFridgeDashboardArticleByFridgeId = createSelector(
+  getFridgeDashboardArticles,
+  // tslint:disable-next-line:max-line-length
+  (dashboardArticles: DashboardArticle[], fridgeId: string) => dashboardArticles && dashboardArticles.filter((dashboardArticle: DashboardArticle) => {
+    return dashboardArticle.fridgeId === fridgeId;
   })
 );

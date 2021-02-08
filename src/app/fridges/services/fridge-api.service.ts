@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Article } from 'src/app/shared/models/article.model';
-import { FridgeDashboardItem } from 'src/app/shared/models/fridge-dashboard-item.model';
+import { DashboardArticle } from 'src/app/shared/models/dashboard-article.model';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
 import { CreateFridgeRequest } from 'src/app/shared/models/requests/create-fridge-request.model';
@@ -42,10 +42,10 @@ export class FridgeApiService {
     return this.httpClient.delete<ApiResponse<{}>>(url);
   }
 
-  // Get All Dashboard Items By Fridge ID
-  public getFridgeDashboardItems(): Observable<ApiResponse<FridgeDashboardItem[]>> {
-    const url = `${this.apiBaseUrl}/fridges/dashboard-items`;
-    return this.httpClient.get<ApiResponse<FridgeDashboardItem[]>>(url);
+  // Get All Dashboard Articles By Fridge ID
+  public getFridgeDashboardArticles(): Observable<ApiResponse<DashboardArticle[]>> {
+    const url = `${this.apiBaseUrl}/fridges/dashboard-articles`;
+    return this.httpClient.get<ApiResponse<DashboardArticle[]>>(url);
   }
 
   // Get All Articles By Fridge ID

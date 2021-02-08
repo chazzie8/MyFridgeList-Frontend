@@ -48,7 +48,7 @@ export class DialogArticleComponent implements OnInit {
       this.form.setValue({
         label: this.data.article.label,
         amount: this.data.article.amount,
-        expiryDate: this.minDate,
+        expiryDate: this.data.article.expirydate,
       });
     } else {
       this.form.setValue({

@@ -1,28 +1,28 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { FridgeDashboardItem } from 'src/app/shared/models/fridge-dashboard-item.model';
+import { DashboardArticle } from 'src/app/shared/models/dashboard-article.model';
 
-import { DashboardItemsApiActions, DashboardItemsApiActionTypes } from '../actions/dashboard-api.actions';
+import { DashboardArticlesApiActions, DashboardArticlesApiActionTypes } from '../actions/dashboard-api.actions';
 import { DashboardActions } from '../actions/dashboard.actions';
 import { DashboardActionTypes } from './../actions/dashboard.actions';
 
-export const fridgeDashboardItemAdapter: EntityAdapter<FridgeDashboardItem> = createEntityAdapter<FridgeDashboardItem>({});
+export const fridgeDashboardArticleAdapter: EntityAdapter<DashboardArticle> = createEntityAdapter<DashboardArticle>({});
 
-export interface FridgeDashboardState extends EntityState<FridgeDashboardItem> { }
+export interface FridgeDashboardState extends EntityState<DashboardArticle> { }
 
-export const initialState: FridgeDashboardState = fridgeDashboardItemAdapter.getInitialState({});
+export const initialState: FridgeDashboardState = fridgeDashboardArticleAdapter.getInitialState({});
 
 export function fridgeDashboardReducer(
   state = initialState,
-  action: DashboardItemsApiActions | DashboardActions,
+  action: DashboardArticlesApiActions | DashboardActions,
 ): FridgeDashboardState {
   switch (action.type) {
 
-    case DashboardItemsApiActionTypes.LoadFridgeDashboardItemsSuccess:
-      return fridgeDashboardItemAdapter.upsertMany(action.dashboardItems, {
+    case DashboardArticlesApiActionTypes.LoadFridgeDashboardArticlesSuccess:
+      return fridgeDashboardArticleAdapter.upsertMany(action.dashboardArticles, {
         ...state,
       });
 
-    case DashboardActionTypes.PurgeDashboardFridgeItems:
+    case DashboardActionTypes.PurgeDashboardFridgeArticles:
       return initialState;
 
     default:

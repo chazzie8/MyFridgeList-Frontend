@@ -1,22 +1,22 @@
-import { FridgeDashboardItem } from 'src/app/shared/models/fridge-dashboard-item.model';
+import { DashboardArticle } from 'src/app/shared/models/dashboard-article.model';
 
-export enum DashboardItemsApiActionTypes {
+export enum DashboardArticlesApiActionTypes {
 
-  LoadFridgeDashboardItems = '[Dashboard] Load Fridge Dashboard Items',
-  LoadFridgeDashboardItemsSuccess = '[Dashboard] Load Fridge Dashboard Items Success',
+  LoadFridgeDashboardArticles = '[Dashboard] Load Fridge Dashboard Articles',
+  LoadFridgeDashboardArticlesSuccess = '[Dashboard] Load Fridge Dashboard Articles Success',
 }
 
-export class LoadFridgeDashboardItems {
-  readonly type = DashboardItemsApiActionTypes.LoadFridgeDashboardItems;
+export class LoadFridgeDashboardArticles {
+  readonly type = DashboardArticlesApiActionTypes.LoadFridgeDashboardArticles;
 }
 
-export class LoadFridgeDashboardItemsSuccess {
-  readonly type = DashboardItemsApiActionTypes.LoadFridgeDashboardItemsSuccess;
+export class LoadFridgeDashboardArticlesSuccess {
+  readonly type = DashboardArticlesApiActionTypes.LoadFridgeDashboardArticlesSuccess;
 
-  constructor(public dashboardItems: FridgeDashboardItem[]) {}
+  constructor(public dashboardArticles: DashboardArticle[]) {}
 }
 
-export type DashboardItemsApiActions =
-  | LoadFridgeDashboardItems
-  | LoadFridgeDashboardItemsSuccess
+export type DashboardArticlesApiActions =
+  | LoadFridgeDashboardArticles
+  | LoadFridgeDashboardArticlesSuccess
 ;
