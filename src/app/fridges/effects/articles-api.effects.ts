@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { ApiError } from 'src/app/core/actions/api-error.actions';
 import { Article } from 'src/app/shared/models/article.model';
 import { ApiResponse } from 'src/app/shared/models/respones/response.model';
 
@@ -25,7 +27,14 @@ export class ArticleApiEffects {
     ofType(ListArticlesApiActionTypes.LoadArticles),
     switchMap((action: LoadArticles) => {
       return this.fridgeApiService.getArticles(action.fridgeId).pipe(
-        map((response: ApiResponse<Article[]>) => new LoadArticlesSuccess(response.data)),
+        map((response: ApiResponse<Article[]>) => {
+          if (response.success) {
+            return new LoadArticlesSuccess(response.data);
+          }
+
+          return new ApiError(response);
+        }),
+        catchError((response: ApiResponse<any>) => of(new ApiError(response)))
       );
     }),
   );
@@ -35,7 +44,14 @@ export class ArticleApiEffects {
     ofType(ArticlesApiActionTypes.CreateArticle),
     switchMap((action: CreateArticle) => {
       return this.fridgeApiService.addArticle(action.fridgeId, action.addArticleRequest).pipe(
-        map((response: ApiResponse<Article>) => new CreateArticleSuccess(response.data)),
+        map((response: ApiResponse<Article>) => {
+          if (response.success) {
+            return new CreateArticleSuccess(response.data);
+          }
+
+          return new ApiError(response);
+        }),
+        catchError((response: ApiResponse<any>) => of(new ApiError(response)))
       );
     }),
   );
@@ -55,7 +71,14 @@ export class ArticleApiEffects {
     ofType(ArticlesApiActionTypes.UpdateArticle),
     switchMap((action: UpdateArticle) => {
       return this.fridgeApiService.updateArticle(action.fridgeId, action.article.id, action.article).pipe(
-        map((response: ApiResponse<Article>) => new UpdateArticleSuccess(response.data)),
+        map((response: ApiResponse<Article>) => {
+          if (response.success) {
+            return new UpdateArticleSuccess(response.data);
+          }
+
+          return new ApiError(response);
+        }),
+        catchError((response: ApiResponse<any>) => of(new ApiError(response)))
       );
     }),
   );
@@ -75,7 +98,14 @@ export class ArticleApiEffects {
     ofType(ArticlesApiActionTypes.DeleteArticle),
     switchMap((action: DeleteArticle) => {
       return this.fridgeApiService.deleteArticle(action.fridgeId, action.articleId).pipe(
-        map(() => new DeleteArticleSuccess(action.articleId)),
+        map((response: ApiResponse<{}>) => {
+          if (response.success) {
+            return new DeleteArticleSuccess(action.articleId);
+          }
+
+          return new ApiError(response);
+        }),
+        catchError((response: ApiResponse<any>) => of(new ApiError(response)))
       );
     }),
   );

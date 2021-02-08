@@ -36,9 +36,7 @@ export class FridgeApiEffects {
 
           return new ApiError(response);
         }),
-        catchError((response: ApiResponse<any>) => {
-          return of(new ApiError(response));
-        })
+        catchError((response: ApiResponse<any>) => of(new ApiError(response)))
       );
     }),
   );
@@ -48,7 +46,14 @@ export class FridgeApiEffects {
     ofType(ListFridgeApiActionTypes.UpdateFridge),
     switchMap((action: UpdateFridge) => {
       return this.fridgeApiService.updateFridge(action.fridgeId, action.updateFridgeTitle).pipe(
-        map((response: ApiResponse<Fridge>) => new UpdateFridgeSuccess(response.data)),
+        map((response: ApiResponse<Fridge>) => {
+          if (response.success) {
+            return new UpdateFridgeSuccess(response.data);
+          }
+
+          return new ApiError(response);
+        }),
+        catchError((response: ApiResponse<any>) => of(new ApiError(response)))
       );
     }),
   );
@@ -68,7 +73,14 @@ export class FridgeApiEffects {
     ofType(ListFridgeApiActionTypes.CreateFridge),
     switchMap((action: CreateFridge) => {
       return this.fridgeApiService.addFridge(action.fridgeRequest).pipe(
-        map((response: ApiResponse<Fridge>) => new CreateFridgeSuccess(response.data)),
+        map((response: ApiResponse<Fridge>) => {
+          if (response.success) {
+            return new CreateFridgeSuccess(response.data);
+          }
+
+          return new ApiError(response);
+        }),
+        catchError((response: ApiResponse<any>) => of(new ApiError(response)))
       );
     }),
   );
@@ -89,7 +101,14 @@ export class FridgeApiEffects {
     ofType(ListFridgeApiActionTypes.DeleteFridge),
     switchMap((action: DeleteFridge) => {
       return this.fridgeApiService.deleteFridge(action.fridgeId).pipe(
-        map(() => new DeleteFridgeSuccess(action.fridgeId)),
+        map((response: ApiResponse<{}>) => {
+          if (response.success) {
+            return new DeleteFridgeSuccess(action.fridgeId);
+          }
+
+          return new ApiError(response);
+        }),
+        catchError((response: ApiResponse<any>) => of(new ApiError(response)))
       );
     }),
   );

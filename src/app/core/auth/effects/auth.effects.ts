@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { exhaustMap, map, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 import { GoToLogIn } from 'src/app/auth-ui/actions/auth-ui-navigation.actions';
 import { LoginRequest } from 'src/app/shared/models/requests/login-request.model';
 import { LoginResponse } from 'src/app/shared/models/respones/login-response.model';
 import { ApiResponse } from 'src/app/shared/models/respones/response.model';
 
+import { ApiError } from '../../actions/api-error.actions';
 import { AuthActionTypes, Login, LoginSuccess } from '../actions/auth.actions';
 import { AuthService } from '../services/auth.service';
 import { DASHBOARD_ROUTER_KEY } from './../../router/definitions/router.definitions';
@@ -21,7 +23,14 @@ export class AuthEffects {
     map((action: Login) => action.payload),
     exhaustMap((auth: LoginRequest) =>
       this.authService.login(auth.email, auth.password).pipe(
-        map((response: ApiResponse<LoginResponse>) => new LoginSuccess(response.data)),
+        map((response: ApiResponse<LoginResponse>) => {
+          if (response.success) {
+            return new LoginSuccess(response.data);
+          }
+
+          return new ApiError(response);
+        }),
+        catchError((response: ApiResponse<any>) => of(new ApiError(response)))
       ),
     ),
   );

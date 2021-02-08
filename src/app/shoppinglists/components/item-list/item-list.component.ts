@@ -47,16 +47,18 @@ export class ItemListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    if (this.itemList) {
-      const boughtItemIds = this.itemList.selectedOptions.selected.map(
-        (ids) => ids.value,
-      );
-      const request: EditShoppinglistItemRequest = {
-        itemIds: boughtItemIds,
-      };
-      this.store.dispatch(new UpdateBoughtItems(this._shoppinglistId, request));
+    if (this._shoppinglistId !== undefined) {
+      if (this.itemList) {
+        const boughtItemIds = this.itemList.selectedOptions.selected.map(
+          (ids) => ids.value,
+        );
+        const request: EditShoppinglistItemRequest = {
+          itemIds: boughtItemIds,
+        };
+        this.store.dispatch(new UpdateBoughtItems(this._shoppinglistId, request));
+      }
+      this.store.dispatch(new PurgeShoppinglistItems());
     }
-    this.store.dispatch(new PurgeShoppinglistItems());
   }
 
   public observeShoppinglist(): void {
