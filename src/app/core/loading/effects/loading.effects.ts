@@ -9,6 +9,7 @@ import { ListFridgeApiActionTypes } from './../../../fridges/actions/list-fridge
 import { ItemsApiActionTypes } from './../../../shoppinglists/actions/items-api.actions';
 import { ListItemsApiActionTypes } from './../../../shoppinglists/actions/list-items-api.actions';
 import { ListShoppinglistsApiActionTypes } from './../../../shoppinglists/actions/list-shoppinglists-api.actions';
+import { ApiErrorActionTypes } from './../../actions/api-error.actions';
 import { SetLoadingEnd, SetLoadingStart } from './../actions/loading.actions';
 
 @Injectable()
@@ -58,6 +59,7 @@ export class LoadingEffects {
       ListShoppinglistsApiActionTypes.DeleteShoppinglistSuccess,
       ListShoppinglistsApiActionTypes.LoadShoppinglistsSuccess,
       ListShoppinglistsApiActionTypes.UpdateShoppinglistSuccess,
+      ApiErrorActionTypes.ApiError,
     ),
     map(() => new SetLoadingEnd()),
   );

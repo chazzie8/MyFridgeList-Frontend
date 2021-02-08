@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { BaseAppState } from 'src/app/core/router/reducers/custom-router-serializer.reducer';
 import { Fridge } from 'src/app/shared/models/fridge.model';
 import { ApiResponse } from 'src/app/shared/models/respones/response.model';
 
@@ -14,6 +17,7 @@ import {
   UpdateFridgeSuccess,
 } from '../actions/list-fridges-api.actions';
 import { FridgeApiService } from '../services/fridge-api.service';
+import { ApiError } from './../../core/actions/api-error.actions';
 import { GoToDashboard, GoToSelectedFridge } from './../../core/router/actions/navigation.actions';
 import { DeleteFridge, DeleteFridgeSuccess } from './../actions/list-fridges-api.actions';
 
@@ -25,7 +29,16 @@ export class FridgeApiEffects {
     ofType(ListFridgeApiActionTypes.LoadFridges),
     switchMap(() => {
       return this.fridgeApiService.getFridges().pipe(
-        map((response: ApiResponse<Fridge[]>) => new LoadFridgesSuccess(response.data)),
+        map((response: ApiResponse<Fridge[]>) => {
+          if (response.success) {
+            return new LoadFridgesSuccess(response.data);
+          }
+
+          return new ApiError(response);
+        }),
+        catchError((response: ApiResponse<any>) => {
+          return of(new ApiError(response));
+        })
       );
     }),
   );
@@ -96,6 +109,7 @@ export class FridgeApiEffects {
     private actions$: Actions,
     private fridgeApiService: FridgeApiService,
     private snackBar: MatSnackBar,
+    private store: Store<BaseAppState>,
   ) { }
 
 }

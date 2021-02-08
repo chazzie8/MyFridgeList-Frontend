@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { routes } from './core.routes';
+import { ApiErrorEffects } from './effects/api-error.effects';
 import { FooterComponent } from './footer/footer.component';
 import { NavBarTitleComponent } from './navigation/nav-bar-title/nav-bar-title.component';
 import { NavBarComponent } from './navigation/nav-bar/nav-bar.component';
@@ -36,6 +38,9 @@ import { StartComponent } from './start/start.component';
     AuthModule,
     RouterModule.forChild(routes),
     RouterStateModule.forRoot(),
+    EffectsModule.forFeature([
+      ApiErrorEffects,
+    ])
   ],
   exports: [
     StartComponent,
