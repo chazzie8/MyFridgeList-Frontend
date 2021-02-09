@@ -14,12 +14,11 @@
               <mat-form-field>
                 <input 
                   matInput 
-                  type="email" 
-                  placeholder="Email-Adresse" 
-                  formControlName="emailAddress"
+                  type="text" 
+                  placeholder="E-Mail oder Username" 
+                  formControlName="emailAddressOrUsername"
                 >
-                <mat-error *ngIf="form.controls.emailAddress.errors?.required">E-Mail ist erforderlich</mat-error>
-                <mat-error *ngIf="form.controls.emailAddress.errors?.pattern"> E-Mail ist ungültig</mat-error>
+                <mat-error *ngIf="form.controls.emailAddressOrUsername.errors?.required">E-Mail oder Username ist erforderlich</mat-error>
               </mat-form-field>
               <mat-form-field>
                 <input 

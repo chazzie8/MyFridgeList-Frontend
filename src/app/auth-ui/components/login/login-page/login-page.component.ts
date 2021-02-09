@@ -22,15 +22,15 @@ export class LoginPageComponent {
   public handleLoginClick(formValue: LoginFormValue): void {
     let request: LoginRequest;
 
-    if (formValue.emailAddress.match(EMAIL_PATTERN)) {
+    if (formValue.emailAddressOrUsername.match(EMAIL_PATTERN)) {
       request = {
         username: '',
-        email: formValue.emailAddress,
+        email: formValue.emailAddressOrUsername,
         password: formValue.password,
       };
     } else {
       request = {
-        username: formValue.emailAddress,
+        username: formValue.emailAddressOrUsername,
         email: '',
         password: formValue.password,
       };
