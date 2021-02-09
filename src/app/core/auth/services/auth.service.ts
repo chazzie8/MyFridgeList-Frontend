@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginRequest } from 'src/app/shared/models/requests/login-request.model';
@@ -14,19 +14,15 @@ export class AuthService {
     private httpClient: HttpClient,
   ) {}
 
-  public login(email: string, password: string): Observable<ApiResponse<LoginResponse>> {
+  public login(username: string, email: string, password: string): Observable<ApiResponse<LoginResponse>> {
     const url = `${this.apiBaseUrl}/account/signin`;
     const body: LoginRequest = {
+      username,
       email,
       password,
     };
 
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic ' + btoa(`${email}:${password}`)).append('Content-Type', 'application/json');
-
-    return this.httpClient.post<ApiResponse<LoginResponse>>(url, body, {
-      headers,
-    });
+    return this.httpClient.post<ApiResponse<LoginResponse>>(url, body);
   }
 
   public signUp(signUpRequest: SignUpRequest): Observable<ApiResponse<{}>> {

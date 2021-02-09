@@ -22,7 +22,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.Login),
     map((action: Login) => action.payload),
     exhaustMap((auth: LoginRequest) =>
-      this.authService.login(auth.email, auth.password).pipe(
+      this.authService.login(auth.username, auth.email, auth.password).pipe(
         map((response: ApiResponse<LoginResponse>) => {
           if (response.success) {
             return new LoginSuccess(response.data);

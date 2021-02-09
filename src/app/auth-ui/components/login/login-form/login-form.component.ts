@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { GoToSignUp } from 'src/app/auth-ui/actions/auth-ui-navigation.actions';
 import { BaseAppState } from 'src/app/core/router/reducers/custom-router-serializer.reducer';
-import { emailPatternValidator } from 'src/app/shared/form-validators/email-pattern-validator';
 
 import { LoginFormValue } from './login-form-value.model';
 
@@ -24,7 +23,7 @@ export class LoginFormComponent {
   ) { }
 
   form: FormGroup = new FormGroup({
-    emailAddress: new FormControl('', [Validators.required, emailPatternValidator]),
+    emailAddress: new FormControl('', [Validators.required]),
     password: new FormControl('', Validators.required),
   });
 
