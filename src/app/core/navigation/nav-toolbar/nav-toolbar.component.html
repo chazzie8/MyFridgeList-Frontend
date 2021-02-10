@@ -4,7 +4,11 @@
   <span class="menu-spacer"></span>
   
   <ng-container *ngIf="!(isLoggedIn$ | async)">
-    <button mat-icon-button><img class="text-white" src="../../../../assets/img/github.svg" alt="github"></button>
+    <button [matMenuTriggerFor]="menu" mat-icon-button><img class="text-white" src="../../../../assets/img/github.svg" alt="github"></button>
+    <mat-menu #menu="matMenu">
+      <a class="non-decoration" href="https://github.com/mad201802/MyFridgeList-Frontend" target="_blank"><button mat-menu-item >Frontend</button></a>
+      <a class="non-decoration" href="https://github.com/mad201802/MyFridgeList-Backend" target="_blank"><button mat-menu-item>Backend</button></a>
+    </mat-menu>
     <button mat-button (click)="handleGoToSignUpClick()">Starten</button>
   </ng-container>
 
