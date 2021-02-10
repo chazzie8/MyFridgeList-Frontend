@@ -15,12 +15,18 @@
         </ng-container>
         <div class="d-block">
           <span class="d-block">{{article.label}}</span>
-          <ng-container *ngIf="article.daysLeft > 0; else expired">
-            <span class="label-subtitle">{{article.daysLeft > 2 ? article.daysLeft + ' Tage' :  article.daysLeft + 'Tag'}}</span>
+          <ng-container *ngIf="article.daysLeft > 1">
+            <span class="label-subtitle">mind. {{article.daysLeft}} Tage haltbar</span>
           </ng-container>
-          <ng-template #expired>
+          <ng-container *ngIf="article.daysLeft == 1">
+            <span class="label-subtitle">mind. {{article.daysLeft}} Tag haltbar</span>
+          </ng-container>
+          <ng-container *ngIf="article.daysLeft == 0">
+            <span class="label-subtitle">Läuft heute ab</span>
+          </ng-container>
+          <ng-container *ngIf="article.daysLeft < 0">
             <span class="label-subtitle">Abgelaufen</span>
-          </ng-template>
+          </ng-container>
         </div>
       </mat-panel-title>
       <mat-panel-description class="label-subtitle">
@@ -28,9 +34,17 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div class="expansion-content">
-      <span>Stückzahl: {{article.amount}}</span>
-      <span>MHD: {{article.expirydate | date:'dd.MM.yyyy'}}</span>
-      <span>Hinzugefügt am {{article.timestamp | date:'dd.MM.yyyy'}}</span>
+          <!-- TODO: Umbauen -->
+      <table id="article-table" class="table-width">
+        <tr>
+          <td><span>MHD:</span></td>
+          <td class="table-data-float-right"><span>{{article.expirydate | date:'dd.MM.yyyy'}}</span></td>
+        </tr>
+        <tr>
+          <td><span>Hinzugefügt am</span></td>
+          <td class="table-data-float-right"><span>{{article.timestamp | date:'dd.MM.yyyy'}}</span></td>
+        </tr>
+      </table>
     </div>
     <mat-action-row>
       <button mat-icon-button color="warn" (click)="handleDeleteArticleClick(fridgeId, article.id)"><mat-icon>delete</mat-icon></button>

@@ -1,0 +1,17 @@
+.table-width {
+  width: 25%;
+}
+
+#article-table {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+@media only screen and (max-width: $breakpoint-max-mobile) {
+  .table-width {
+    width: unset;
+  }
+
+  .table-data-float-right {
+    float: right;
+  }
+}

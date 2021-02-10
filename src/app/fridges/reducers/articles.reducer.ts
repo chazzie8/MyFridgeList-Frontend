@@ -62,5 +62,5 @@ function handleCreateOrUpdateArticleSuccess(state: ArticlesState, article: Artic
 }
 
 function getDaysLeft(article: Article): number {
-  return (Date.now() - article.expirydate.getUTCMilliseconds()) * 1000 * 60 * 60 * 24;
+  return Math.ceil((new Date(article.expirydate).valueOf() - new Date().valueOf()) / (1000 * 60 * 60 * 24));
 }
