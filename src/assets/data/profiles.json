@@ -1,0 +1,16 @@
+[
+  {
+    "id": 0,
+    "name": "Chas Richards",
+    "imgUrl": "assets/img/dummy.png",
+    "jobtitle": "Fachinformatiker für Anwendungsentwicklung",
+    "subtitle": "Founder / Entwickler"
+  },
+  {
+    "id": 1,
+    "name": "Michael Dick",
+    "imgUrl": "assets/img/Michael_Dick.jpg",
+    "jobtitle": "Fachinformatiker für Anwendungsentwicklung",
+    "subtitle": "Founder / Entwickler"
+  }
+]

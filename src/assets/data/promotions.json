@@ -1,0 +1,34 @@
+[
+  {
+    "id": 0,
+    "floating": "left",
+    "promoImgUrl": "assets/img/platzhalter.png",
+    "imgAltLabel": "Alternativ Bildtext",
+    "promoHeader": "Test Überschrift",
+    "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+  },
+  {
+    "id": 1,
+    "floating": "right",
+    "promoImgUrl": "assets/img/platzhalter.png",
+    "imgAltLabel": "Alternativ Bildtext",
+    "promoHeader": "Test Überschrift",
+    "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+  },
+  {
+    "id": 2,
+    "floating": "left",
+    "promoImgUrl": "assets/img/platzhalter.png",
+    "imgAltLabel": "Alternativ Bildtext",
+    "promoHeader": "Test Überschrift",
+    "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+  },
+  {
+    "id": 3,
+    "floating": "right",
+    "promoImgUrl": "assets/img/platzhalter.png",
+    "imgAltLabel": "Alternativ Bildtext",
+    "promoHeader": "Test Überschrift",
+    "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+  }
+]

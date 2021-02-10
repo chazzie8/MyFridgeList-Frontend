@@ -1,0 +1,27 @@
+[
+  {
+    "id": 0,
+    "question": "Was ist MyFridgeList?",
+    "answer": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren"
+  },
+  {
+    "id": 1,
+    "question": "Wie kann ich mich bei MyFridgeList anmelden?",
+    "answer": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren"
+  },
+  {
+    "id": 2,
+    "question": "Ist MyFridgeList kostenlos?",
+    "answer": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren"
+  },
+  {
+    "id": 3,
+    "question": "Kann ich meinen Kühlschrank bei MyFridgeList mit Anderen teilen?",
+    "answer": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren"
+  },
+  {
+    "id": 4,
+    "question": "Kann ich mein Usernamen bei MyFridgeList ändern, wenn ich ihn nicht mehr mag?",
+    "answer": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren"
+  }
+]
