@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Article } from 'src/app/shared/models/article.model';
+import { Article, StoreArticle } from 'src/app/shared/models/article.model';
 
 import { DeleteArticle } from '../../actions/articles-api.actions';
 import { ArticlesState } from '../../reducers/articles.reducer';
@@ -14,7 +14,7 @@ import { DialogArticleComponent } from '../dialog-article/dialog-article.compone
 })
 export class ArticleListItemComponent {
 
-  @Input() articles: Article[];
+  @Input() articles: StoreArticle[];
   @Input() fridgeId: string;
 
   constructor(

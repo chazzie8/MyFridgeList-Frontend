@@ -6,3 +6,7 @@ export interface Article {
   timestamp: Date;
   expirystatus: string;
 }
+
+export interface StoreArticle extends Article {
+  daysLeft: number;
+}

@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, filter, take, tap } from 'rxjs/operators';
-import { Article } from 'src/app/shared/models/article.model';
+import { StoreArticle } from 'src/app/shared/models/article.model';
 
 import { PurgeFridgeArticles } from '../../actions/fridge.actions';
 import { LoadArticles } from '../../actions/list-articles-api.actions';
@@ -21,7 +21,7 @@ import { getAlmostExpiredArticles, getExpiredArticles, getShowGoodArticles } fro
 })
 export class ArticleListComponent implements OnInit, OnDestroy {
 
-  articles$: Observable<Article[]> = this.store.pipe(select(getArticles));
+  articles$: Observable<StoreArticle[]> = this.store.pipe(select(getArticles));
   fridgeId$: Observable<string> = this.store.pipe(select(getSelectedFridgeId));
 
   currentDate: Date = new Date();

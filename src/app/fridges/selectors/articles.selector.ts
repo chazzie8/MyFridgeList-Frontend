@@ -1,5 +1,5 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import { Article } from 'src/app/shared/models/article.model';
+import { StoreArticle } from 'src/app/shared/models/article.model';
 
 import { getFridgeRootState } from '.';
 import { articlesAdapter, ArticlesState } from '../reducers/articles.reducer';
@@ -17,21 +17,21 @@ export const {
 
 export const getExpiredArticles = createSelector(
   getArticles,
-  (articles: Article[]) => {
+  (articles: StoreArticle[]) => {
     return articles && articles.filter(article => article.expirystatus === 'expired');
   }
 );
 
 export const getAlmostExpiredArticles = createSelector(
   getArticles,
-  (articles: Article[]) => {
+  (articles: StoreArticle[]) => {
     return articles && articles.filter(article => article.expirystatus === 'almostExpired');
   }
 );
 
 export const getShowGoodArticles = createSelector(
   getArticles,
-  (articles: Article[]) => {
+  (articles: StoreArticle[]) => {
     return articles && articles.filter(article => article.expirystatus === 'good');
   }
 );

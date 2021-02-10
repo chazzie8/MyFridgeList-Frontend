@@ -15,7 +15,12 @@
         </ng-container>
         <div class="d-block">
           <span class="d-block">{{article.label}}</span>
-          <span class="label-subtitle">{{article.expirydate | date:'dd.MM.yyyy'}}</span>
+          <ng-container *ngIf="article.daysLeft > 0; else expired">
+            <span class="label-subtitle">{{article.daysLeft > 2 ? article.daysLeft + ' Tage' :  article.daysLeft + 'Tag'}}</span>
+          </ng-container>
+          <ng-template #expired>
+            <span class="label-subtitle">Abgelaufen</span>
+          </ng-template>
         </div>
       </mat-panel-title>
       <mat-panel-description class="label-subtitle">
