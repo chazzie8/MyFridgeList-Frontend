@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { isLoggedIn } from './core/auth/selectors/auth.selectors';
 import { getIsLoading } from './core/loading/selectors/loading.selectors';
 import { BaseAppState } from './core/router/reducers/custom-router-serializer.reducer';
 
@@ -14,7 +13,6 @@ import { BaseAppState } from './core/router/reducers/custom-router-serializer.re
 export class AppComponent {
   title = 'MyFridgeList';
 
-  isLoggedIn$: Observable<boolean> = this.store.pipe(select(isLoggedIn));
   loading$: Observable<boolean> = this.store.pipe(select(getIsLoading));
 
   constructor(

@@ -3,6 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map } from 'rxjs/operators';
 import { ListArticlesApiActionTypes } from 'src/app/fridges/actions/list-articles-api.actions';
 
+import { SignUpActionTypes } from '../../auth/actions/auth-sign-up.actions';
 import { ArticlesApiActionTypes } from './../../../fridges/actions/articles-api.actions';
 import { DashboardArticlesApiActionTypes } from './../../../fridges/actions/dashboard-api.actions';
 import { ListFridgeApiActionTypes } from './../../../fridges/actions/list-fridges-api.actions';
@@ -10,6 +11,7 @@ import { ItemsApiActionTypes } from './../../../shoppinglists/actions/items-api.
 import { ListItemsApiActionTypes } from './../../../shoppinglists/actions/list-items-api.actions';
 import { ListShoppinglistsApiActionTypes } from './../../../shoppinglists/actions/list-shoppinglists-api.actions';
 import { ApiErrorActionTypes } from './../../actions/api-error.actions';
+import { AuthActionTypes } from './../../auth/actions/auth.actions';
 import { SetLoadingEnd, SetLoadingStart } from './../actions/loading.actions';
 
 @Injectable()
@@ -18,6 +20,8 @@ export class LoadingEffects {
   @Effect({ dispatch: true })
   public loadingStart$ = this.actions$.pipe(
     ofType(
+      AuthActionTypes.Login,
+      SignUpActionTypes.SignUp,
       ListArticlesApiActionTypes.LoadArticles,
       ArticlesApiActionTypes.CreateArticle,
       ArticlesApiActionTypes.DeleteArticle,
@@ -42,6 +46,8 @@ export class LoadingEffects {
   @Effect({ dispatch: true })
   public loadingEnd$ = this.actions$.pipe(
     ofType(
+      AuthActionTypes.LoginSuccess,
+      SignUpActionTypes.SignUpSuccess,
       ListArticlesApiActionTypes.LoadArticlesSuccess,
       ArticlesApiActionTypes.CreateArticleSuccess,
       ArticlesApiActionTypes.DeleteArticleSuccess,
