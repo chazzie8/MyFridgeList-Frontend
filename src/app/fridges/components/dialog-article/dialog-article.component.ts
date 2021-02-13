@@ -85,7 +85,8 @@ export class DialogArticleComponent implements OnInit {
     };
     const article = {...addRequest};
     this.store.dispatch(new CreateArticle(this.data.fridgeId, article));
-    this.dialogRef.close();
+    this.form.reset();
+    this.initForm();
   }
 
   public handleCancelClick(): void {

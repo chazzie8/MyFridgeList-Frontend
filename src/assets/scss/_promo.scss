@@ -11,8 +11,8 @@
 }
 
 .promo-img {
-  max-width: 300px;
-  max-height: 200px
+  max-width: 500px;
+  max-height: 313px
 }
 
 .promo-text-box {
@@ -38,6 +38,11 @@
     align-items: center; 
     box-sizing: border-box; 
     margin: 32px auto;
+  }
+
+  .promo-img {
+    max-width: 375px;
+    max-height: 235px
   }
 
   .promo-img-box {

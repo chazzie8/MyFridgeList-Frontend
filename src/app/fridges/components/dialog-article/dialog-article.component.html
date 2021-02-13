@@ -12,6 +12,7 @@
           placeholder="Artikelname"
           formControlName="label"
           type="text"
+          autocomplete="off"
         >
         <mat-error *ngIf="form.controls.label.errors?.required">Artikelname ist erforderlich</mat-error>
         <mat-error *ngIf="form.controls.label.errors?.pattern">Bitte ausschließlich Buchstaben verwenden</mat-error>
@@ -22,6 +23,7 @@
         placeholder="Menge"
         formControlName="amount"
         type="number"
+        autocomplete="off"
       >
       <mat-error *ngIf="form.controls.amount.errors?.required">Menge ist erforderlich</mat-error>
       <mat-error *ngIf="form.controls.amount.errors?.pattern">Bitte positive Zahlen eingeben</mat-error>
@@ -36,6 +38,7 @@
       placeholder="MHD"
       onfocus="blur()"
       class="input-font-size-16"
+      autocomplete="off"
     >
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
@@ -44,8 +47,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button (click)="handleCancelClick()">Abbrechen</button>
   <ng-container *ngIf="data.article !== null; else noDataButtons">
+    <button mat-button (click)="handleCancelClick()">Abbrechen</button>
     <button
       mat-raised-button 
       [disabled]="form.controls['label'].value === data.article.label && form.controls['amount'].value === data.article.amount && form.controls['expiryDate'].value === data.article.expirydate"
@@ -59,6 +62,7 @@
 </mat-dialog-actions>
 
 <ng-template #noDataButtons>
+  <button mat-button (click)="handleCancelClick()">Fertig</button>
   <button 
     mat-raised-button 
     [disabled]="!(form.controls.label.dirty && form.controls.amount.dirty)"
@@ -66,6 +70,6 @@
     type="submit" 
     (click)="handleAddClick()"
   >
-    Hinzufügen
+    Weitere hinzufügen
   </button>
 </ng-template>

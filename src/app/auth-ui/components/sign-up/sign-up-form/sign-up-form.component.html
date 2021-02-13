@@ -18,6 +18,7 @@
                   type="email" 
                   placeholder="Email-Adresse" 
                   formControlName="emailAddress"
+                  autocomplete="off"
                 >
                 <mat-error *ngIf="form.controls.emailAddress.errors?.required">E-Mail ist erforderlich</mat-error>
                 <mat-error *ngIf="form.controls.emailAddress.errors?.pattern">E-Mail ist ungültig</mat-error>
@@ -28,6 +29,7 @@
                   type="text"
                   placeholder="Username" 
                   formControlName="userName"
+                  autocomplete="off"
                 >
                 <mat-error *ngIf="form.controls.userName.errors?.required">Username ist erforderlich</mat-error>
                 <mat-error *ngIf="form.controls.userName.errors?.pattern">Bitte nur Buchstaben und Zahlen ohne Leerzeichen</mat-error>
@@ -39,9 +41,10 @@
                   placeholder="Passwort" 
                   formControlName="password"
                   [type]="hidePasswort ? 'password' : 'text'"
+                  autocomplete="off"
                 >
-                <button mat-icon-button matSuffix (click)="hidePasswort = !hidePasswort" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswort">
-                  <mat-icon>{{hidePasswort ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <button mat-icon-button matSuffix>
+                  <mat-icon (click)="hidePasswort = !hidePasswort">{{hidePasswort ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
                 <mat-error *ngIf="form.controls.password.errors?.required">Passwort ist erforderlich</mat-error>
                 <mat-error *ngIf="form.controls.password.errors?.minlength">Passwort muss mindestens 8 Zeichen lang sein</mat-error>
@@ -55,8 +58,8 @@
                   formControlName="passwordConfirmation"
                   [type]="hidePasswordConfirmation ? 'password' : 'text'"
                 >
-                <button mat-icon-button matSuffix (click)="hidePasswordConfirmation = !hidePasswordConfirmation" [attr.aria-label]="'Hide password confirmation'" [attr.aria-pressed]="hidePasswordConfirmation">
-                  <mat-icon>{{hidePasswordConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <button mat-icon-button matSuffix>
+                  <mat-icon (click)="hidePasswordConfirmation = !hidePasswordConfirmation">{{hidePasswordConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
                 <mat-error *ngIf="form.controls.passwordConfirmation.errors?.required">Passwortbestätigung ist erforderlich</mat-error>
                 <mat-error *ngIf="form.controls.passwordConfirmation.errors?.mismatchedPasswords && !form.controls.passwordConfirmation.errors?.required">Passwörter stimmen nicht überein</mat-error>

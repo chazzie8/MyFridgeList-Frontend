@@ -1,34 +1,26 @@
 [
   {
     "id": 0,
-    "floating": "left",
-    "promoImgUrl": "assets/img/platzhalter.png",
+    "floating": "right",
+    "promoImgUrl": "assets/img/dashboard.png",
     "imgAltLabel": "Alternativ Bildtext",
-    "promoHeader": "Test Überschrift",
-    "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+    "promoHeader": "Übersichtlich. Dynamisch. Leicht!",
+    "text": "Mit MyFridgeList hast Du alles beisammen. Durch ein modernes und leichtes Design bekommst du den vollen Überblick. Ein Dashboard ermöglicht dir auf die Gegebenheiten schnell zu reagieren. Navigiere schnell zwischen deinem Kühlschrank und deiner Einkaufsliste."
   },
   {
     "id": 1,
-    "floating": "right",
-    "promoImgUrl": "assets/img/platzhalter.png",
+    "floating": "left",
+    "promoImgUrl": "assets/img/kuehlschrank.png",
     "imgAltLabel": "Alternativ Bildtext",
-    "promoHeader": "Test Überschrift",
-    "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+    "promoHeader": "Deinen Kühlschrank überall",
+    "text": "Habe deine Kühlschrank immer mit dabei. Siehe auf einen Blick alle deine Lebensmittel und deren Mindesthaltbarkeitsdaten. Über das intuitive Smileydesign und deren Farben hast du den kompletten Überblick. Hinzufügen, löschen und bearbeiten ist kinderleicht. Sortiere deine Kühlschrank nach verschiedenen Kriterien."
   },
   {
     "id": 2,
-    "floating": "left",
-    "promoImgUrl": "assets/img/platzhalter.png",
-    "imgAltLabel": "Alternativ Bildtext",
-    "promoHeader": "Test Überschrift",
-    "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-  },
-  {
-    "id": 3,
     "floating": "right",
-    "promoImgUrl": "assets/img/platzhalter.png",
+    "promoImgUrl": "assets/img/einkaufsliste.png",
     "imgAltLabel": "Alternativ Bildtext",
-    "promoHeader": "Test Überschrift",
-    "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+    "promoHeader": "Nie wieder Einkaufszettel",
+    "text": "Papier und Stift? Geschichte! Vergiss deinen Zettel nie wieder Zuhause. Hier bekommst du die Möglichkeit für jeden Einkaufsladen einen individuellen digitalen Einkaufszettel zu generieren. Steiche ab oder füge deine Liste dem Kühlschrank hinzu, schneller den je."
   }
 ]

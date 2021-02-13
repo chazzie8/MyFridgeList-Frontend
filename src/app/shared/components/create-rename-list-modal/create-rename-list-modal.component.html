@@ -23,6 +23,7 @@
         placeholder="Name"
         formControlName="label"
         type="text"
+        autocomplete="off"
       >
       <mat-error *ngIf="form.controls.label.errors?.required">Ein Name ist erforderlich</mat-error>
       <mat-error *ngIf="form.controls.label.errors?.pattern">Bitte ausschließlich Buchstaben verwenden</mat-error>

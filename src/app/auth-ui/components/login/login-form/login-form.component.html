@@ -10,30 +10,30 @@
               Sie haben noch keinen Account? <br><button mat-button color="primary" (click)="handleGoToSignUpClick()">Hier registrieren</button>
             </div>
 
-            <form [formGroup]="form" (ngSubmit)="handleLoginClick()" #ngForm="ngForm" novalidate>
+            <form [formGroup]="form" (keyup.enter)="handleLoginClick()" (ngSubmit)="handleLoginClick()" #ngForm="ngForm" novalidate>
               <mat-form-field>
                 <input 
                   matInput 
                   type="text" 
                   placeholder="E-Mail oder Username" 
                   formControlName="emailAddressOrUsername"
+                  autocomplete="off"
                 >
                 <mat-error *ngIf="form.controls.emailAddressOrUsername.errors?.required">E-Mail oder Username ist erforderlich</mat-error>
               </mat-form-field>
               <mat-form-field>
                 <input 
                   matInput
-                  type="password"
                   placeholder="Passwort" 
                   formControlName="password"
                   [type]="hide ? 'password' : 'text'"
+                  autocomplete="off"
                 >
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <button mat-icon-button matSuffix>
+                  <mat-icon (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
                 <mat-error *ngIf="form.controls.password.errors?.required">Passwort ist erforderlich</mat-error>
               </mat-form-field>
-
               <div class="button-row-right">
                 <button
                   mat-raised-button
