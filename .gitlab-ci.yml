@@ -1,0 +1,9 @@
+deploy_develop:
+  stage: deploy
+  script:
+    - npm install
+    - npm run build --prod
+    - cp .htaccess dist/MyFridgeList-Frontend/
+    - rsync -e "ssh -p 9012" -az --delete --chmod=777 dist/MyFridgeList-Frontend/ gitlab@secure.seracom.de:/var/www/myfridgelist.seracom.de/
+  only:
+    - master
