@@ -106,7 +106,9 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
     boughtItemIds.forEach((boughtItem: string) => {
       const item = this.store.pipe(select(getSelectedItemById, boughtItem));
-      item.pipe(take(1), ).subscribe(i => itemObjList.push(i[0]));
+      item.pipe(
+        take(1),
+      ).subscribe(i => itemObjList.push(i[0]));
     });
 
     this.shoppinglistId$.pipe(
