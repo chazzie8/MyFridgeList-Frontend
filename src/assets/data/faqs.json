@@ -11,31 +11,36 @@
   },
   {
     "id": 2,
+    "question": "Wozu benötigt Ihr meine E-Mailadresse?",
+    "answer": "Deine E-Mailadresse wird vorerst zur Anmeldung gebraucht. Die Daten werden aber vertraulich behandelt und nicht an Dritte weitergegeben. Demnächst sollen neue Features erscheinen, bei denen wir ggf. Deine E-Mailadresse benötigen. Wir werden dich dann auf deinem Dashboard benachrichtigen und keine E-Mails versenden, ohne deine Zustimmung."
+  },
+  {
+    "id": 3,
     "question": "Ist MyFridgeList kostenlos?",
     "answer": "Ja, MyFridgeList ist derzeit kostenlos. Wir arbeiten aber an weitere Funktionalitäten, welche in Zukunft dann mit einem kleinen Betrag genutzt werden können."
   },
   {
-    "id": 3,
+    "id": 4,
     "question": "Kann ich meinen Kühlschrank bei MyFridgeList mit anderen teilen?",
     "answer": "Leider bieten wir das zurzeit nicht an. Ist aber für die Zukunft geplant. Nutze doch mit deiner Familie dieselbe E-Mailadresse, dann können zum Beispiel mehrere darauf zugreifen."
   },
   {
-    "id": 4,
+    "id": 5,
     "question": "Mir gefällt mein Username nicht mehr, kann ich diesen ändern?",
     "answer": "Derzeit nicht verfügbar. Kommt mit dem nächsten Release."
   },
   {
-    "id": 5,
+    "id": 6,
     "question": "Mist, ich habe mein Passwort vergessen. Wie kann ich es zurücksetzen?",
     "answer": "Derzeit nicht verfügbar. Kommt mit dem nächsten Release."
   },
   {
-    "id": 6,
+    "id": 7,
     "question": "Werden meine Daten sicher gespeichert?",
     "answer": "Wir legen sehr großen Wert auf Datensicherheit und handeln nach dem DSGVO. Mehr Infos hierzu findet ihr auf unserer Datenschutzseite."
   },
   {
-    "id": 7,
+    "id": 8,
     "question": "Wie kann ich euch bei der Entwicklung unterstützen?",
     "answer": "Gerne könnt ihr uns über folgende E-Mailadressen: Michael Dick <m.dick@its-stuttgart.de> und/oder Chas Richards <chas.richards@its-stuttgart.de> eine Anfrage schicken. Wir besprechen dann alles weitere mit euch."
   }
