@@ -22,10 +22,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { CreateRenameListModalComponent } from './components/create-rename-list-modal/create-rename-list-modal.component';
+import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.component';
 
 @NgModule({
   declarations: [
     CreateRenameListModalComponent,
+    DialogAlertComponent,
   ],
   imports: [
     CommonModule,
