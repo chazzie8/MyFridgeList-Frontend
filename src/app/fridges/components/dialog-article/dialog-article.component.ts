@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { DialogAlertComponent } from 'src/app/shared/components/dialog-alert/dialog-alert.component';
 import { letterPatternValidator, numericPatternValidator } from 'src/app/shared/form-validators/chars-pattern-validator';
 import { DialogData } from 'src/app/shared/models/dialog-data.model';
 import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
@@ -22,6 +24,7 @@ export class DialogArticleComponent implements OnInit {
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private store: Store<ArticlesState>,
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<DialogArticleComponent>
   ) { }
 
@@ -41,6 +44,27 @@ export class DialogArticleComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initForm();
+    this.observeBackdropClick();
+  }
+
+  private observeBackdropClick(): void {
+    this.dialogRef.backdropClick().pipe(
+      distinctUntilChanged(),
+      tap(() => {
+        if (!this.form.dirty) {
+          this.handleCancelClick();
+        } else {
+          this.dialog.open(DialogAlertComponent, {
+            disableClose: true,
+            autoFocus: false,
+          }).afterClosed().subscribe((close: boolean) => {
+            if (close) {
+              this.dialogRef.close();
+            }
+          });
+        }
+      }),
+    ).subscribe();
   }
 
   public initForm(): void {
@@ -74,6 +98,20 @@ export class DialogArticleComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  public handleAddAndCloseClick(): void {
+    if (!this.form.valid) {
+      return;
+    }
+    const addRequest: CreateArticleRequest = {
+      label: this.form.controls.label.value,
+      amount: this.form.controls.amount.value,
+      expirydate: this.form.controls.expiryDate.value,
+    };
+    const article = {...addRequest};
+    this.store.dispatch(new CreateArticle(this.data.fridgeId, article));
+    this.dialogRef.close();
+  }
+
   public handleAddClick(): void {
     if (!this.form.valid) {
       return;
@@ -92,4 +130,5 @@ export class DialogArticleComponent implements OnInit {
   public handleCancelClick(): void {
     this.dialogRef.close();
   }
+
 }

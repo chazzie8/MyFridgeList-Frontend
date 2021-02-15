@@ -15,13 +15,20 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button (click)="handleCancelClick()">Fertig</button>
   <button
-    mat-raised-button 
+    mat-button 
     [disabled]="!form.dirty" 
-    color="primary" type="submit" 
+    color="primary" 
     (click)="handleAddClick()"
   >
     Weitere hinzufügen
+  </button>
+  <button 
+    mat-raised-button
+    [disabled]="!form.dirty" 
+    color="primary" 
+    (click)="handleAddAndCancelClick()"
+  >
+    Fertig
   </button>
 </mat-dialog-actions>

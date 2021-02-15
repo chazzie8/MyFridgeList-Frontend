@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 import { CreateArticle } from 'src/app/fridges/actions/articles-api.actions';
 import { ArticlesState } from 'src/app/fridges/reducers/articles.reducer';
 import { getFridges } from 'src/app/fridges/selectors/fridges.selector';
@@ -11,8 +12,8 @@ import { DialogFridgeItemData } from 'src/app/shared/models/dialog-fridge-item-d
 import { Fridge } from 'src/app/shared/models/fridge.model';
 import { CreateArticleRequest } from 'src/app/shared/models/requests/create-article-request.model';
 
+import { DialogAlertComponent } from '../../../shared/components/dialog-alert/dialog-alert.component';
 import { DeleteItem } from '../../actions/items-api.actions';
-import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 
 @Component({
   selector: 'app-dialog-fridge-item',
@@ -51,6 +52,14 @@ export class DialogFridgeItemComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initForm();
+    this.observeBackdropClick();
+  }
+
+  private observeBackdropClick(): void {
+    this.dialogRef.backdropClick().pipe(
+      distinctUntilChanged(),
+      tap(() => this.handleCancelClick()),
+    ).subscribe();
   }
 
   public initForm(): void {
@@ -84,7 +93,8 @@ export class DialogFridgeItemComponent implements OnInit {
 
   public handleCancelClick(): void {
     this.dialog.open(DialogAlertComponent, {
-      disableClose: true
+      disableClose: true,
+      autoFocus: false,
     }).afterClosed().subscribe((close: boolean) => {
       if (close) {
         this.dialogRef.close();

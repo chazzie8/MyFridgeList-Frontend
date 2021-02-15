@@ -7,7 +7,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from './../shared/shared.module';
-import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.component';
 import { DialogFridgeItemComponent } from './components/dialog-fridge-item/dialog-fridge-item.component';
 import { DialogItemComponent } from './components/dialog-item/dialog-item.component';
 import { ItemListItemComponent } from './components/item-list-item/item-list-item.component';
@@ -32,14 +31,12 @@ import { routes } from './shoppinglists.routes';
     ItemListItemComponent,
     DialogItemComponent,
     DialogFridgeItemComponent,
-    DialogAlertComponent,
   ],
   declarations: [
     ItemListComponent,
     ItemListItemComponent,
     DialogItemComponent,
     DialogFridgeItemComponent,
-    DialogAlertComponent,
   ],
 })
 export class ShoppinglistsModule {

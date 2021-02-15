@@ -62,14 +62,22 @@
 </mat-dialog-actions>
 
 <ng-template #noDataButtons>
-  <button mat-button (click)="handleCancelClick()">Fertig</button>
-  <button 
-    mat-raised-button 
-    [disabled]="!(form.controls.label.dirty && form.controls.amount.dirty)"
-    color="primary" 
-    type="submit" 
-    (click)="handleAddClick()"
-  >
-    Weitere hinzufügen
-  </button>
+  <div class="modal-button-row">
+    <button 
+      [disabled]="!(form.controls.label.dirty && form.controls.amount.dirty)"
+      mat-button
+      color="primary"
+      (click)="handleAddClick()"
+    >
+      Weitere hinzufügen
+    </button>
+    <button
+      [disabled]="!(form.controls.label.dirty && form.controls.amount.dirty)"
+      mat-raised-button
+      color="primary"
+      (click)="handleAddAndCloseClick()"
+    >
+      Fertig
+    </button>
+  </div>
 </ng-template>
