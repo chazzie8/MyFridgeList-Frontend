@@ -22,6 +22,7 @@ export class LoadingEffects {
     ofType(
       AuthActionTypes.Login,
       SignUpActionTypes.SignUp,
+      AuthActionTypes.DeleteUser,
       ListArticlesApiActionTypes.LoadArticles,
       ArticlesApiActionTypes.CreateArticle,
       ArticlesApiActionTypes.DeleteArticle,
@@ -48,6 +49,7 @@ export class LoadingEffects {
     ofType(
       AuthActionTypes.LoginSuccess,
       SignUpActionTypes.SignUpSuccess,
+      AuthActionTypes.DeleteUserSuccess,
       ListArticlesApiActionTypes.LoadArticlesSuccess,
       ArticlesApiActionTypes.CreateArticleSuccess,
       ArticlesApiActionTypes.DeleteArticleSuccess,

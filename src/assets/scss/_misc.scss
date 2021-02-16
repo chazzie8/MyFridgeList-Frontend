@@ -34,12 +34,17 @@ textarea {
   margin-right: 12px;
 }
 
-.version-label {
-  color: rgba(0, 0, 0, 0.54);
-  padding-top: 50px;
+.account-delete {
   display: flex;
   justify-content: center;
-  bottom: 15px;
+  padding-top: 50px;
+  padding-bottom: 15px;
+}
+
+.version-label {
+  color: rgba(0, 0, 0, 0.54);
+  display: flex;
+  justify-content: center;
 }
 
 .input-font-size-16 {
