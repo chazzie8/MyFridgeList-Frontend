@@ -29,4 +29,9 @@ export class AuthService {
     const url = `${this.apiBaseUrl}/account/signup`;
     return this.httpClient.post<ApiResponse<{}>>(url, signUpRequest);
   }
+
+  public deleteUser(): Observable<ApiResponse<{}>> {
+    const url = `${this.apiBaseUrl}/account`;
+    return this.httpClient.delete<ApiResponse<{}>>(url);
+  }
 }

@@ -3,15 +3,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { GoToLogIn } from 'src/app/auth-ui/actions/auth-ui-navigation.actions';
 import { LoginRequest } from 'src/app/shared/models/requests/login-request.model';
 import { LoginResponse } from 'src/app/shared/models/respones/login-response.model';
 import { ApiResponse } from 'src/app/shared/models/respones/response.model';
 
 import { ApiError } from '../../actions/api-error.actions';
-import { AuthActionTypes, Login, LoginSuccess } from '../actions/auth.actions';
+import { AuthActionTypes, DeleteUserSuccess, Login, LoginSuccess } from '../actions/auth.actions';
 import { AuthService } from '../services/auth.service';
+import { GoToSignUp } from './../../../auth-ui/actions/auth-ui-navigation.actions';
 import { DASHBOARD_ROUTER_KEY } from './../../router/definitions/router.definitions';
 
 @Injectable()
@@ -63,6 +64,34 @@ export class AuthEffects {
   redirectToLoginAfterLogout$ = this.actions$.pipe(
     ofType(AuthActionTypes.Logout),
     map(() => new GoToLogIn()),
+  );
+
+  @Effect()
+  deleteUser$ = this.actions$.pipe(
+    ofType(AuthActionTypes.DeleteUser),
+    switchMap(() =>
+      this.authService.deleteUser().pipe(
+        map((response: ApiResponse<{}>) => {
+          if (response.success) {
+            return new DeleteUserSuccess();
+          }
+
+          return new ApiError(response);
+        }),
+        catchError((response: ApiResponse<any>) => of(new ApiError(response)))
+      ),
+    ),
+  );
+
+  @Effect({ dispatch: true })
+  public deleteUserSuccess$ = this.actions$.pipe(
+    ofType(AuthActionTypes.DeleteUserSuccess),
+    map(() => {
+      this.snackBar.open('Ihr Profil wurde gelöscht. Vielleicht sehen wir uns bald wieder.', 'Schließen', {
+        duration: 3000,
+      });
+      return new GoToSignUp();
+    }),
   );
 
   constructor(

@@ -11,6 +11,7 @@ import { getShoppinglists } from 'src/app/shoppinglists/selectors/shoppinglists.
 
 import { Logout } from '../../auth/actions/auth.actions';
 import { isLoggedIn } from '../../auth/selectors/auth.selectors';
+import { DeleteUser } from './../../auth/actions/auth.actions';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -35,6 +36,11 @@ export class SideNavBarComponent {
 
   public handleLogoutClick(): void {
     this.store.dispatch(new Logout());
+    this.sidenav.close();
+  }
+
+  public handleDeleteAccountClick(): void {
+    this.store.dispatch(new DeleteUser());
     this.sidenav.close();
   }
 }

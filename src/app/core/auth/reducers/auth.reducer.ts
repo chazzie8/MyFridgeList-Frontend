@@ -33,7 +33,8 @@ export function reducer(
     }
 
     case AuthActionTypes.Logout:
-    case AuthActionTypes.SessionExpired: {
+    case AuthActionTypes.SessionExpired:
+    case AuthActionTypes.DeleteUserSuccess: {
       return initialState;
     }
 
