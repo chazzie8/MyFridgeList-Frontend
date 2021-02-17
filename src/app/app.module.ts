@@ -38,9 +38,9 @@ registerLocaleData(localeDECH);
       scrollPositionRestoration: 'top',
     }),
     StoreModule.forRoot(reducers, { metaReducers }),
-    StoreDevtoolsModule.instrument({
+    !environment.production ? StoreDevtoolsModule.instrument({
       name: 'MyFridgeList App DevTools',
-    }),
+    }) : [],
     CoreModule,
     SharedModule,
     LoadingModule,
